@@ -1,1 +1,3 @@
 src/
+test/
+karma.conf.js
