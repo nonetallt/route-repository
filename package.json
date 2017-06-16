@@ -1,0 +1,30 @@
+{
+    "name": "laravel-js-helpers",
+    "version": "1.0.0",
+    "description": "Js helpers for creating laravel resource routes.",
+    "main": "dist/laravel.js",
+    "scripts": {
+        "prepublish": "npm run compile",
+        "compile": "babel --presets=es2015 -d dist src",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/nonetallt/laravel-js-helpers.git"
+    },
+    "keywords": [
+        "laravel",
+        "js",
+        "helpers"
+    ],
+    "author": "Jyri Mikkola",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/nonetallt/laravel-js-helpers/issues"
+    },
+    "homepage": "https://github.com/nonetallt/laravel-js-helpers#readme",
+    "devDependencies": {
+        "babel-cli": "^6.24.1",
+        "babel-preset-es2015": "^6.24.1"
+    }
+}
