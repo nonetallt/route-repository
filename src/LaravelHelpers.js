@@ -1,7 +1,9 @@
-export default class LaravelHelpers
+class LaravelHelpers
 {
     resourceRoute()
     {
 
     }
 }
+
+
