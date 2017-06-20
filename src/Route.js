@@ -1,50 +1,44 @@
-import InvalidHttpVerbException from './exceptions/InvalidHttpVerbException';
 import NullResourceException from './exceptions/NullResourceException';
+import HttpVerb from './HttpVerb';
+import UrlParams from '.UrlParams';
 
 export default class ResourceRoute
 {
 
-    constructor(verb, uri, action, resourceName, resourceId = null)
+    constructor(verb, uri, action, resourceName)
     {
-        this.verb = verb.toUpperCase() ;
+        this.verb = new HttpVerb(verb);
         this.uri = uri;
         this.action = action;
         this.name =  `${resourceName}.${action}`;
         this.resourceName = resourceName;
-        this.resourceId = resourceId;
-
-        let verbs = ['GET', 'POST', 'PUT/PATCH', 'DELETE'];
-
-        if(verbs.indexOf(this.verb) === -1)
-        {
-            let accepted = verbs.join(', ');
-            throw new InvalidHttpVerbException('Http verb must be one of the following: ' + accepted + '.');
-        }
-
-        
     }
 
-    // Default to object property if none are given.
-    url(resourceId = this.resourceId)
+    verb()
     {
-        let url = this.uri;
+        return this.verb.first();
+    }
 
-        if(url.indexOf('#') !== -1)
-        {
-            if(resourceId === null) throw new NullResourceException('This url requires a resource id.');
-            url = url.replace('#', resourceId);
+    verbs()
+    {
+        return this.verb.all();
+    }
 
-        }
-        
-        if(url.indexOf('$') !== -1)
+    static substituteResource(uriString)
+    {
+        // Substitute placeholders with resource name.
+        if(uriString.includes('$'))
         {
             if(this.resourceName === null) throw new NullResourceException('This url requires a resource name.');
-            url = url.replace('$', this.resourceName);
-
+            uriString = uriString.replace('$', this.resourceName);
         }
-        
-        return url;
     }
 
-
+    // Default to empty parameters.
+    url(paramValues = {})
+    {
+        let url = Route.substituteResource(this.uri);
+        let params = new UrlParams(url);
+        return params.bind(paramValues);
+    }
 }

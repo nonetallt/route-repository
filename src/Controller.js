@@ -5,18 +5,20 @@ export default class Controller
     constructor(resourceName)
     {
         this.resourceName = resourceName;
+        this.customRoutes = [];
     }
 
+    // When calling urls $ equals resource name
     static resources(action)
     {
         let routes  = {
             index: [ 'GET', '/$'],
             create: [ 'GET', '/$/create'],
             store: [ 'POST', '/$'],
-            show: [ 'GET', '/$/#'],
-            edit: [ 'GET', '/$/#/edit'],
-            update: [ 'PUT/PATCH', '/$/#'],
-            destroy: [ 'DELETE', '/$/#']
+            show: [ 'GET', '/$/{$}'],
+            edit: [ 'GET', '/$/{$}/edit'],
+            update: [ 'PUT/PATCH', '/$/{$}'],
+            destroy: [ 'DELETE', '/$/{$}']
         }
         return routes[action];
     }
@@ -31,4 +33,8 @@ export default class Controller
         return new Route(...route);
     }
 
+    addRoute(verb, uri, action)
+    {
+        this.customRoutes[action] = new Route(verb, uri, action, this.resouceName);
+    }
 }
