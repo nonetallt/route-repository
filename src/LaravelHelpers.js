@@ -21,7 +21,7 @@ class LaravelHelpers
 
     route(routeName)
     {
-        if(!routeName.includes('.'))
+        if(!routeName.indexOf('.') !== -1)
         {
             throw new InvalidRouteException('Route name should consist of resource and action names separated by a dot.');
         }

@@ -6,15 +6,12 @@ export default class HttpVerb
     constructor(verbString)
     {
         // Make sure the verb is capitalized.
-        verbString = verbString.toUpperCase();
+        let verbs = verbString.toUpperCase();
 
         // Check if this object supports multiple verbs at once.
-        if(verbString.includes('/'))
-        {
-            // Typecasts string to array with one element if no separator is
-            // found.
-            verbs = verbString.split('/');
-        }
+        // Typecasts string to array with one element if no separator is
+        // found.
+        verbs = verbs.split('/');
         
         HttpVerb.validate(verbs);
         this.verbs = verbs;
@@ -39,7 +36,7 @@ export default class HttpVerb
     {
         let validVerbs = HttpVerb.valid();
         verbs.forEach(verb => {
-            if(!validVerbs.includes(verb))
+            if(validVerbs.indexOf(verb) === -1)
             {
                 let msgValid = `Http verb must be one of the following: ${verbs.join(', ')}.`; 
                 let msgGiven = ` '${verb}' given.`;

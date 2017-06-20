@@ -1,60 +1,85 @@
+import NullResourceException from './exceptions/NullResourceException';
+
 export default class UrlParams
 {
     constructor(uriString)
     {
-        // Parse the url parameter name without surrounding [] brackets.
-        this.params = uri.match(/\[(.*?)\]/);
+        this.url = uriString;
+        this.names = [];
+        
+        // Parse the url parameter placeholders with surrounding [] brackets.
+        this.placeholders = uriString.match(/\{.*?\}/) || [];
+
+        // Remove the brackets for parameter names.
+        for(let n = 0; n < this.placeholders.length; n++)
+        {
+            this.names.push(this.placeholders[n].slice(1, -1));
+        }
+    }
+
+    static is_object(value)
+    {
+        for(let property in value)
+        {
+            if(value.hasOwnProperty(property)) return true;
+        }
+        return false;
     }
 
     bind(values)
     {
-        if(object.keys(values).length > 0)
+        // Bind using keys if provided.
+        if(UrlParams.is_object(values))
         {
-            return bindWithKeys(values);
+            return this.bindWithKeys(values);
         }
-        if(Array.isArray(values))
-        {
-            return bindWithValues(values);
-        }
-        throw new TypeError('Bound values type must be either an object or an array');
+
+        // Typecast a single value to array.
+        if(!Array.isArray(values)) values = [values];
+        
+        return this.bindWithValues(values);
     }
 
     // Bind each value to a specified parameter key.
     bindWithKeys(values)
     {
-        for(n = 0; n < this.params.length; n++)
+        let url = this.url;
+        for(let n = 0; n < this.names.length; n++)
         {
-            let valueToBind = values[this.params[n]];
-            if(valueToBind === undefined || valueToBind === null) bindingException();
+            let valueToBind = values[this.names[n]];
+            if(valueToBind === undefined || valueToBind === null) this.bindingException(n);
 
             // Bind parameters.
-            url = url.replace(/\[(.*)\]/, valueToBind);
+            url = url.replace(this.placeholders[n], valueToBind);
         }
+        return url;
     }
 
     // Bind values in given order without caring about keys.
     bindWithValues(values)
     {
-        for(n = 0; n < this.params.length; n++)
+        let url = this.url;
+        for(let n = 0; n < this.names.length; n++)
         {
             let valueToBind = values[n];
-            if(valueToBind === undefined || valueToBind === null) bindingException();
+            if(valueToBind === undefined || valueToBind === null) this.bindingException(n);
 
             // Bind parameters.
-            url = url.replace(/\[(.*)\]/, valueToBind);
+            url = url.replace(this.placeholders[n], valueToBind);
         }
+        return url;
     }
 
-    bindingException(parameterName)
+    bindingException(paramIndex)
     {
         // Generate example method call for hint.
         let required = [];
-        for(n = 0; n < this.params.length; n++)
+        for(let n = 0; n < this.names.length; n++)
         {
-            required[] = `${this.params[n]} : 'value'`;
+            required.push(`${this.names[n]} : 'value'`);
         }
 
-        let msgError = `Cannot bind required parameter '${parameterName}' - value does not exist.`;
+        let msgError = `Cannot bind required parameter '${this.names[paramIndex]}' - value does not exist.`;
         let msgHint = `Try binding with the required values: {${required.join(', ')}}`;
         throw new NullResourceException(`${msgError}\n${msgHint}`);
     }

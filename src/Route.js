@@ -1,12 +1,13 @@
 import NullResourceException from './exceptions/NullResourceException';
 import HttpVerb from './HttpVerb';
-import UrlParams from '.UrlParams';
+import UrlParams from './UrlParams';
 
-export default class ResourceRoute
+export default class Route
 {
 
     constructor(verb, uri, action, resourceName)
     {
+        // $ in resource name would cause an infinite loop
         this.verb = new HttpVerb(verb);
         this.uri = uri;
         this.action = action;
@@ -24,21 +25,29 @@ export default class ResourceRoute
         return this.verb.all();
     }
 
-    static substituteResource(uriString)
+    // Substitute $ placeholders with resource name.
+    substituteResource(uriString)
     {
-        // Substitute placeholders with resource name.
-        if(uriString.includes('$'))
+        let res = this.resourceName;
+
+        while(uriString.indexOf('$') !== -1)
         {
-            if(this.resourceName === null) throw new NullResourceException('This url requires a resource name.');
+            if(res === null || res === undefined) throw new NullResourceException('This url requires a resource name.');
             uriString = uriString.replace('$', this.resourceName);
         }
+        return uriString;
     }
 
     // Default to empty parameters.
     url(paramValues = {})
     {
-        let url = Route.substituteResource(this.uri);
+        let url = this.substituteResource(this.uri);
         let params = new UrlParams(url);
         return params.bind(paramValues);
+    }
+
+    urlParameters()
+    {
+        return new UrlParams(this.substituteResource(this.uri));
     }
 }

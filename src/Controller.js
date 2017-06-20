@@ -1,4 +1,5 @@
 import Route from './Route';
+import NullResourceException from './exceptions/NullResourceException';
 
 export default class Controller
 {
@@ -9,7 +10,7 @@ export default class Controller
     }
 
     // When calling urls $ equals resource name
-    static resources(action)
+    static resource(action)
     {
         let routes  = {
             index: [ 'GET', '/$'],
@@ -25,12 +26,22 @@ export default class Controller
 
     action(action)
     {
+        // Check if route is registered as a custom route.
+        if(this.customRoutes[action] !== undefined)
+        {
+            return this.customRoutes[action];
+        }
 
-        let route = Controller.resources(action);
-        route.push(action);
-        route.push(this.resourceName);
-        
-        return new Route(...route);
+        // Check resource routes.
+        if(Controller.resource(action) !== undefined)
+        {
+            // Add action and resource name for route constructor.
+            let route = Controller.resource(action);
+            route.push(action);
+            route.push(this.resourceName);
+            return new Route(...route);
+        }
+        throw new NullResourceException(`Route '${this.resourceName}.${action}' does not exist.`);
     }
 
     addRoute(verb, uri, action)
