@@ -39,7 +39,7 @@ export default class Route
     }
 
     // Default to empty parameters.
-    url(paramValues = {})
+    url(paramValues)
     {
         let url = this.substituteResource(this.uri);
         let params = new UrlParams(url);

@@ -23,19 +23,13 @@ export default class UrlParams
         }
     }
 
-    static is_object(value)
-    {
-        for(let property in value)
-        {
-            if(value.hasOwnProperty(property)) return true;
-        }
-        return false;
-    }
-
     bind(values)
     {
+        // Return base url if there's nothing to bind.
+        if(this.placeholders.length < 1) return this.url;
+
         // Bind using keys if provided.
-        if(UrlParams.is_object(values))
+        if(this.objectHasRequiredKeys(values))
         {
             return this.bindWithKeys(values);
         }
@@ -44,6 +38,17 @@ export default class UrlParams
         if(!Array.isArray(values)) values = [values];
         
         return this.bindWithValues(values);
+    }
+
+    // Checks that a given object has all named properties matching param
+    // names.
+    objectHasRequiredKeys(object)
+    {
+        for(let n = 0; n < this.names.length; n++)
+        {
+            if(!object.hasOwnProperty(this.names[n])) return false;
+        }
+        return true;
     }
 
     // Bind each value to a specified parameter key.
