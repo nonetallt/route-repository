@@ -31,5 +31,13 @@ describe('Custom routes', function()
         expect(route.verb()).toBe('POST');   
     });
 
+    it('should register a single headless route', function()
+    {
+        var customRoutes = {index: ['POST', '/$/custom']}
+        this.helpers.registerRoute('POST', '/headless', 'headless');
+        var route = this.helpers.route('headless');
+        expect(route.url()).toBe('/headless');
+        expect(route.verb()).toBe('POST');   
+    });
 
 });

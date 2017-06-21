@@ -56,6 +56,6 @@ class LaravelRoutes
             this.controllers[resourceName] = controller;
             return;
         }
-        return this.headlessRoutes.push(new Route(verb, uri, action));
+        this.headlessRoutes[action] = new Route(verb, uri, action);
     }
 }
