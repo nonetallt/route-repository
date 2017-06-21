@@ -6,14 +6,20 @@ export default class UrlParams
     {
         this.url = uriString;
         this.names = [];
+        this.placeholders = [];
         
         // Parse the url parameter placeholders with surrounding [] brackets.
-        this.placeholders = uriString.match(/\{.*?\}/) || [];
-
-        // Remove the brackets for parameter names.
-        for(let n = 0; n < this.placeholders.length; n++)
+        let match = uriString.match(/\{.*?\}/);
+        while(match !== null)
         {
-            this.names.push(this.placeholders[n].slice(1, -1));
+            match = match[0];
+
+            this.placeholders.push(match);
+            // Remove the brackets for parameter names.
+            this.names.push(match.slice(1, -1));
+
+            uriString = uriString.replace(match,'');
+            match = uriString.match(/\{.*?\}/);
         }
     }
 

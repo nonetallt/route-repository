@@ -8,7 +8,7 @@ export default class Route
     constructor(verb, uri, action, resourceName)
     {
         // $ in resource name would cause an infinite loop
-        this.verb = new HttpVerb(verb);
+        this.httpVerbs = new HttpVerb(verb);
         this.uri = uri;
         this.action = action;
         this.name =  `${resourceName}.${action}`;
@@ -17,12 +17,12 @@ export default class Route
 
     verb()
     {
-        return this.verb.first();
+        return this.httpVerbs.first();
     }
 
     verbs()
     {
-        return this.verb.all();
+        return this.httpVerbs.all();
     }
 
     // Substitute $ placeholders with resource name.

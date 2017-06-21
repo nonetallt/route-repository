@@ -14,7 +14,6 @@ class LaravelHelpers
         {
             this.controllers[resourceName] = new Controller(resourceName);
         }
-        
         return this.controllers[resourceName];
     }
 
@@ -36,14 +35,13 @@ class LaravelHelpers
     registerRoutes(resourceName, routes)
     {
         let actions = Object.keys(routes);
-        let controller = controller(resourceName);
+        let controller = this.controller(resourceName);
 
-        for(n = 0; n < routes.length; n++)
+        for(let n = 0; n < actions.length; n++)
         {
             let route = routes[actions[n]];
             controller.addRoute(route[0], route[1], actions[n]);
             this.controllers[resourceName] = controller;
         }
-
     }
 }

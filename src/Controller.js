@@ -6,7 +6,7 @@ export default class Controller
     constructor(resourceName)
     {
         this.resourceName = resourceName;
-        this.customRoutes = [];
+        this.customRoutes = {};
     }
 
     // When calling urls $ equals resource name
@@ -46,6 +46,7 @@ export default class Controller
 
     addRoute(verb, uri, action)
     {
-        this.customRoutes[action] = new Route(verb, uri, action, this.resouceName);
+        let route = new Route(verb, uri, action, this.resourceName);
+        this.customRoutes[action] = route;
     }
 }

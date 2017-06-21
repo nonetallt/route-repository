@@ -6,49 +6,50 @@ describe('Resource routes', function()
                 
     })
 
-    it('should return correct index route', function()
+    it('should return index route', function()
     {
         var route = this.helpers.controller('test').action('index');
         expect(route.url()).toBe('/test');
         expect(route.verb()).toBe('GET');
     });
 
-    it('should return correct create route', function()
+    it('should return create route', function()
     {
         var route = this.helpers.controller('test').action('create');
         expect(route.url()).toBe('/test/create');
         expect(route.verb()).toBe('GET');
     });
 
-    it('should return correct store route', function()
+    it('should return store route', function()
     {
         var route = this.helpers.controller('test').action('store');
         expect(route.url()).toBe('/test');
         expect(route.verb()).toBe('POST');
     });
 
-    it('should return correct show route', function()
+    it('should return show route', function()
     {
         var route = this.helpers.controller('test').action('show');
         expect(route.url(1)).toBe('/test/1');
         expect(route.verb()).toBe('GET');
     });
 
-    it('should return correct edit route', function()
+    it('should return edit route', function()
     {
         var route = this.helpers.controller('test').action('edit');
         expect(route.url(1)).toBe('/test/1/edit');
         expect(route.verb()).toBe('GET');
     });
 
-    it('should return correct update route', function()
+    it('should return update route', function()
     {
         var route = this.helpers.controller('test').action('update');
         expect(route.url(1)).toBe('/test/1');
-        expect(route.verb()).toBe('PUT/PATCH');
+        expect(route.verb()).toBe('PUT');
+        expect(route.verbs()).toEqual(['PUT', 'PATCH']);
     });
 
-    it('should return correct destroy route', function()
+    it('should return destroy route', function()
     {
         var route = this.helpers.controller('test').action('destroy');
         expect(route.url(1)).toBe('/test/1');
