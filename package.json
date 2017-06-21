@@ -1,8 +1,8 @@
 {
-    "name": "laravel-js-helpers",
+    "name": "laravel-js-routes",
     "version": "1.0.0",
     "description": "Js helpers for creating laravel resource routes.",
-    "main": "dist/laravel-helpers.js",
+    "main": "dist/LaravelRoutes.js",
     "scripts": {
         "prepublish": "npm run compile",
         "compile": "rollup -c",

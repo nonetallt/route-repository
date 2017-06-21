@@ -2,8 +2,8 @@ describe('Url parameters', function()
 {
     beforeAll(function()
     {
-        this.helpers = new LaravelHelpers();
-        this.helpers.registerRoutes('test', {custom: ['GET', '/$/{param1}/{param2}']});
+        this.helpers = new LaravelRoutes();
+        this.helpers.register({custom: ['GET', '/$/{param1}/{param2}']}, 'test');
     })
 
     it('should parse single names', function()
@@ -58,9 +58,9 @@ describe('Url parameters', function()
     it('should throw exception when parameters are required but not given', function()
     { 
         expect(function(){
-            var helpers = new LaravelHelpers();
+            var helpers = new LaravelRoutes();
             var customRoutes = {custom: [ 'GET', '/$/{param1}/{param2}' ]};
-            helpers.registerRoutes('test', customRoutes);
+            helpers.register(customRoutes, 'test');
             var route = helpers.controller('test').action('custom');
             var url = route.url();
             console.log(url);
@@ -71,9 +71,9 @@ describe('Url parameters', function()
     it('should throw exception when not enough parameters are given', function()
     {
         expect(function(){
-            var helpers = new LaravelHelpers();
+            var helpers = new LaravelRoutes();
             var customRoutes = {custom: [ 'GET', '/$/{param1}/{param2}' ]};
-            helpers.registerRoutes('test', customRoutes);
+            helpers.register(customRoutes, 'test');
             var route = helpers.controller('test').action('custom');
             var url = route.url('p1');
         })

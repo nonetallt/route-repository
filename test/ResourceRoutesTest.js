@@ -2,7 +2,7 @@ describe('Resource routes', function()
 {
     beforeAll(function()
     {
-        this.helpers = new LaravelHelpers();
+        this.helpers = new LaravelRoutes();
                 
     })
 

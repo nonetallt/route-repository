@@ -1,3 +1,4 @@
+import InvalidRouteException from './exceptions/InvalidRouteException';
 import NullResourceException from './exceptions/NullResourceException';
 import HttpVerb from './HttpVerb';
 import UrlParams from './UrlParams';
@@ -5,7 +6,7 @@ import UrlParams from './UrlParams';
 export default class Route
 {
 
-    constructor(verb, uri, action, resourceName)
+    constructor(verb, uri, action, resourceName = null)
     {
         // $ in resource name would cause an infinite loop
         this.httpVerbs = new HttpVerb(verb);
