@@ -1,3 +1,4 @@
+import LaravelRoutes from '../src/LaravelRoutes';
 describe('Resource routes', function() 
 {
     beforeAll(function()

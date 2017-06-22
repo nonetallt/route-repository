@@ -2,7 +2,7 @@ import Route from './Route';
 import RouteGroup from './RouteGroup';
 import InvalidRouteException from './exceptions/InvalidRouteException';
 
-class LaravelRoutes
+export default class LaravelRoutes
 {
     constructor()
     {
@@ -63,19 +63,6 @@ class LaravelRoutes
         }
     }
 
-    registerByNames(routes)
-    {
-        let actions = Object.keys(routes);
-        for(let n = 0; n < actions.length; n++)
-        {
-            let results = LaravelRoutes.parseName(actions[n]);
-            let route = routes[actions[n]];
-            let verb = route[0];
-            let url = route[1];
-            this.register(verb, url, results.action, results.group);
-        }
-    }
-
     register(verb, uri, action, groupName = null)
     {
         // Check if group name is known.
@@ -87,6 +74,19 @@ class LaravelRoutes
             return;
         }
         this.headlessRoutes[action] = new Route(verb, uri, action);
+    }
+
+    registerByNames(routes)
+    {
+        let actions = Object.keys(routes);
+        for(let n = 0; n < actions.length; n++)
+        {
+            let results = LaravelRoutes.parseName(actions[n]);
+            let route = routes[actions[n]];
+            let verb = route[0];
+            let url = route[1];
+            this.register(verb, url, results.action, results.group);
+        }
     }
 
     static parseName(string)

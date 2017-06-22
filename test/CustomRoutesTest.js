@@ -1,3 +1,4 @@
+import LaravelRoutes from '../src/LaravelRoutes';
 describe('Custom routes', function() 
 {
     beforeAll(function()

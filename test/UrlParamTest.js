@@ -1,3 +1,4 @@
+import LaravelRoutes from '../src/LaravelRoutes';
 describe('Url parameters', function() 
 {
     beforeAll(function()
