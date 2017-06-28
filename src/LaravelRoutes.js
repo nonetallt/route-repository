@@ -56,23 +56,6 @@ export default class LaravelRoutes
         return markdownTable(tableRows, {align: 'l'});
     }
 
-    // Register all routes in a given object using object keys as action names.
-    registerByActions(routes, group = null)
-    {
-        let actions = Object.keys(routes);
-        for(let n = 0; n < actions.length; n++)
-        {
-            if(actions[n].indexOf('.') !== -1)
-            {
-                let msgErr = 'Registered action names should not contain the dot (.) character.';
-                let msgHint = 'Try registerByNames() instead';
-                throw new InvalidRouteException(`${msgErr}\n${msgHint}`);
-            }
-            let route = routes[actions[n]];
-            this.register(route[0], route[1], actions[n], group);
-        }
-    }
-
     // Register a single route.
     register(verb, uri, action, groupName = null)
     {

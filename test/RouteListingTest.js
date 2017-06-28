@@ -4,11 +4,6 @@ describe('Route listing', function()
     beforeAll(function()
     {
         this.routes = new LaravelRoutes();
-        /*
-        this.routes.registerByNames({
-            'test.index': ['GET', '/$'],
-        });
-        */
     })
 
     it('should return registered resource routes', function()

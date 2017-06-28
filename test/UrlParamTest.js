@@ -4,7 +4,7 @@ describe('Url parameters', function()
     beforeAll(function()
     {
         this.helpers = new LaravelRoutes();
-        this.helpers.registerByActions({custom: ['GET', '/$/{param1}/{param2}']}, 'test');
+        this.helpers.group('test').addAll({custom: ['GET', '/$/{param1}/{param2}']});
     })
 
     it('should parse single names', function()
@@ -61,7 +61,7 @@ describe('Url parameters', function()
         expect(function(){
             var helpers = new LaravelRoutes();
             var customRoutes = {custom: [ 'GET', '/$/{param1}/{param2}' ]};
-            helpers.registerByActions(customRoutes, 'test');
+            helpers.group('test').addAll(customRoutes);
             var route = helpers.group('test').route('custom');
             var url = route.url();
             console.log(url);
@@ -74,7 +74,7 @@ describe('Url parameters', function()
         expect(function(){
             var helpers = new LaravelRoutes();
             var customRoutes = {custom: [ 'GET', '/$/{param1}/{param2}' ]};
-            helpers.registerByActions(customRoutes, 'test');
+            helpers.group('test').addAll(customRoutes);
             var route = helpers.group('test').route('custom');
             var url = route.url('p1');
         })

@@ -17,7 +17,7 @@ describe('Custom routes', function()
     it('should find a registered custom route', function()
     {
         var customRoutes = {custom: ['GET', '/$/custom']}
-        this.helpers.registerByActions(customRoutes, 'test');
+        this.helpers.group('test').addAll(customRoutes);
         var route = this.helpers.group('test').route('custom');
         expect(route.url()).toBe('/test/custom');
         expect(route.verb()).toBe('GET');
@@ -26,7 +26,7 @@ describe('Custom routes', function()
     it('should override an existing resource route', function()
     {
         var customRoutes = {index: ['POST', '/$/custom']}
-        this.helpers.registerByActions(customRoutes, 'test');
+        this.helpers.group('test').addAll(customRoutes);
         var route = this.helpers.group('test').route('index');
         expect(route.url()).toBe('/test/custom');
         expect(route.verb()).toBe('POST');   

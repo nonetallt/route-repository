@@ -101,6 +101,23 @@ export default class RouteGroup
         this.customRoutes[action] = route;
     }
 
+    // Register all routes in a given object using object keys as action names.
+    addAll(routes)
+    {
+        let actions = Object.keys(routes);
+        for(let n = 0; n < actions.length; n++)
+        {
+            if(actions[n].indexOf('.') !== -1)
+            {
+                let msgErr = 'Registered action names should not contain the dot (.) character.';
+                let msgHint = 'Try registerByNames() instead';
+                throw new InvalidRouteException(`${msgErr}\n${msgHint}`);
+            }
+            let route = routes[actions[n]];
+            this.add(route[0], route[1], actions[n]);
+        }
+    }
+
     // Remove a register custom route.
     remove(name)
     {
