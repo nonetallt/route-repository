@@ -1,5 +1,6 @@
 import Route from './Route';
 import RouteGroup from './RouteGroup';
+import markdownTable from './vendor/MarkdownTable';
 import InvalidRouteException from './exceptions/InvalidRouteException';
 
 export default class LaravelRoutes
@@ -30,21 +31,23 @@ export default class LaravelRoutes
     // Returns a formatted list of all 'registered' routes.
     routes()
     {
-        let msg = '';
-        msg += '---- Route Groups ----\n\n';
-        for(let n = 0; n < this.groups.length; n++)
+        // Initialize table with headers
+        let tableRows = [['GROUP', 'VERB', 'URI', 'ACTION', 'NAME']];
+        let groupKeys = Object.keys(this.groups);
+
+        for(let n = 0; n < groupKeys.length; n++)
         {
-            // Convert group to string presentation.
-            msg += this.groups[n];
+            let group = this.groups[groupKeys[n]];
+            // Append the group data to rows.
+            tableRows = tableRows.concat(group.toArray());
         }
 
-        msg += '\n---- Headless Routes ----\n\n'
         for(let n = 0; n < this.headlessRoutes.length; n++)
         {
             // Convert group to string presentation.
             msg += this.groups[n];
         }
-        return msg;
+        return markdownTable(tableRows, {align: 'l'});
     }
 
     registerByActions(routes, group = null)

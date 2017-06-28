@@ -1,5 +1,6 @@
 import Route from './Route';
 import InvalidRouteException from './exceptions/InvalidRouteException';
+import markdownTable from './vendor/MarkdownTable';
 
 export default class RouteGroup
 {
@@ -13,29 +14,26 @@ export default class RouteGroup
     // Return a string representation of the object.
     toString()
     {
-        let str = `-- ${this.name} --\n`;
-        
-        // Find longest values for parsing.
-        let verbL = 0;
-        let uriL = 0;
-        let actionL = 0;
-        let nameL = 0;
+        // Initialize table with headers
+        let tableRows = [['VERB', 'URI', 'ACTION', 'NAME']];
+        return markdownTable(tableRows.concat(this.toArray()), {align: 'l'});
+    }
 
+    // Returns an array representation of the object.
+    toArray()
+    {
+        let tableRows = [];
         let routes = this.all();
+
         for(let n = 0; n < routes.length; n++)
         {
-            let route = routes[n];
-            let verb = route.verbs().join('/').length;
-            let uri = route.uri().length;
-            let action = route.action().length;
-            let name = route.name().length;
+            // Prepend the group name to the row.
+            let row = [this.name].concat(routes[n].toArray());
 
-            if(verb > verbL) verbL = verb;
-            if(uri > uriL) uriL = uri;
-            if(action > actionL) actionL = action;
-            if(name > nameL) nameL = name;
+            // Append route as an array to the table rows
+            tableRows.push(row);
         }
-        return str;
+        return tableRows;
     }
 
     // Shorthand for returning resourceful action data.

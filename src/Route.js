@@ -14,6 +14,18 @@ export default class Route
         this.group = group;
     }
 
+    // Return a string representation of the object.
+    toString()
+    {
+        return this.toArray().join(' , ');
+    }
+
+    // Returns an array representation of the object.
+    toArray()
+    {
+        return [this.verbs().join('/'), this.uri(), this.action(), this.name()];
+    }
+
     // Validation when substiting $ placeholder to avoid infinite loops.
     static validateGroup(string)
     {

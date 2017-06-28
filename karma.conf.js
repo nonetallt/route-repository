@@ -35,6 +35,9 @@ module.exports = function(config) {
             plugins: [
                 require('rollup-plugin-buble')()
             ],
+            globals: {
+                'markdown-table': 'node_modules/markdown-table/index.js'
+            },
             format: 'iife',
             sourceMap: 'inline',
             moduleName: 'laravel-routes'
