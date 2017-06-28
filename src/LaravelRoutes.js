@@ -11,13 +11,18 @@ export default class LaravelRoutes
         this.headlessRoutes = {};
     }
 
-    group(name)
+    // Get an existing route group or create a new group if the specified group
+    // does not exist.
+    group(name, usesResources)
     {
-        // Lazy loading for new groups.
-        if(this.groups[name] === undefined) this.groups[name] = new RouteGroup(name);
+        if(this.groups[name] === undefined) this.groups[name] = new RouteGroup(name, usesResources);
+        
+        // Change existing group's usesResources value.
+        if(usesResources !== undefined) this.groups[name].usesResources = usesResources;
         return this.groups[name];
     }
 
+    // Returns a Route object with the given name.
     route(routeName)
     {
         let results = LaravelRoutes.parseName(routeName);
@@ -29,7 +34,7 @@ export default class LaravelRoutes
     }
 
     // Returns a formatted list of all 'registered' routes.
-    routes()
+    list()
     {
         // Initialize table with headers
         let tableRows = [['GROUP', 'VERB', 'URI', 'ACTION', 'NAME']];
@@ -44,12 +49,14 @@ export default class LaravelRoutes
 
         for(let n = 0; n < this.headlessRoutes.length; n++)
         {
-            // Convert group to string presentation.
-            msg += this.groups[n];
+            // Prepend the empty cell for the group to row.
+            let row = [''].concat(this.headlessRoutes[n].toArray());
+            tableRows = tableRows.concat(row);
         }
         return markdownTable(tableRows, {align: 'l'});
     }
 
+    // Register all routes in a given object using object keys as action names.
     registerByActions(routes, group = null)
     {
         let actions = Object.keys(routes);
@@ -66,6 +73,7 @@ export default class LaravelRoutes
         }
     }
 
+    // Register a single route.
     register(verb, uri, action, groupName = null)
     {
         // Check if group name is known.
@@ -79,6 +87,8 @@ export default class LaravelRoutes
         this.headlessRoutes[action] = new Route(verb, uri, action);
     }
 
+    // Registers any routes in the given objects by using the object keys as
+    // route names.
     registerByNames(routes)
     {
         let actions = Object.keys(routes);
@@ -92,6 +102,8 @@ export default class LaravelRoutes
         }
     }
 
+    // Checks that a given route name is valid and returns an object containing
+    // the parsed data.
     static parseName(string)
     {
         let parts = string.split('.');
