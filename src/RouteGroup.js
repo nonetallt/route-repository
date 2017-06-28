@@ -128,8 +128,8 @@ export default class RouteGroup
         {
             if(actions[n].indexOf('.') !== -1)
             {
-                let msgErr = 'Registered action names should not contain the dot (.) character.';
-                let msgHint = 'Try registerByNames() instead';
+                let msgErr = 'Registered actions should not contain the dot (.) character.';
+                let msgHint = "Try calling addAll() on 'LaravelRoutes' to register by names instead of actions.";
                 throw new InvalidRouteException(`${msgErr}\n${msgHint}`);
             }
             let route = routes[actions[n]];

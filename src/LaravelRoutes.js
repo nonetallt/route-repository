@@ -64,7 +64,7 @@ export default class LaravelRoutes
     }
 
     // Register a single route.
-    register(verb, uri, action, groupName = null)
+    add(verb, uri, action, groupName = null)
     {
         // Check if group name is known.
         if(typeof groupName === 'string') 
@@ -81,7 +81,7 @@ export default class LaravelRoutes
 
     // Registers any routes in the given objects by using the object keys as
     // route names.
-    registerByNames(routes)
+    addAll(routes)
     {
         let actions = Object.keys(routes);
         for(let n = 0; n < actions.length; n++)
@@ -90,7 +90,7 @@ export default class LaravelRoutes
             let route = routes[actions[n]];
             let verb = route[0];
             let url = route[1];
-            this.register(verb, url, results.action, results.group);
+            this.add(verb, url, results.action, results.group);
         }
     }
 

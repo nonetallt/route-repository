@@ -9,7 +9,7 @@ describe('Headless routes', function()
             search: ['POST', '/search/{query}'],
             'photos.search': ['GET', '/search']
         };
-        this.routes.registerByNames(namedRoutes);
+        this.routes.addAll(namedRoutes);
         //console.log('\n'+this.routes.list());
     })
 
