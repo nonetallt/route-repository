@@ -15,11 +15,16 @@ export default class LaravelRoutes
     // does not exist.
     group(name, usesResources)
     {
-        if(this.groups[name] === undefined) this.groups[name] = new RouteGroup(name, usesResources);
+        if(!this.hasGroup(name)) this.groups[name] = new RouteGroup(name, usesResources);
         
         // Change existing group's usesResources value.
         if(usesResources !== undefined) this.groups[name].usesResources = usesResources;
         return this.groups[name];
+    }
+
+    setGroup(name, group)
+    {
+        this.groups[name] = group;
     }
 
     // Returns a Route object with the given name.
@@ -47,10 +52,12 @@ export default class LaravelRoutes
             tableRows = tableRows.concat(group.toArray());
         }
 
-        for(let n = 0; n < this.headlessRoutes.length; n++)
+        let headlessKeys = Object.keys(this.headlessRoutes);
+        for(let n = 0; n < headlessKeys.length; n++)
         {
             // Prepend the empty cell for the group to row.
-            let row = [''].concat(this.headlessRoutes[n].toArray());
+            let row = [];
+            row.push([''].concat(this.headlessRoutes[headlessKeys[n]].toArray()));
             tableRows = tableRows.concat(row);
         }
         return markdownTable(tableRows, {align: 'l'});
@@ -60,14 +67,16 @@ export default class LaravelRoutes
     register(verb, uri, action, groupName = null)
     {
         // Check if group name is known.
-        if(typeof groupName === 'string')
+        if(typeof groupName === 'string') 
         {
-            let group = this.group(groupName);
-            group.add(verb, uri, action);
-            this.groups[group] = group;
-            return;
+            // Register a new group without resource routes by default.
+            let group = this.group(groupName, false);
+            let route = group.add(verb, uri, action);
+            this.setGroup(groupName, group);
+            return route;
         }
         this.headlessRoutes[action] = new Route(verb, uri, action);
+        return this.headlessRoutes[action];
     }
 
     // Registers any routes in the given objects by using the object keys as
@@ -99,5 +108,39 @@ export default class LaravelRoutes
             return {group: null, action: parts[0], type: 'headless'};
         }
         return {group: parts[0], action: parts[1], type: 'controller'};
+    }
+
+    count()
+    {
+        return this.countHeadless() + this.countGrouped();
+    }
+
+    countHeadless()
+    {
+        return Object.keys(this.headlessRoutes).length;
+    }
+
+    countGrouped()
+    {
+        let groupNames = Object.keys(this.groups);
+        let routeCount = 0;
+        for(let n = 0; n < groupNames.length; n++)
+        {
+            let group = this.groups[groupNames[n]];
+            // Add all routes for this group.
+            routeCount += group.all().length;
+        }
+        return routeCount;
+    }
+
+    countGroups()
+    {
+        return Object.keys(this.groups).length;
+    }
+
+    hasGroup(name)
+    {
+        if(this.groups[name] === undefined) return false;
+        return true;
     }
 }

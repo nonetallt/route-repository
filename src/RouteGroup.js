@@ -78,19 +78,36 @@ export default class RouteGroup
         throw new InvalidRouteException(`Route '${name}' is not registered for group '${this.name}'.`);
     }
 
+    // Add all resource routes for the group.
+    resourceRoutes()
+    {
+        let routes = [];
+        let actions = Object.keys(RouteGroup.resources());
+        for(let n = 0; n < actions.length; n++)
+        {
+            routes.push(this.resourceRoute(actions[n]));
+        }
+        return routes;
+    }
+
+    // Return all custom routes added to this group.
+    registeredRoutes()
+    {
+        let routes = [];
+        let customRouteNames = Object.keys(this.customRoutes);
+        for(let n = 0; n < customRouteNames.length; n++)
+        {
+            routes.push(this.customRoutes[customRouteNames[n]]);
+        }
+        return routes;
+    }
+
     // Return all 'registered' routes, including resources if applicable.
     all()
     {
-        let routes = [];
-        routes.concat(this.customRoutes);
-        if(this.usesResources)
-        {
-            let actions = Object.keys(RouteGroup.resources());
-            for(let n = 0; n < actions.length; n++)
-            {
-                routes.push(this.resourceRoute(actions[n]));
-            }
-        }
+        let routes = this.registeredRoutes();
+        // Add resource routes if in use.
+        if(this.usesResources) routes = routes.concat(this.resourceRoutes());
         return routes;
     }
 
@@ -99,11 +116,13 @@ export default class RouteGroup
     {
         let route = new Route(verb, uri, action, this.name);
         this.customRoutes[action] = route;
+        return route;
     }
 
     // Register all routes in a given object using object keys as action names.
     addAll(routes)
     {
+        let newRoutes = [];
         let actions = Object.keys(routes);
         for(let n = 0; n < actions.length; n++)
         {
@@ -114,8 +133,10 @@ export default class RouteGroup
                 throw new InvalidRouteException(`${msgErr}\n${msgHint}`);
             }
             let route = routes[actions[n]];
-            this.add(route[0], route[1], actions[n]);
+            let routeObject  = this.add(route[0], route[1], actions[n]);
+            newRoutes.push(routeObject );
         }
+        return newRoutes;
     }
 
     // Remove a register custom route.
