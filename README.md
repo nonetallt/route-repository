@@ -6,52 +6,58 @@ Having a global helper for routes allows you to avoid blade generated properties
 
 
 # Usage
-```
-// Assign helpers object to window for global access.
-window.R = new LaravelRoutes();
 
-var route = R.route('photos.create');
+Create a new routes object for the application.
+```
+var r = new LaravelRoutes();
+```
+
+Access a "create" resource route for the group photos.
+```
+var route = r.route('photos.create');
 // or
-// var route = R.group('photos').route('create');
-
-console.log('url: ' + route.url());
-console.log('verb: ' + route.verb());
+var route = r.group('photos').route('create');
 ```
 
-
-url: /photos/create
-
-verb: GET
-
-# Adding Custom Routes
+Accessing route data.
 ```
-// Adding routes via a route group
+// Parameters are bound using either keys in an object or in order from an array.
+route.url(parameters);
+route.uri();
+route.urlParameters();
+route.verb();
+route.verbs();
+route.action();
+route.name();
+```
 
-R.group('photos').addAll({
+Return a formatted table string of all the routes.
+```
+r.list();
+```
+
+# Custom Routes
+Adding multiple routes.
+```
+r.group('photos').addAll({
     upload: ['POST', 'upload'],
     publish: ['PUT/PATCH', '#/publish']
 });
-
-// Adding routes dynamically
-R.addAll({
-    "photos.upload" : ['POST', 'upload'],
-    "photos.publish" : ['PUT/PATCH', '#/publish']
+// or
+r.addAll({
+    "photos.upload" : ['POST', '$/upload'],
+    "photos.publish" : ['PUT/PATCH', '$/{photo}/publish']
 });
-
-// Adding a single route
-
 ```
 
-New registered routes:
+Adding a single route.
+```
+r.add(verb, uri, action, groupName);
+// or
+r.group('photos').add(verb, uri, action);
+```
 
 | Verb      | URI                     | Action  | Route Name     |
 |-----------|-------------------------|---------|----------------|
 | POST      | /photos/upload          | upload  | photos.upload  |
 | PUT/PATCH | /photos/{photo}/publish | publish | photos.publish |
-
-# Listing registered routes for debugging
-```
-// Returns a formatted table string of all the routes.
-var routeList = R.list();
-console.log(routeList);
-```
