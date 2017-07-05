@@ -39,9 +39,12 @@ r.list();
 # Custom Routes
 Adding multiple routes.
 ```
+// The $ sign can be used as a placeholder for the group name.
+// Url parameters can be created using the same curly bracket syntax as in laravel.
+
 r.group('photos').addAll({
-    upload: ['POST', 'upload'],
-    publish: ['PUT/PATCH', '#/publish']
+    upload: ['POST', '$/upload'],
+    publish: ['PUT/PATCH', '$/{photo}/publish']
 });
 // or
 r.addAll({
