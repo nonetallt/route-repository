@@ -1,4 +1,4 @@
-# Laravel-js-helpers
+# Laravel-js-routes
 
 A simple package for easily accessing the most common routes from javascript. Useful for dynamic js components that use ajax calls. The routes are automatically automatically generated for a given [resource](https://laravel.com/docs/5.4/controllers#resource-controllers) name, for example, photos.
 
@@ -8,17 +8,16 @@ Having a global helper for routes allows you to avoid blade generated properties
 # Usage
 ```
 // Assign helpers object to window for global access.
-window.H = new LaravelHelpers();
+window.R = new LaravelRoutes();
 
-var route = H.route('photos.create');
+var route = R.route('photos.create');
 // or
-// var route = H.controller('photos').action('create');
+// var route = R.group('photos').route('create');
 
 console.log('url: ' + route.url());
-console.log('verb: ' + route.verb);
+console.log('verb: ' + route.verb());
 ```
 
-Output:
 
 url: /photos/create
 
@@ -26,12 +25,21 @@ verb: GET
 
 # Adding Custom Routes
 ```
-window.H = new LaravelHelpers();
+// Adding routes via a route group
 
-H.registerRoutes('photos', {
+R.group('photos').addAll({
     upload: ['POST', 'upload'],
     publish: ['PUT/PATCH', '#/publish']
 });
+
+// Adding routes dynamically
+R.addAll({
+    "photos.upload" : ['POST', 'upload'],
+    "photos.publish" : ['PUT/PATCH', '#/publish']
+});
+
+// Adding a single route
+
 ```
 
 New registered routes:
@@ -40,3 +48,10 @@ New registered routes:
 |-----------|-------------------------|---------|----------------|
 | POST      | /photos/upload          | upload  | photos.upload  |
 | PUT/PATCH | /photos/{photo}/publish | publish | photos.publish |
+
+# Listing registered routes for debugging
+```
+// Returns a formatted table string of all the routes.
+var routeList = R.list();
+console.log(routeList);
+```
