@@ -37,11 +37,10 @@ r.list();
 ```
 
 # Custom Routes
+The $ sign can be used as a placeholder in the route uri when adding routes to a group. Url parameters can be created using the same curly bracket syntax as in laravel. The text inside brackets will be used as a parameter name so avoid using duplicate parameter names if you want the binding to work correctly with objects.
+
 Adding multiple routes.
 ```
-// The $ sign can be used as a placeholder for the group name.
-// Url parameters can be created using the same curly bracket syntax as in laravel.
-
 r.group('photos').addAll({
     upload: ['POST', '$/upload'],
     publish: ['PUT/PATCH', '$/{photo}/publish']
