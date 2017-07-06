@@ -5,7 +5,7 @@
     "main": "dist/LaravelRoutes.js",
     "scripts": {
         "prepublish": "npm run compile",
-        "compile": "rollup -c",
+        "compile": "./node_modules/rollup/bin/rollup -c",
         "test": "clear; ./node_modules/karma/bin/karma start karma.conf.js",
         "ct": "npm run compile; npm test"
     },
