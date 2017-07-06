@@ -1,8 +1,8 @@
 {
     "name": "laravel-js-routes",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "description": "Js helpers for creating laravel resource routes.",
-    "main": "dist/LaravelRoutes.js",
+    "main": "dist/laravel-js-routes.js",
     "scripts": {
         "prepublish": "npm run compile",
         "compile": "./node_modules/rollup/bin/rollup -c",
@@ -11,7 +11,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/nonetallt/laravel-js-helpers.git"
+        "url": "git+https://github.com/nonetallt/laravel-js-routes.git"
     },
     "keywords": [
         "laravel",
@@ -22,9 +22,9 @@
     "author": "Jyri Mikkola",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/nonetallt/laravel-js-helpers/issues"
+        "url": "https://github.com/nonetallt/laravel-js-routes/issues"
     },
-    "homepage": "https://github.com/nonetallt/laravel-js-helpers#readme",
+    "homepage": "https://github.com/nonetallt/laravel-js-routes#readme",
     "devDependencies": {
         "jasmine-core": "^2.6.3",
         "karma": "^1.7.0",
