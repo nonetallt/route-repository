@@ -1,6 +1,6 @@
 # Laravel-js-routes
 
-A simple front to back router package for javascript. Useful for users of dynamic javascript frameworks like Vue.js or React who are using ajax calls. The routes can be generated automatically for a given [resource](https://laravel.com/docs/5.4/controllers#resource-controllers) (e.g. photos).
+A simple front to back router package for javascript. Useful for users of dynamic javascript frameworks like Vue.js or React who are using ajax calls. The routes can be added manually or generated automatically for a given [resource](https://laravel.com/docs/5.4/controllers#resource-controllers) (e.g. photos).
 
 Features and benefits:
 * less props for components
@@ -13,6 +13,14 @@ Features and benefits:
 
 
 # Usage
+Import the package.
+```
+// Using commonjs
+var LaravelRoutes = require('laravel-js-routes');
+
+// Using es2015
+import LaravelRoutes from 'laravel-js-routes';
+```
 
 Create a new routes object for the application.
 ```
