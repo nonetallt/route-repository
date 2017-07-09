@@ -1,6 +1,6 @@
 {
     "name": "laravel-js-routes",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "Js helpers for creating laravel resource routes.",
     "main": "dist/laravel-js-routes.js",
     "scripts": {
