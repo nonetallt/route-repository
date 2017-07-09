@@ -4,8 +4,7 @@ export default
 {
     entry: 'src/LaravelRoutes.js',
     dest: 'dist/laravel-js-routes.js',
-    format: 'iife',
-    moduleName: 'LaravelJsRoutes',
+    format: 'cjs',
     plugins: [buble()],
     exports: 'default'
 }

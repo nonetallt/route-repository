@@ -35,7 +35,7 @@ export default class LaravelRoutes
         {
             return this.headlessRoutes[routeName];
         }
-        return this.group(results.group).action(results.action);
+        return this.group(results.group).route(results.action);
     }
 
     // Returns a formatted list of all 'registered' routes.
