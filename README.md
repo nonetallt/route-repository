@@ -1,4 +1,4 @@
-# Laravel-js-routes
+# laravel-js-routes
 
 A simple front to back router package for JavaScript. Useful for users of dynamic JavaScript frameworks like Vue.js or React who are using ajax calls. The routes can be added manually or generated automatically for a given [resource](https://laravel.com/docs/5.4/controllers#resource-controllers) (e.g. photos).
 
