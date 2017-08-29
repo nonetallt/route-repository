@@ -4,7 +4,10 @@ describe('Url parameters', function()
     beforeAll(function()
     {
         this.helpers = new LaravelRoutes();
-        this.helpers.group('test').addAll({custom: ['GET', '/$/{param1}/{param2}']});
+        this.helpers.group('test').addAll({
+            custom: ['GET', '/$/{param1}/{param2}'],
+            noparams: ['GET', '/$/params']
+        });
     })
 
     it('should parse single names', function()
@@ -83,7 +86,29 @@ describe('Url parameters', function()
 
     it('should work when no parameters are required', function()
     {
+        // Auto generate resource route
         var route = this.helpers.group('test').route('index');
         expect(route.url()).toEqual('/test');
     });
+
+
+    it('should tell if parameters are required', function()
+    {
+        var route = this.helpers.group('test').route('custom');
+        expect(route.urlParameters().areRequired()).toEqual(true);
+    });
+
+    it('should tell if parameters are not required', function()
+    {
+        var route = this.helpers.group('test').route('noparams');
+        expect(route.urlParameters().areRequired()).toEqual(false);
+    });
+
+    it('should return the required parameter names', function()
+    {
+        var route = this.helpers.group('test').route('custom');
+        let params = ['param1', 'param2'];
+        expect(route.urlParameters().required()).toEqual(params);
+    });
+
 });

@@ -23,6 +23,17 @@ export default class UrlParams
         }
     }
 
+    areRequired()
+    {
+        if(this.placeholders.length > 0) return true;
+        return false;
+    }
+
+    required()
+    {
+        return this.names;
+    }
+
     bind(values)
     {
         // Return base url if there's nothing to bind.
