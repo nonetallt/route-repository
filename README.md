@@ -51,57 +51,61 @@ console.log(routeListString);
 # Route Methods
 Route methods are used to access the object data.
 
-url The link with parameters bound.
 ```
+/**
+* The link with parameters bound.
+*/
 route.url();
 route.url(parameters);
-```
 
-uri The link with parameter placeholders.
-```
+/**
+* The link with parameter placeholders.
+*/
 route.uri();
-```
 
-urlParameters UrlParams object used by the route.
-```
+/**
+* UrlParams object used by the route.
+*/
 route.urlParameters();
-```
 
-verb The preferred http method verb, for example GET.
-```
+/**
+* The preferred http method verb, for example GET.
+*/
 route.verb();
-```
 
-verbs An array of all supported verbs.
-```
+/**
+* An array of all supported verbs.
+*/
 route.verbs();
-```
 
-action The second half of the name if route is in a group. Same as route.name() if called on a headless route.
-```
+/**
+* The second half of the name if route is in a group. Same as route.name() if called on a headless route.
+*/
 route.action();
-```
 
-name The full qualified name of the route.
-```
+/**
+* The full qualified name of the route.
+*/
 route.name();
 ```
 
 # Url Parameters
 The UrlParams object returned by route.urlParameters() contains a couple of useful methods.
 
-An array of all the required parameter names.
 ```
+/**
+* An array of all the required parameter names.
+*/
 params.required();
-```
 
-Check wether the route requires any parameters or not.
-```
+/**
+* Check wether the route requires any parameters or not.
+*/
 params.areRequired();
-```
 
-Directly check if a given parameters object contains the keys required by the route.
-```
+/**
+* Directly check if a given parameters object contains the keys required by the route.
+*/
 params.objectHasRequiredKeys(object);
 ```
 
@@ -111,7 +115,7 @@ Parameters are bound when calling the route.url() method. Obviously, if the rout
 
 1. a **plain value** that can be interpreted as a string (string, number etc)
 2. an **array** of plain values
-3. an **object** with keys matching plain_values
+3. an **object** with keys matching plain values
 
 
 ---
