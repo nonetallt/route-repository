@@ -106,9 +106,22 @@ describe('Url parameters', function()
 
     it('should return the required parameter names', function()
     {
-        var route = this.helpers.group('test').route('custom');
+        let route = this.helpers.group('test').route('custom');
         let params = ['param1', 'param2'];
         expect(route.urlParameters().required()).toEqual(params);
+    });
+
+    it('should throw an exception when parameters are required but none are given', function()
+    {
+        expect(function()
+        {
+            let helpers = new LaravelRoutes();
+            let customRoutes = {custom: [ 'GET', '/$/{param1}/{param2}' ]};
+            helpers.group('test').addAll(customRoutes);
+            let route = helpers.group('test').route('custom');
+            route.url();
+        })
+        .toThrow();
     });
 
 });

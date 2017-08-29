@@ -51,8 +51,18 @@ export default class Route
     // Default to empty parameters.
     url(paramValues = null, requireLeadingSlash = true)
     {
-        let url = this.substituteResource(this.unprocessedUri);
-        url = new UrlParams(url).bind(paramValues);
+        // Only create parameters once
+        let params = this.urlParameters();
+
+        // Check if required parameters were given
+        if(params.areRequired() && paramValues === null)
+        {
+            let required = params.required().join();
+            throw new NullResourceException(`Url '${this.uri()}' requires the following parameters: (${required}). None given.`);
+        }
+
+        // Replace placeholders and bind parameters
+        let url = params.bind(paramValues);
 
         // Append missing leading slash if required.
         if(requireLeadingSlash && url.charAt(0) !== '/') url = '/'+url;
