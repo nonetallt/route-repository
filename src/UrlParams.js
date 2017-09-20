@@ -34,15 +34,15 @@ export default class UrlParams
         return this.names;
     }
 
-    bind(values)
+    bind(values, bindGetParameters = false)
     {
         // Return base url if there's nothing to bind.
-        if(this.placeholders.length < 1) return this.url;
+        if(this.placeholders.length < 1 && bindGetParameters === false) return this.url;
 
-        // Bind using keys if provided.
-        if(this.objectHasRequiredKeys(values))
+        // Bind using keys if provided. Do not process non-objects or null values
+        if(typeof values === 'object' && values !== null && this.objectHasRequiredKeys(values))
         {
-            return this.bindWithKeys(values);
+            return this.bindWithKeys(values, bindGetParameters);
         }
 
         // Typecast a single value to array.
@@ -63,7 +63,7 @@ export default class UrlParams
     }
 
     // Bind each value to a specified parameter key.
-    bindWithKeys(values)
+    bindWithKeys(values, bindGetParameters = false)
     {
         let url = this.url;
         for(let n = 0; n < this.names.length; n++)
@@ -73,7 +73,14 @@ export default class UrlParams
 
             // Bind parameters.
             url = url.replace(this.placeholders[n], valueToBind);
+
+            // Remove already bound values from the object
+            delete values[this.names[n]];
         }
+
+        // Bind rest of the parameters as get params if specified
+        if(bindGetParameters) url = this.bindGetParameters(url, values);
+
         return url;
     }
 
@@ -88,6 +95,24 @@ export default class UrlParams
 
             // Bind parameters.
             url = url.replace(this.placeholders[n], valueToBind);
+        }
+        return url;
+    }
+
+    bindGetParameters(url, values)
+    {
+        
+        let names = Object.keys(values);
+        for(let index = 0; index < names.length; index++)
+        {
+            // Append the query indicator for first param
+            if(index === 0) url += '?';
+
+            // For params after, start with & 
+            else url += '&';
+
+            // Append the ket value pair
+            url += `${names[index]}=${values[names[index]]}`;
         }
         return url;
     }

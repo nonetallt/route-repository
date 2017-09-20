@@ -8,7 +8,7 @@ describe('Url parameters', function()
             custom: ['GET', '/$/{param1}/{param2}'],
             noparams: ['GET', '/$/params']
         });
-    })
+    });
 
     it('should parse single names', function()
     {

@@ -62,7 +62,8 @@ export default class Route
         }
 
         // Replace placeholders and bind parameters
-        let url = params.bind(paramValues);
+        let bindGetParameters = this.verb().toLowerCase() === 'get';
+        let url = params.bind(paramValues, bindGetParameters);
 
         // Append missing leading slash if required.
         if(requireLeadingSlash && url.charAt(0) !== '/') url = '/'+url;
@@ -82,6 +83,11 @@ export default class Route
     verb()
     {
         return this.httpVerbs.first();
+    }
+
+    method()
+    {
+        return this.verb();
     }
 
     verbs()

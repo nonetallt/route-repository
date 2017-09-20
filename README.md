@@ -1,4 +1,4 @@
-# laravel-js-routes
+# laravel-js-routes 
 
 A simple front to back router package for JavaScript. Useful for users of dynamic JavaScript frameworks like Vue.js or React who are using ajax calls. The routes can be added manually or generated automatically for a given [resource](https://laravel.com/docs/5.4/controllers#resource-controllers) (e.g. photos).
 
@@ -70,8 +70,10 @@ route.urlParameters();
 
 /**
 * The preferred http method verb, for example GET.
+* Proxy 'method()' added in (v2.0.0+)
 */
 route.verb();
+route.method();
 
 /**
 * An array of all supported verbs.
@@ -143,6 +145,29 @@ var url = route.url({
 });
 // url = example/orange/cucumber/beef
 ```
+
+
+
+# Get Parameter Binding (v2.0.0+)
+You can now bind regular get parameters to the url string when using the object type binding (see the section above). The binding is applied automatically to GET routes. 
+```
+var route = r.add('GET', 'example');
+var url = route.url({
+    foo: 1,
+    bar: 2
+});
+// url = example?foo=1&bar=2
+```
+Note that when binding parameters, the route parameters of a given route are given priority over GET parameters.
+```
+var route = r.add('GET', 'example/{foo}');
+var url = route.url({
+    foo: 1,
+    bar: 2
+});
+// url = example/1?bar=2
+```
+
 
 # Custom Routes
 The $ sign can be used as a placeholder in the route uri when adding routes to a group. Url parameters can be created using the same curly bracket syntax as in laravel. The text inside brackets will be used as a parameter name so avoid using duplicate parameter names if you want the binding to work correctly with objects.
