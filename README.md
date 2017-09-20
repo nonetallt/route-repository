@@ -149,7 +149,7 @@ var url = route.url({
 
 
 # Get Parameter Binding (v2.0.0+)
-You can now bind regular get parameters to the url string when using the object type binding (see the section above). The binding is applied automatically to GET routes. 
+You can now bind regular get parameters to the url string when using object type binding (see section above). The binding is applied automatically to GET routes. 
 ```
 var route = r.add('GET', 'example');
 var url = route.url({
