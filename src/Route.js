@@ -5,7 +5,6 @@ import UrlParams from './UrlParams';
 
 export default class Route
 {
-
     constructor(verb, uri, action, group = null)
     {
         this.httpVerbs = new HttpVerb(verb);

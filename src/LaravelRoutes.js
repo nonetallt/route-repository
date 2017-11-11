@@ -2,13 +2,16 @@ import Route from './Route';
 import RouteGroup from './RouteGroup';
 import markdownTable from './vendor/MarkdownTable';
 import InvalidRouteException from './exceptions/InvalidRouteException';
+import RouteBuilder from './RouteBuilder';
+import LaravelRoutesSettings from './LaravelRoutesSettings';
 
 export default class LaravelRoutes
 {
-    constructor()
+    constructor(settings)
     {
         this.groups = {};
         this.headlessRoutes = {};
+        this.settings = new LaravelRoutesSettings(settings);
     }
 
     // Get an existing route group or create a new group if the specified group
@@ -142,5 +145,19 @@ export default class LaravelRoutes
     {
         if(this.groups[name] === undefined) return false;
         return true;
+    }
+
+    get(uri, action)
+    {
+        let verb = 'GET';
+        return new RouteBuilder(verb, uri, action, builder =>
+        {
+            if(builder.hasWarnings && this.settings.setting('registration.strict'))
+            {
+                throw new Error(builder.warnings);
+            }
+            if(this.settings.setting('logging.warnings')) builder.printWarnings();
+            return this.add(builder.verb, builder.uri, builder.action);
+        });
     }
 }

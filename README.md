@@ -169,6 +169,25 @@ var url = route.url({
 ```
 
 
+# Settings (v2.1.0+)
+
+| Setting name          | Type    | Default | Explanation
+|
+|-----------------------|---------|---------|---------------------------------------------------------------------------------------------------------------------|
+| registration.strict   | boolean | false   | Throw errors when using Laravel
+style registration and name of the new route is not explicitly defined.
+|
+| registration.explicit | boolean | false   | Disable automatic resource
+routes. (not implemented)
+|
+| logging.warnings      | boolean | true    | Show warnings in console when
+using Laravel style registration and name of the new route is not explicitly
+defined. |
+| logging.suggestions   | boolean | true    | Show tips and debugging
+suggestions in longer error messages. (not implemented)
+|
+
+
 # Custom Routes
 The $ sign can be used as a placeholder in the route uri when adding routes to a group. Url parameters can be created using the same curly bracket syntax as in laravel. The text inside brackets will be used as a parameter name so avoid using duplicate parameter names if you want the binding to work correctly with objects.
 
