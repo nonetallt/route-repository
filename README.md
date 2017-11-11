@@ -170,22 +170,13 @@ var url = route.url({
 
 
 # Settings (v2.1.0+)
-
 | Setting name          | Type    | Default | Explanation
 |
 |-----------------------|---------|---------|---------------------------------------------------------------------------------------------------------------------|
-| registration.strict   | boolean | false   | Throw errors when using Laravel
-style registration and name of the new route is not explicitly defined.
-|
-| registration.explicit | boolean | false   | Disable automatic resource
-routes. (not implemented)
-|
-| logging.warnings      | boolean | true    | Show warnings in console when
-using Laravel style registration and name of the new route is not explicitly
-defined. |
-| logging.suggestions   | boolean | true    | Show tips and debugging
-suggestions in longer error messages. (not implemented)
-|
+| registration.strict   | boolean | false   | Throw errors when using Laravel style registration and name of the new route is not explicitly defined.  |
+| registration.explicit | boolean | false   | Disable automatic resource routes. (not implemented) |
+| logging.warnings      | boolean | true    | Show warnings in console when using Laravel style registration and name of the new route is not explicitly defined. |
+| logging.suggestions   | boolean | true    | Show tips and debugging suggestions in longer error messages. (not implemented) |
 
 
 # Custom Routes
