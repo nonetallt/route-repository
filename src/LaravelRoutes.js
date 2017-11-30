@@ -2,8 +2,9 @@ import Route from './Route';
 import RouteGroup from './RouteGroup';
 import markdownTable from './vendor/MarkdownTable';
 import InvalidRouteException from './exceptions/InvalidRouteException';
-import RouteBuilder from './RouteBuilder';
+import LaravelRouteBuilder from './LaravelRouteBuilder';
 import LaravelRoutesSettings from './LaravelRoutesSettings';
+import RouteParser from './RouteParser';
 
 export default class LaravelRoutes
 {
@@ -33,8 +34,8 @@ export default class LaravelRoutes
     // Returns a Route object with the given name.
     route(routeName)
     {
-        let results = LaravelRoutes.parseName(routeName);
-        if(results.type === 'headless' && this.headlessRoutes[routeName] !== undefined)
+        let results = RouteParser.parseName(routeName);
+        if(results.group === null && this.headlessRoutes[routeName] !== undefined)
         {
             return this.headlessRoutes[routeName];
         }
@@ -89,28 +90,12 @@ export default class LaravelRoutes
         let actions = Object.keys(routes);
         for(let n = 0; n < actions.length; n++)
         {
-            let results = LaravelRoutes.parseName(actions[n]);
+            let results = RouteParser.parseName(actions[n]);
             let route = routes[actions[n]];
             let verb = route[0];
             let url = route[1];
             this.add(verb, url, results.action, results.group);
         }
-    }
-
-    // Checks that a given route name is valid and returns an object containing
-    // the parsed data.
-    static parseName(string)
-    {
-        let parts = string.split('.');
-        if(parts.length > 2) 
-        {
-            throw new InvalidRouteException('Route name syntax with more than a single dot is not supported.');
-        }
-        if(parts.length === 1)
-        {
-            return {group: null, action: parts[0], type: 'headless'};
-        }
-        return {group: parts[0], action: parts[1], type: 'controller'};
     }
 
     count()
@@ -147,17 +132,55 @@ export default class LaravelRoutes
         return true;
     }
 
+    laravelStyleRoute(verb, uri, action)
+    {
+        // Create a builder instance that has a callback for adding routes to
+        // this class
+        let format = this.settings.setting('registration.actionDefault');
+        let builder = new LaravelRouteBuilder(verb, uri, action, format, builder => 
+        {
+            return this.add(builder.verb, builder.uri, builder.action, builder.group);
+        });
+
+        // If strict mode is active, throw errors from builder warnings
+        if(builder.hasWarnings && this.settings.setting('registration.strict'))
+        {
+            throw new Error(builder.warnings);
+        }
+
+        // If warnings are enabled, print warnings in console
+        if(this.settings.setting('logging.warnings')) builder.printWarnings();
+
+        return builder;
+    }
+
     get(uri, action)
     {
         let verb = 'GET';
-        return new RouteBuilder(verb, uri, action, builder =>
-        {
-            if(builder.hasWarnings && this.settings.setting('registration.strict'))
-            {
-                throw new Error(builder.warnings);
-            }
-            if(this.settings.setting('logging.warnings')) builder.printWarnings();
-            return this.add(builder.verb, builder.uri, builder.action);
-        });
+        return this.laravelStyleRoute(verb, uri, action);
+    }
+
+    post(uri, action)
+    {
+        let verb = 'POST';
+        return this.laravelStyleRoute(verb, uri, action);
+    }
+ 
+    delete(uri, action)
+    {
+        let verb = 'DELETE';
+        return this.laravelStyleRoute(verb, uri, action);
+    }
+
+    put(uri, action)
+    {
+        let verb = 'PUT';
+        return this.laravelStyleRoute(verb, uri, action);
+    }
+
+    patch(uri, action)
+    {
+        let verb = 'PATCH';
+        return this.laravelStyleRoute(verb, uri, action);
     }
 }

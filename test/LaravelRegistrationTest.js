@@ -7,17 +7,17 @@ describe('Laravel style route registration', function()
         window.Route = new LaravelRoutes();
     });
 
-    it('should register get routes', function()
-    {
-        Route.get('test', 'TestController@test').name('test');
-        let route = Route.route('test');
-        expect(route.url()).toEqual('/test');
-    });
-
     it('should default route name to action name', function()
     {
         Route.get('test', 'TestController@test');
-        let route = Route.route('test');
+        let route = Route.route('TestController.test');
+        expect(route.url()).toEqual('/test');
+    });
+
+    it('should register the routes to a group if possible', function()
+    {
+        Route.get('test', 'TestController@test').name('test.test');
+        let route = Route.route('test.test');
         expect(route.url()).toEqual('/test');
     });
 
@@ -46,5 +46,42 @@ describe('Laravel style route registration', function()
         .toThrow(new Error('No uri specified for the new route.'));
     });
 
-    
+    it('should register get routes', function()
+    {
+        Route.get('test', 'TestController@test').name('test');
+        let route = Route.route('test');
+        expect(route.url()).toEqual('/test');
+    });
+
+    it('should register post routes', function()
+    {
+        Route.post('test', 'TestController@test').name('test');
+        let route = Route.route('test');
+        expect(route.url()).toEqual('/test');
+    });
+
+    it('should register delete routes', function()
+    {
+        Route.delete('test', 'TestController@test').name('test');
+        let route = Route.route('test');
+        expect(route.url()).toEqual('/test');
+    });
+
+    it('should register put routes', function()
+    {
+        Route.put('test', 'TestController@test').name('test');
+        let route = Route.route('test');
+        expect(route.url()).toEqual('/test');
+    });
+
+    it('should register patch routes', function()
+    {
+        Route.patch('test', 'TestController@test').name('test');
+        let route = Route.route('test');
+        expect(route.url()).toEqual('/test');
+    });
+
+
+
+
 });

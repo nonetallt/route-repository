@@ -5,7 +5,8 @@ export default class LaravelRoutesSettings
         this.defaultSettings = {
             registration: {
                 strict: false,
-                explicit: false
+                explicit: false,
+                actionDefault: 'controller'
             },
             logging: {
                 warnings: true,
