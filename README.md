@@ -22,7 +22,7 @@ Features and benefits:
 * routes contain the correct method (verb), making ajax calls more dynamic
 
 # Publishing routes
-Please check out the new [nonetallt/jsroute](https://github.com/nonetallt/laravel-js-routes-publish) -package for instructions on how to publish the routes from backend php to js automatically.
+Please check out the new [nonetallt/jsroute](https://github.com/nonetallt/laravel-js-routes-publish) -package for instructions on how to publish the routes from backend php to js automatically. (requires version 2.1.0+)
 
 # Installation
 Using npm.
