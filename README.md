@@ -31,7 +31,7 @@ npm install laravel-js-routes
 ```
 
 Import the package in JavaScript.
-```
+```javascript
 // Using commonjs
 var LaravelRoutes = require('laravel-js-routes');
 
@@ -42,19 +42,19 @@ import LaravelRoutes from 'laravel-js-routes';
 # Basic Usage
 
 Create a new routes object for the application.
-```
+```javascript
 var r = new LaravelRoutes();
 ```
 
 Access a "create" resource route for the group photos.
-```
+```javascript
 var route = r.route('photos.create');
 // or
 var route = r.group('photos').route('create');
 ```
 
 Return a formatted table string of all the routes.
-```
+```javascript
 var routeListString = r.list();
 
 // For debugging
@@ -64,7 +64,7 @@ console.log(routeListString);
 # Route Methods
 Route methods are used to access the object data.
 
-```
+```javascript
 /**
 * The link with parameters bound.
 */
@@ -107,7 +107,7 @@ route.name();
 # Url Parameters
 The UrlParams object returned by route.urlParameters() contains a couple of useful methods.
 
-```
+```javascript
 /**
 * An array of all the required parameter names.
 */
@@ -135,21 +135,21 @@ Parameters are bound when calling the route.url() method. Obviously, if the rout
 
 ---
 When using a single parameter, the first method is often desirable.
-```
+```javascript
 var route = r.add('GET', 'example/{parameter}', 'test');
 var url = route.url(1);
 // url = example/1
 ```
 ---
 When multiple parameters are required, arrays can be used to bind the values in the same order as in the given array. 
-```
+```javascript
 var route = r.add('GET', 'example/{p1}/{p2}/{p3}', 'test');
 var url = route.url([1,2,3]);
 // url = example/1/2/3
 ```
 ---
 For most fine grained control and making sure that every parameter matches as intended by the user, using a keyed object is the method of choice.
-```
+```javascript
 var route = r.add('GET', 'example/{fruit}/{vegetable}/{meat}', 'test');
 var url = route.url({
     meat: 'beef',
@@ -163,7 +163,7 @@ var url = route.url({
 
 # Get Parameter Binding (v2.0.0+)
 You can now bind regular get parameters to the url string when using object type binding (see section above). The binding is applied automatically to GET routes. 
-```
+```javascript
 var route = r.add('GET', 'example');
 var url = route.url({
     foo: 1,
@@ -172,7 +172,7 @@ var url = route.url({
 // url = example?foo=1&bar=2
 ```
 Note that when binding parameters, the route parameters of a given route are given priority over GET parameters.
-```
+```javascript
 var route = r.add('GET', 'example/{foo}');
 var url = route.url({
     foo: 1,
@@ -196,7 +196,7 @@ var url = route.url({
 The $ sign can be used as a placeholder in the route uri when adding routes to a group. Url parameters can be created using the same curly bracket syntax as in laravel. The text inside brackets will be used as a parameter name so avoid using duplicate parameter names if you want the binding to work correctly with objects.
 
 Adding multiple routes.
-```
+```javascript
 r.group('photos').addAll({
     upload: ['POST', '$/upload'],
     publish: ['PUT/PATCH', '$/{photo}/publish']
@@ -209,7 +209,7 @@ r.addAll({
 ```
 
 Adding a single route.
-```
+```javascript
 r.add(verb, uri, action, groupName);
 // or
 r.group('photos').add(verb, uri, action);
