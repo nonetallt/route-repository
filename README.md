@@ -1,6 +1,16 @@
 # laravel-js-routes 
 
-A simple front to back router package for JavaScript. Useful for users of dynamic JavaScript frameworks like Vue.js or React who are using ajax calls. The routes can be added manually or generated automatically for a given [resource](https://laravel.com/docs/5.4/controllers#resource-controllers) (e.g. photos).
+A simple front to back router package for JavaScript. Useful for users of dynamic JavaScript frameworks like Vue.js or React who are using ajax calls. The routes can be added manually or generated automatically for a given [resource](https://laravel.com/docs/5.5/controllers#resource-controllers) (e.g. photos).
+
+Why?
+* Some backend frameworks like Laravel use http methods/verbs like GET and POST to determine which route your ajax request will trigger, therefore you want to keep track of this extra information.
+* Most similar packages lack documentation or are simply outdated.
+
+What this package is
+* A place to store your js application backend api routes
+
+What this package is not
+* Ajax client (you can use ajax client like [Axios](https://github.com/axios/axios) with this package)
 
 Features and benefits:
 * less props for components
@@ -10,6 +20,9 @@ Features and benefits:
 * dynamically add or remove custom routes
 * no messy string parsing for url parameters
 * routes contain the correct method (verb), making ajax calls more dynamic
+
+# Publishing routes
+Please check out the new [nonetallt/jsroute](https://github.com/nonetallt/laravel-js-routes-publish) -package for instructions on how to publish the routes from backend php to js automatically.
 
 # Installation
 Using npm.
