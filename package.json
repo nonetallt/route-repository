@@ -2,7 +2,14 @@
     "name": "front-to-back-router",
     "description": "Framework agnostic router for frontend to backend ajax.",
     "scripts": {
-    },
+        "test": "npm run development && mocha",
+        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "npm run development -- --watch",
+        "watch-poll": "npm run watch -- --watch-poll",
+        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "prepublishOnly": "npm run test && npm run production"
+	},
     "author": "Jyri Mikkola",
     "license": "MIT",
     "repository": {
@@ -27,16 +34,13 @@
         "test": "./test"
     },
     "dependencies": {
-        "markdown-table": "^1.1.0"
+        "cross-env": "^7.0.3",
+        "laravel-mix": "^6.0.16",
+        "mocha": "^8.3.2"
     },
-    "devDependencies": {
-        "jasmine-core": "^2.6.3",
-        "karma": "^1.7.0",
-        "karma-jasmine": "^1.1.0",
-        "karma-phantomjs-launcher": "^1.0.4",
-        "karma-rollup-preprocessor": "^4.0.0",
-        "rollup": "^0.43.0",
-        "rollup-plugin-buble": "^0.15.0"
+    "devDependencies": {},
+    "optionalDependencies": {
+        "markdown-table": "^3.0.0"
     },
     "jsdelivr": "dist/front-to-back-router.min.js",
     "unpkg": "dist/front-to-back-router.min.js"
