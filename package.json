@@ -1,47 +1,50 @@
 {
-    "name": "front-to-back-router",
-    "description": "Framework agnostic router for frontend to backend ajax.",
-    "scripts": {
-        "test": "npm run development && mocha",
-        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "watch": "npm run development -- --watch",
-        "watch-poll": "npm run watch -- --watch-poll",
-        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "prepublishOnly": "npm run test && npm run production"
-    },
-    "author": "Jyri Mikkola",
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/nonetallt/front-to-back-router.git"
-    },
-    "homepage": "https://github.com/nonetallt/front-to-back-router#readme",
-    "bugs": {
-        "url": "https://github.com/nonetallt/front-to-back-router/issues"
-    },
-    "keywords": [
-        "js",
-        "back-end",
-        "front-end",
-        "router",
-        "routes"
-    ],
-    "browser": "index.js",
-    "directories": {
-        "lib": "./src",
-        "example": "./example",
-        "test": "./test"
-    },
-    "dependencies": {},
-    "devDependencies": {
-        "cross-env": "^7.0.3",
-        "laravel-mix": "^6.0.16",
-        "mocha": "^8.3.2"
-    },
-    "optionalDependencies": {
-        "markdown-table": "^3.0.0"
-    },
-    "jsdelivr": "dist/front-to-back-router.min.js",
-    "unpkg": "dist/front-to-back-router.min.js"
+  "name": "front-to-back-router",
+  "description": "Framework agnostic router for frontend to backend ajax.",
+  "scripts": {
+    "test": "jest --coverage",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "npm run development -- --watch",
+    "watch-poll": "npm run watch -- --watch-poll",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prepublishOnly": "npm run test && npm run production"
+  },
+  "author": "Jyri Mikkola",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nonetallt/front-to-back-router.git"
+  },
+  "homepage": "https://github.com/nonetallt/front-to-back-router#readme",
+  "bugs": {
+    "url": "https://github.com/nonetallt/front-to-back-router/issues"
+  },
+  "keywords": [
+    "js",
+    "back-end",
+    "front-end",
+    "router",
+    "routes"
+  ],
+  "browser": "index.js",
+  "directories": {
+    "lib": "./src",
+    "example": "./example",
+    "test": "./test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.13.0",
+    "cross-env": "^7.0.3",
+    "jest": "^26.6.3",
+    "laravel-mix": "^6.0.16",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
+  },
+  "optionalDependencies": {
+    "markdown-table": "^3.0.0"
+  },
+  "jsdelivr": "dist/front-to-back-router.min.js",
+  "unpkg": "dist/front-to-back-router.min.js"
 }
