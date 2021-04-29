@@ -17,10 +17,11 @@ export default {
   clearMocks: true,
 
   // Indicates whether the coverage information should be collected while executing the test
-  collectCoverage: true,
+  // Note that using coverage disables type checks
+  collectCoverage: false,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
-   collectCoverageFrom: ['./src/**/*.ts'],
+  collectCoverageFrom: ['./src/**/*.ts'],
 
   // The directory where Jest should output its coverage files
   coverageDirectory: "coverage",
@@ -63,7 +64,8 @@ export default {
   globals: {
       "ts-jest": {
           // Should improve performance, see: https://github.com/kulshekhar/ts-jest/issues/259
-          isolatedModules: true
+          // Improves performance but disables type checking
+          isolatedModules: false
       }
   },
 
@@ -142,7 +144,7 @@ export default {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  testEnvironment: "node",
+  testEnvironment: 'node',
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
