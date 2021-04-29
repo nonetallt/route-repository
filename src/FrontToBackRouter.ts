@@ -5,12 +5,12 @@ import HttpRequestMethod from './HttpRequestMethod'
 
 export default class FrontToBackRouter
 {
-    routes: object
-    configuration: object
+    routes: Map<string, Route>
+    configuration: RouterConfiguration
 
     constructor(configuration = {})
     {
-        this.routes = {}
+        this.routes = new Map()
         this.configuration = new RouterConfiguration(configuration)
     }
 
@@ -29,12 +29,11 @@ export default class FrontToBackRouter
      */
     registerRoute(route: Route)
     {
-        syntax error
-        if(this.routes[route.name] !== undefined && this.configuration.registration.immutable) {
-            const msg = `Route '${route.name}' is already defined and is immutable!`
+        if(this.routes.get(route.name) !== undefined && this.configuration.registration.immutable) {
+            const msg = `Route '${route.name}' is already defined and immutable!`
             throw new RegistrationError(msg)
         }
 
-        this.routes[route.name] = route
+        this.routes.set(route.name, route)
     }
 }
