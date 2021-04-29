@@ -2,7 +2,7 @@
   "name": "front-to-back-router",
   "description": "Framework agnostic router for frontend to backend ajax.",
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest",
     "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "npm run development -- --watch",
     "watch-poll": "npm run watch -- --watch-poll",
@@ -35,11 +35,11 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@types/jest": "^26.0.22",
+    "@types/jest": "^26.0.0",
     "cross-env": "^7.0.3",
-    "jest": "^26.6.3",
+    "jest": "^27.0.0-next.8",
     "laravel-mix": "^6.0.16",
-    "ts-jest": "^26.5.5",
+    "ts-jest": "^27.0.0-next.10",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
   },
