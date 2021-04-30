@@ -1,5 +1,16 @@
 {
-    "extends": "@tsconfig/recommended/tsconfig.json",
+    "compilerOptions": {
+        "target": "ES2015",
+        "module": "commonjs",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "display": "Recommended",
     "sourceMap": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
     "include": ["src/**/*.ts"]
 }
