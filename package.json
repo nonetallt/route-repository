@@ -3,7 +3,7 @@
   "description": "Framework agnostic router for frontend to backend ajax.",
   "scripts": {
     "test": "jest",
-    "test-watch": "jest --watch --no-cache",
+    "test-watch": "jest --watch",
     "prepublishOnly": "npm run test && npm run production"
   },
   "author": "Jyri Mikkola",
