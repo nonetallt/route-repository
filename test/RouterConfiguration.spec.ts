@@ -1,4 +1,4 @@
-import RouterConfiguration from '../src/RouterConfiguration'
+import { RouterConfiguration } from '../src/RouterConfiguration'
 
 describe('constructor', () => {
 
@@ -6,21 +6,21 @@ describe('constructor', () => {
 		expect(new RouterConfiguration).toBeInstanceOf(RouterConfiguration)
     })
 
-    it('initializes registration.immmutable default value', () => {
+    it('initializes immmutable default value as true', () => {
         const conf = new RouterConfiguration;
-        expect(conf.registration.immutable).toEqual(true);
+        expect(conf.immutable).toEqual(true);
     })
 
-    it('override default configuration values', () => {
+    it('initializes duplicates default value as false', () => {
+        const conf = new RouterConfiguration;
+        expect(conf.duplicates).toEqual(false);
+    })
+
+    it('overrides default configuration values', () => {
         const conf = new RouterConfiguration({
-            registration: {
-                immutable: false
-            }
+            immutable: false
         });
 
-        expect(conf.registration.immutable).toEqual(false);
+        expect(conf.immutable).toEqual(false);
     })
-})
-
-describe('register', () => {
 })

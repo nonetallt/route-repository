@@ -1,21 +1,19 @@
-interface Registration {
-    immutable: boolean
-}
-
-interface Configuration {
-    registration: Registration
-}
-
-export default class RouterConfiguration implements Configuration
+export interface ConfigurationInterface
 {
-    registration = {
-        immutable: true
-    }
+    immutable?: boolean
+    duplicates?: boolean
+};
 
-    constructor(configuration: object = {})
-    {
-        Object.keys(configuration).forEach((key) => {
-            this[key] = configuration[key]
-        })
+export class RouterConfiguration implements ConfigurationInterface
+{
+    immutable: boolean
+    duplicates: boolean
+
+    constructor(options : ConfigurationInterface = {}) {
+
+        this.immutable = true;
+        this.duplicates = false;
+
+        Object.assign(this, options);
     }
 }
