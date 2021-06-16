@@ -1,15 +1,20 @@
-import HttpRequestMethod from './HttpRequestMethod';
+import RequestMethod from './RequestMethod';
 
 export default class Route
 {
     name: string
-    methods: Array<HttpRequestMethod>
+    method: RequestMethod
     url: string
 
-    constructor(name: string, method: HttpRequestMethod | Array<HttpRequestMethod>, url: string)
+    constructor(name: string, method: RequestMethod, url: string)
     {
         this.name = name
-        this.methods = Array.isArray(method) ? method : [method]
+        this.method = method
         this.url = url
+    }
+
+    applyPrefix(prefix: string)
+    {
+        this.url = prefix + this.url
     }
 }
