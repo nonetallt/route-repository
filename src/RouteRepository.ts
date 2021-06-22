@@ -1,10 +1,10 @@
 import Route from './Route'
-import { RouterConfiguration, ConfigurationInterface } from './RouterConfiguration'
+import { RepositoryConfiguration, ConfigurationInterface } from './RepositoryConfiguration'
 import RegistrationError from './Error/RegistrationError'
 import RequestMethodType from './RequestMethod'
 import { RequestMethod } from './RequestMethod'
 
-export default class Router
+export default class RouteRepository
 {
     routes: Map<string, Route>
     config: ConfigurationInterface
@@ -14,7 +14,7 @@ export default class Router
     constructor(config : ConfigurationInterface = {})
     {
         this.routes = new Map()
-        this.config = new RouterConfiguration(config);
+        this.config = new RepositoryConfiguration(config);
         this.signatures = new Map();
         this.routePrefix = null;
     }
@@ -34,21 +34,31 @@ export default class Router
      */
     registerRoute(route: Route)
     {
-        if(this.config.immutable && this.routes.get(route.name) !== undefined) {
-            const msg = `Route '${route.name}' is already defined and immutable!`
-            throw new RegistrationError(msg)
+        const oldRoute = this.routes.get(route.name);
+
+        // Check if a route with this name is already registered and thus being modified
+        if(oldRoute !== undefined) {
+
+            // Throw error if routes are immutable
+            if(! this.config.mutable) {
+                const msg = `Route '${route.name}' is already defined and immutable!`
+                throw new RegistrationError(msg)
+            }
+
+            // If existing route is being modified, remove the old signature
+            this.signatures.delete(this.routeSignature(oldRoute.method, oldRoute.url.toString()));
         }
 
         if(this.routePrefix !== null) {
             route.applyPrefix(this.routePrefix)
         }
 
-        const signature = this.routeSignature(route.method, route.url);
-        const oldRoute = this.signatures.get(signature);
+        const signature = this.routeSignature(route.method, route.url.toString());
+        const duplicateRoute = this.signatures.get(signature);
 
-        if(this.config.duplicates === false && oldRoute !== undefined) {
+        if(this.config.duplicates === false && duplicateRoute !== undefined) {
 
-            const msg = `Route '${route.name}' is a duplicate of existing route '${oldRoute}'. If you want to enable multiple aliases for the same url and method combination, set 'duplicates' option as true.`
+            const msg = `Route '${route.name}' is a duplicate of existing route '${duplicateRoute}'. If you want to enable multiple aliases for the same url and method combination, set 'duplicates' option as true.`
             throw new RegistrationError(msg)
         }
 
@@ -155,7 +165,7 @@ export default class Router
      * Prefix routes registered inside callback with a given prefix
      *
      */
-    prefix(prefix: string, callback : (router: Router) => void)
+    prefix(prefix: string, callback : (repository: RouteRepository) => void)
     {
         this.routePrefix = prefix;
         callback(this);
