@@ -1,15 +1,15 @@
-import Router from '../src/Router'
+import RouteRepository from '../src/RouteRepository'
 import RegistrationError from '../src/Error/RegistrationError'
 import Route from '../src/Route'
 
 describe('constructor', () => {
 
     it('initializes the object', () => {
-		expect(new Router).toBeInstanceOf(Router)
+		expect(new RouteRepository).toBeInstanceOf(RouteRepository)
     })
 
     it('initializes routes as empty', () => {
-        let router = new Router
+        const router = new RouteRepository
 		expect(router.routes).toMatchObject({})
     })
 })
@@ -17,12 +17,12 @@ describe('constructor', () => {
 describe('initial state', () => {
 
     it('doesn\'t have any routes', () => {
-        let router = new Router
+        const router = new RouteRepository
         expect(router.routes.size).toEqual(0);
     })
 
     it('doesn\'t have a route prefix', () => {
-        let router = new Router
+        const router = new RouteRepository
         expect(router.routePrefix).toEqual(null);
     })
 })
@@ -30,14 +30,14 @@ describe('initial state', () => {
 describe('register', () => {
 
     it('adds new route to routes', () => {
-        let router = new Router
+        const router = new RouteRepository
         router.register('new_route', 'GET', '/foo')
         expect(router.routes.has('new_route')).toEqual(true)
     })
 
-    it('throws error registering route with duplicate name when strict is true', () => {
-        let router = new Router({
-            immutable: true
+    it('throws error registering route with duplicate name when mutable is false', () => {
+        const router = new RouteRepository({
+            mutable: false
         })
 
         expect(() => {
@@ -46,9 +46,9 @@ describe('register', () => {
         }).toThrow(RegistrationError)
     })
 
-    it('does not throw error registering route with duplicate name when strict is false', () => {
-        let router = new Router({
-            immutable: false
+    it('does not throw error registering route with duplicate name when mutable is true', () => {
+        const router = new RouteRepository({
+            mutable: true
         })
 
         expect(() => {
@@ -58,7 +58,7 @@ describe('register', () => {
     })
 
     it('throws error when registering route with duplicate url + method when duplicates is false', () => {
-        let router = new Router({
+        const router = new RouteRepository({
             duplicates: false
         })
 
@@ -69,7 +69,7 @@ describe('register', () => {
     })
 
     it('does not throw error when registering route with duplicate url + method when duplicates is true', () => {
-        let router = new Router({
+        const router = new RouteRepository({
             duplicates: true
         })
 
@@ -78,21 +78,64 @@ describe('register', () => {
             router.register('bar', 'GET', '/foo');
         }).not.toThrow(RegistrationError)
     })
+
+    it('generates a route signature', () => {
+        const router = new RouteRepository({
+            mutable: true
+        })
+
+        router.register('foo', 'GET', '/foo')
+        router.register('foo', 'GET', '/foo/bar')
+
+        expect(router.signatures.size).toEqual(1)
+    })
+
+    it('generates the correct route signature', () => {
+        const router = new RouteRepository({
+            mutable: true
+        })
+
+        router.register('foo', 'GET', '/foo')
+
+        expect(router.signatures.has(router.routeSignature('GET', '/foo'))).toEqual(true)
+    })
+
+    it('removes old signature from signatures when an old route is updated', () => {
+        const router = new RouteRepository({
+            mutable: true
+        })
+
+        router.register('foo', 'GET', '/foo')
+        router.register('foo', 'GET', '/foo/bar')
+
+        expect(router.signatures.size).toEqual(1)
+    })
+
+    it('generates the correct signature when an old route is updated', () => {
+        const router = new RouteRepository({
+            mutable: true
+        })
+
+        router.register('foo', 'GET', '/foo')
+        router.register('foo', 'GET', '/foo/bar')
+
+        expect(router.signatures.has(router.routeSignature('GET', '/foo/bar'))).toEqual(true)
+    })
 })
 
 
 describe('registerRoute', () => {
 
     it('adds new route to routes', () => {
-        let router = new Router
-        let route = new Route('new_route', 'GET', '/foo')
+        const router = new RouteRepository
+        const route = new Route('new_route', 'GET', '/foo')
         router.registerRoute(route)
         expect(router.routes.get('new_route')).toEqual(route)
     })
 
     it('adds only single route', () => {
-        let router = new Router
-        let route = new Route('new_route', 'GET', '/foo')
+        const router = new RouteRepository
+        const route = new Route('new_route', 'GET', '/foo')
         router.registerRoute(route)
         expect(router.routes.size).toEqual(1)
     })
@@ -101,9 +144,9 @@ describe('registerRoute', () => {
 describe('get', () => {
 
     it('adds new get route', () => {
-        let router = new Router
+        const router = new RouteRepository
         router.get('new_route', '/foo')
-        let route = router.routes.get('new_route') ?? {method: null};
+        const route = router.routes.get('new_route') ?? {method: null};
         expect(route.method).toEqual('GET')
     })
 })
@@ -112,9 +155,9 @@ describe('get', () => {
 describe('post', () => {
 
     it('adds new post route', () => {
-        let router = new Router
+        const router = new RouteRepository
         router.post('new_route', '/foo')
-        let route = router.routes.get('new_route') ?? {method: null};
+        const route = router.routes.get('new_route') ?? {method: null};
         expect(route.method).toEqual('POST')
     })
 })
@@ -122,9 +165,9 @@ describe('post', () => {
 describe('put', () => {
 
     it('adds new put route', () => {
-        let router = new Router
+        const router = new RouteRepository
         router.put('new_route', '/foo')
-        let route = router.routes.get('new_route') ?? {method: null};
+        const route = router.routes.get('new_route') ?? {method: null};
         expect(route.method).toEqual('PUT')
     })
 })
@@ -132,9 +175,9 @@ describe('put', () => {
 describe('patch', () => {
 
     it('adds new patch route', () => {
-        let router = new Router
+        const router = new RouteRepository
         router.patch('new_route', '/foo')
-        let route = router.routes.get('new_route') ?? {method: null};
+        const route = router.routes.get('new_route') ?? {method: null};
         expect(route.method).toEqual('PATCH')
     })
 })
@@ -142,9 +185,9 @@ describe('patch', () => {
 describe('delete', () => {
 
     it('adds new delete route', () => {
-        let router = new Router
+        const router = new RouteRepository
         router.delete('new_route', '/foo')
-        let route = router.routes.get('new_route') ?? {method: null};
+        const route = router.routes.get('new_route') ?? {method: null};
         expect(route.method).toEqual('DELETE')
     })
 })
@@ -152,44 +195,48 @@ describe('delete', () => {
 describe('prefix', () => {
 
     it('adds prefix to registered routes', () => {
-        const router = new Router
+        const router = new RouteRepository
         const prefix = 'prefix_'
         const url = '/foo'
 
-        router.prefix(prefix, (router: Router) => {
+        router.prefix(prefix, (router: RouteRepository) => {
             router.register('new_route', 'GET', url);
         })
 
-        const route = router.routes.get('new_route') ?? {url: null};
-        expect(route.url).toEqual(`${prefix}${url}`);
+        const route = router.routes.get('new_route') ?? {url: {toString: function() {return null}}};
+        expect(route.url.toString()).toEqual(`${prefix}${url}`);
     })
 
     it('does not apply prefix to routes registered after prefix', () => {
-        const router = new Router({duplicates: true})
+        const router = new RouteRepository({duplicates: true})
         const prefix = 'prefix_'
         const url = '/foo'
 
-        router.prefix(prefix, (router: Router) => {
+        router.prefix(prefix, (router: RouteRepository) => {
             router.register('new_route_1', 'GET', url);
         })
 
         router.register('new_route_2', 'GET', url)
 
-        const route = router.routes.get('new_route_2') ?? {url: null};
-        expect(route.url).toEqual(url);
+        const route = router.routes.get('new_route_2') ?? {url: {toString: function() {return null}}};
+        expect(route.url.toString()).toEqual(url);
+    })
+
+    it('removes old signatures from list when route is modified', () => {
+        const router = new RouteRepository({mutable: true})
     })
 })
 
 describe('hasRouteWithName', () => {
 
     it('returns true when route with a given name exists', () => {
-        const router = new Router
+        const router = new RouteRepository
         router.get('foo', '/foo')
         expect(router.hasRouteWithName('foo')).toEqual(true)
     })
 
     it('returns false when route with a given name does not exist', () => {
-        const router = new Router
+        const router = new RouteRepository
         router.get('foo', '/foo')
         expect(router.hasRouteWithName('bar')).toEqual(false)
     })
@@ -198,37 +245,37 @@ describe('hasRouteWithName', () => {
 describe('hasRouteWithUrl', () => {
 
     it('returns true when route with a given url exists', () => {
-        const router = new Router
+        const router = new RouteRepository
         router.get('foo', '/foo')
         expect(router.hasRouteWithUrl('/foo')).toEqual(true)
     })
 
     it('returns false when route with a given url does not exist', () => {
-        const router = new Router
+        const router = new RouteRepository
         router.get('foo', '/foo')
         expect(router.hasRouteWithUrl('/bar')).toEqual(false)
     })
 
     it('returns true when route with a given url and method exists', () => {
-        const router = new Router
+        const router = new RouteRepository
         router.get('foo', '/foo')
         expect(router.hasRouteWithUrl('/foo', 'GET')).toEqual(true)
     })
 
     it('returns true when route with a given url and one of the given methods exists', () => {
-        const router = new Router
+        const router = new RouteRepository
         router.post('foo', '/foo')
         expect(router.hasRouteWithUrl('/foo', 'GET', 'POST')).toEqual(true)
     })
 
     it('returns false when route with a given url but not method exists', () => {
-        const router = new Router
+        const router = new RouteRepository
         router.get('foo', '/foo')
         expect(router.hasRouteWithUrl('/foo', 'POST')).toEqual(false)
     })
 
     it('returns false when route with a given method but not url exists', () => {
-        const router = new Router
+        const router = new RouteRepository
         router.get('foo', '/foo')
         expect(router.hasRouteWithUrl('/bar', 'GET')).toEqual(false)
     })
