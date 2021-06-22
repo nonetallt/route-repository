@@ -1,6 +1,6 @@
 {
-  "name": "front-to-back-router",
-  "description": "Framework agnostic router for frontend to backend ajax.",
+  "name": "route-repository",
+  "description": "Framework agnostic storage of front to back routing information.",
   "scripts": {
     "test": "jest",
     "test-watch": "jest --watch",
@@ -10,18 +10,21 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nonetallt/front-to-back-router.git"
+    "url": "git+https://github.com/nonetallt/route-repository.git"
   },
-  "homepage": "https://github.com/nonetallt/front-to-back-router#readme",
+  "homepage": "https://github.com/nonetallt/route-repository#readme",
   "bugs": {
-    "url": "https://github.com/nonetallt/front-to-back-router/issues"
+    "url": "https://github.com/nonetallt/route-repository/issues"
   },
   "keywords": [
     "js",
-    "back-end",
     "front-end",
+    "back-end",
+    "route",
     "router",
-    "routes"
+    "routes",
+    "repository",
+    "collection"
   ],
   "browser": "index.js",
   "directories": {
