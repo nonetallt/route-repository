@@ -15,7 +15,7 @@ describe('initial state', () => {
 
         const url = '/foo'
         const route = new Route('test', 'GET', url)
-        expect(route.url).toEqual(url)
+        expect(route.url.toString()).toEqual(url)
     })
 })
 
@@ -28,6 +28,6 @@ describe('apply prefix', () => {
         const route = new Route('test', 'GET', url)
 
         route.applyPrefix(prefix)
-        expect(route.url).toEqual(`${prefix}${url}`)
+        expect(route.url.toString()).toEqual(`${prefix}${url}`)
     })
 })
