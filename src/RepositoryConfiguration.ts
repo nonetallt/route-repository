@@ -1,17 +1,17 @@
 export interface ConfigurationInterface
 {
-    immutable?: boolean
+    mutable?: boolean
     duplicates?: boolean
 };
 
-export class RouterConfiguration implements ConfigurationInterface
+export class RepositoryConfiguration implements ConfigurationInterface
 {
-    immutable: boolean
+    mutable: boolean
     duplicates: boolean
 
     constructor(options : ConfigurationInterface = {}) {
 
-        this.immutable = true;
+        this.mutable = false;
         this.duplicates = false;
 
         Object.assign(this, options);
