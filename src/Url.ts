@@ -1,15 +1,20 @@
 import UrlParameterCollection from './UrlParameterCollection'
-import ParameterBindingError from './Error/ParameterBindingError'
+import ParameterBindingError from './error/ParameterBindingError'
+import Configuration from './config/UrlConfiguration'
+import ConfigurationInterface from './contract/UrlConfigurationInterface'
+import TypeConversionError from './error/TypeConversionError'
 
 export default class Url
 {
-    content : string
-    parameters: UrlParameterCollection
+    private content : string
+    readonly parameters: UrlParameterCollection
+    readonly configuration: Configuration
 
-    constructor(content: string)
+    constructor(content: string, config: ConfigurationInterface = {})
     {
         this.content = content
         this.parameters = UrlParameterCollection.parseFromUrl(content)
+        this.configuration = new Configuration(config)
     }
 
     toString() : string
@@ -21,46 +26,89 @@ export default class Url
      * Bind given values to the url parameter placeholders
      *
      */
-    bind(values : string | Array<string> | object, bindGetParameters = false) : string
+    bindParameters(values : any, bindGetParameters: boolean = false) : string
     {
         // Return base url if there's nothing to bind.
         if(this.parameters.length === 0 && bindGetParameters === false) {
             return this.content
         }
 
-        // Bind using keys if provided. Do not process non-objects or null values
-        if(typeof values === 'object') {
+        if(Array.isArray(values)) {
+            return this.bindArray((values as Array<string>));
+        }
+
+        if(typeof values === 'object' && values !== null) {
             return this.bindObject(values, bindGetParameters);
         }
 
-        // Typecast a single value to array.
-        if(! Array.isArray(values)) {
-            values = [values];
-        }
-
-        return this.bindArray((values as Array<string>));
+        return this.bindPlainValue(values)
     }
 
     /**
      * Check if a given object has properties matching all required parameters
+     *
+     * @throws ParameterBindingError
      *
      */
     canBindObject(object: object) : boolean
     {
         let canBind = true
 
-        this.parameters.forEach(param => {
-            if(!object.hasOwnProperty(param.name) && param.required) {
+        this.parameters.forEach(parameter => {
+
+            if(object.hasOwnProperty(parameter.name)) {
+                let valueToBind = (object as any)[parameter.name]
+
+                try {
+                    valueToBind = this.convertToString(valueToBind)
+                }
+                catch(error) {
+                    if(error instanceof TypeConversionError) {
+                        canBind = false
+                        return false
+                    }
+                    throw error
+                }
+
+                // Check if bound property can be converted into a non-empty string
+                if(valueToBind === '') {
+                    canBind = false
+                    return false
+                }
+            }
+            else if(parameter.required) {
                 canBind = false
                 return false
             }
         })
 
-        return canBind;
+        return canBind
     }
 
-    // Bind each value to a specified parameter key.
-    bindObject(object : object, bindGetParameters: boolean = false) : string
+    /**
+     * Check if this url is absolute
+     *
+     */
+    isAbsolute() : boolean
+    {
+        /* TODO */
+        return false
+    }
+
+    /**
+     * Check if this url is relative (aka URI instead of an actual URL...)
+     *
+     */
+    isRelative() : boolean
+    {
+        return ! this.isAbsolute()
+    }
+
+    /**
+     * Bind each value to a specified parameter key.
+     *
+     */
+    private bindObject(object : object, bindGetParameters: boolean = false) : string
     {
         let url = this.content
 
@@ -68,14 +116,22 @@ export default class Url
 
             let valueToBind = (object as any)[parameter.name]
 
-            valueToBind = valueToBind === undefined ? '' : String(valueToBind)
+            try {
+                valueToBind = valueToBind === undefined ? '' : this.convertToString(valueToBind)
+            }
+            catch(error) {
+                if(error instanceof TypeConversionError) {
+                    const msg = `Cannot bind value for parameter '${parameter.name}', unable to convert ${typeof valueToBind} to string.`
+                    throw new ParameterBindingError(msg, error)
+                }
+                throw error
+            }
 
-            if(parameter.required || valueToBind === '') {
+            if(parameter.required && valueToBind === '') {
                 this.throwBindingError(parameter.name)
             }
 
-            // Replace the placeholder with string value
-            url = url.replace(parameter.placeholder, valueToBind);
+            url = this.parameters.bindParameter(url, parameter, valueToBind)
 
             // Remove already bound values from the object's keys
             delete (object as any)[parameter.name];
@@ -86,7 +142,42 @@ export default class Url
             url = this.bindGetParameters(object);
         }
 
-        return url;
+        return this.removeTrailingSlashes(url);
+    }
+
+    /**
+     * Bind a given plain value
+     *
+     */
+    private bindPlainValue(value: any) : string
+    {
+        const original = value
+        const required = this.parameters.getRequired()
+
+        if(required.length > 1) {
+            const msg = `Cannot bind a given ${typeof value} as url parameters: this type is handled as a plain value and can only be bound to one parameter but there are ${required.length} required parameters (${this.content}).`
+            throw new ParameterBindingError(msg)
+        }
+
+        const parameter = this.parameters[0]
+
+        try {
+            value = this.convertToString(value)
+        }
+        catch(error) {
+            if(error instanceof TypeConversionError) {
+                const msg = `Cannot bind value for parameter '${parameter.name}', unable to convert ${typeof value} to string.`
+                throw new ParameterBindingError(msg, error)
+            }
+            throw error
+        }
+
+        if(value === '') {
+            const msg = `Cannot bind given value of type ${typeof original} because string conversion results in an empty string`
+            throw new ParameterBindingError(msg)
+        }
+
+        return this.parameters.bindParameter(this.content, parameter, value)
     }
 
 
@@ -94,7 +185,7 @@ export default class Url
      * Bind values in given order without caring about keys.
      *
      */
-    bindArray(array: Array<string>) : string
+    private bindArray(array: Array<any>) : string
     {
         let url = this.content;
 
@@ -102,22 +193,32 @@ export default class Url
 
             let valueToBind = array[index] ?? '';
 
-            if(parameter.required || valueToBind === '') {
+            if(parameter.required && valueToBind === '') {
                 this.throwBindingError(parameter.name);
             }
 
-            // Bind parameters.
-            url = url.replace(parameter.placeholder, valueToBind);
+            try {
+                valueToBind = this.convertToString(valueToBind)
+            }
+            catch(error) {
+                if(error instanceof TypeConversionError) {
+                    const msg = `Cannot bind value for parameter '${parameter.name}', unable to convert ${typeof valueToBind} to string.`
+                    throw new ParameterBindingError(msg, error)
+                }
+                throw error
+            }
+
+            url = this.parameters.bindParameter(url, parameter, valueToBind)
         })
 
-        return url;
+        return this.removeTrailingSlashes(url);
     }
 
     /**
      * Bind given object's properties as key value pairs for GET parameters
      *
      */
-    bindGetParameters(values : object) : string
+    private bindGetParameters(values : object) : string
     {
         let url = this.content
 
@@ -130,23 +231,57 @@ export default class Url
             else url += '&';
 
             // Append the key value pair
-            url += `${key}=${value}`;
+            url += `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
         }
 
         return url;
     }
 
     /**
+     * Removes trailing slashes from a given string
+     *
+     */
+    private removeTrailingSlashes(url: string) : string
+    {
+        let lastChar = url.slice(-1)
+
+        while(lastChar === '/') {
+            url = url.slice(0, -1)
+            lastChar = url.slice(-1)
+        }
+
+        return url
+    }
+
+    /**
      * Throw a binding error
      *
      */
-    throwBindingError(parameterName: string)
+    private throwBindingError(parameterName: string)
     {
         // Generate example method call for hint.
         const required = this.parameters.getRequired().getNames()
 
-        const msgError = `Cannot bind required parameter '${parameterName}' - value does not exist.`;
-        const msgHint = `Try binding with the required values: {${required.join(', ')}}`;
-        throw new ParameterBindingError(`${msgError}\n${msgHint}`);
+        const msg = `Cannot bind given parameters to url '${this.content}' - value of the required parameter '${parameterName}' is missing.`;
+        const hint = `Try binding with the required values: {${required.join(', ')}}`;
+        throw new ParameterBindingError(`${msg}\n${hint}`);
+    }
+
+    /**
+     * Convert a given value to string according to the configured parameter type conversion function
+     *
+     */
+    private convertToString(value: any) : string
+    {
+        if(typeof value !== 'string') {
+            value = this.configuration.parameterTypeConversionFunction(value)
+
+            if(value === null) {
+                const msg = 'String conversion failed'
+                throw new ParameterBindingError(msg)
+            }
+        }
+
+        return value.trim()
     }
 }
