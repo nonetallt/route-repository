@@ -1,8 +1,8 @@
 export default class UrlParameter
 {
-    name: string
-    required: boolean
-    placeholder: string
+    readonly name: string
+    readonly required: boolean
+    readonly placeholder: string
 
     constructor(placeholder: string)
     {

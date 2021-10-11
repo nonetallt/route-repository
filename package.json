@@ -1,6 +1,8 @@
 {
   "name": "route-repository",
   "description": "Framework agnostic storage of front to back routing information.",
+  "main": "index.js",
+  "types": "./src/index.d.ts",
   "scripts": {
     "test": "jest",
     "test-watch": "jest --watch",
@@ -33,15 +35,15 @@
     "test": "./test"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.23",
+    "@types/jest": "^27.0.1",
     "cross-env": "^7.0.3",
     "jest": "^27.0.4",
     "laravel-mix": "^6.0.16",
     "ts-jest": "^27.0.3",
     "ts-node": "^9.1.1",
-    "typescript": "^4.2.4"
+    "typescript": "^4.4.2"
   },
-  "optionalDependencies": {
+  "optionalPeerDependencies": {
     "markdown-table": "^3.0.0"
   },
   "jsdelivr": "dist/front-to-back-router.min.js",

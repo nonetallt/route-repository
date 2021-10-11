@@ -1,88 +1,42 @@
-import UrlParameterCollection from './UrlParameterCollection'
-import ParameterBindingError from './error/ParameterBindingError'
 import Configuration from './config/UrlConfiguration'
 import ConfigurationInterface from './contract/UrlConfigurationInterface'
-import TypeConversionError from './error/TypeConversionError'
+import UrlParameterBinder from './UrlParameterBinder'
+import UrlComponent from './UrlComponent'
+import UrlSyntaxError from './error/UrlSyntaxError'
+import UrlBuilder from './UrlBuilder'
+import BaseUrlConfiguration from './config/BaseUrlConfiguration'
 
 export default class Url
 {
-    private content : string
-    readonly parameters: UrlParameterCollection
+    private builder: UrlBuilder
+    readonly binder: UrlParameterBinder
     readonly configuration: Configuration
 
-    constructor(content: string, config: ConfigurationInterface = {})
+    /**
+     * Create a new url
+     *
+     *  @throws UrlSyntaxError
+     *
+     */
+    constructor(url: string | Map<UrlComponent, string>, config: ConfigurationInterface = {}, baseUri: BaseUrlConfiguration | null = null)
     {
-        this.content = content
-        this.parameters = UrlParameterCollection.parseFromUrl(content)
+        if(url instanceof Map && (! url.has(UrlComponent.Scheme) && ! url.has(UrlComponent.Host)) && ! url.has(UrlComponent.Path)) {
+            const msg = `Url constructed from components should have at least either scheme and host or path.`
+            throw new UrlSyntaxError(msg)
+        }
+
         this.configuration = new Configuration(config)
+        this.builder = url instanceof Map ? new UrlBuilder(url, baseUri) : UrlBuilder.fromUrlString(url, baseUri)
+        this.binder = new UrlParameterBinder(this.toString(), this.configuration.parameters)
     }
 
+    /**
+     * Get a string representation
+     *
+     */
     toString() : string
     {
-        return this.content
-    }
-
-    /**
-     * Bind given values to the url parameter placeholders
-     *
-     */
-    bindParameters(values : any, bindGetParameters: boolean = false) : string
-    {
-        // Return base url if there's nothing to bind.
-        if(this.parameters.length === 0 && bindGetParameters === false) {
-            return this.content
-        }
-
-        if(Array.isArray(values)) {
-            return this.bindArray((values as Array<string>));
-        }
-
-        if(typeof values === 'object' && values !== null) {
-            return this.bindObject(values, bindGetParameters);
-        }
-
-        return this.bindPlainValue(values)
-    }
-
-    /**
-     * Check if a given object has properties matching all required parameters
-     *
-     * @throws ParameterBindingError
-     *
-     */
-    canBindObject(object: object) : boolean
-    {
-        let canBind = true
-
-        this.parameters.forEach(parameter => {
-
-            if(object.hasOwnProperty(parameter.name)) {
-                let valueToBind = (object as any)[parameter.name]
-
-                try {
-                    valueToBind = this.convertToString(valueToBind)
-                }
-                catch(error) {
-                    if(error instanceof TypeConversionError) {
-                        canBind = false
-                        return false
-                    }
-                    throw error
-                }
-
-                // Check if bound property can be converted into a non-empty string
-                if(valueToBind === '') {
-                    canBind = false
-                    return false
-                }
-            }
-            else if(parameter.required) {
-                canBind = false
-                return false
-            }
-        })
-
-        return canBind
+        return this.builder.build()
     }
 
     /**
@@ -91,12 +45,11 @@ export default class Url
      */
     isAbsolute() : boolean
     {
-        /* TODO */
-        return false
+        return this.builder.has(UrlComponent.Scheme) && this.builder.has(UrlComponent.Host)
     }
 
     /**
-     * Check if this url is relative (aka URI instead of an actual URL...)
+     * Check if this url is relative
      *
      */
     isRelative() : boolean
@@ -105,183 +58,128 @@ export default class Url
     }
 
     /**
-     * Bind each value to a specified parameter key.
+     * Get url scheme component
      *
      */
-    private bindObject(object : object, bindGetParameters: boolean = false) : string
+    get scheme() : string | null
     {
-        let url = this.content
+        return this.getComponent(UrlComponent.Scheme)
+    }
 
-        this.parameters.forEach(parameter => {
+    /**
+     * Get url userinfo component, containing both username and password
+     *
+     */
+    get userinfo() : string | null
+    {
+        return this.getComponent(UrlComponent.Userinfo)
+    }
 
-            let valueToBind = (object as any)[parameter.name]
+    /**
+     * Get url user component
+     *
+     */
+    get username() : string | null
+    {
+        return this.getComponent(UrlComponent.Username)
+    }
 
-            try {
-                valueToBind = valueToBind === undefined ? '' : this.convertToString(valueToBind)
-            }
-            catch(error) {
-                if(error instanceof TypeConversionError) {
-                    const msg = `Cannot bind value for parameter '${parameter.name}', unable to convert ${typeof valueToBind} to string.`
-                    throw new ParameterBindingError(msg, error)
-                }
-                throw error
-            }
+    /**
+     * Get url password component
+     *
+     */
+    get password() : string | null
+    {
+        return this.getComponent(UrlComponent.Password)
+    }
 
-            if(parameter.required && valueToBind === '') {
-                this.throwBindingError(parameter.name)
-            }
+    /**
+     * Get url host component
+     *
+     */
+    get host() : string | null
+    {
+        return this.getComponent(UrlComponent.Host)
+    }
 
-            url = this.parameters.bindParameter(url, parameter, valueToBind)
+    /**
+     * Get url port component
+     *
+     */
+    get port() : number | null
+    {
+        const value = this.getComponent(UrlComponent.Port)
 
-            // Remove already bound values from the object's keys
-            delete (object as any)[parameter.name];
+        if(value === null) {
+            return null
+        }
+
+        return parseInt(value)
+    }
+
+    /**
+     * Get url path component
+     *
+     */
+    get path() : string | null
+    {
+        return this.getComponent(UrlComponent.Path)
+    }
+
+    /**
+     * Get query string
+     *
+     */
+    get queryString() : string | null
+    {
+        return this.getComponent(UrlComponent.Query)
+    }
+
+    /**
+     * Get query parameters
+     *
+     */
+    get queryParameters() : Map<string, string> | null
+    {
+        const params = new Map<string, string>()
+        const query = this.getComponent(UrlComponent.Query)
+
+        if(query === null) {
+            return null
+        }
+
+        query.split('&').forEach(keyValuePair => {
+            const [key, value] = keyValuePair.split('=')
+            params.set(key, decodeURIComponent(value))
         })
 
-        // Bind rest of the parameters as get params if specified
-        if(bindGetParameters) {
-            url = this.bindGetParameters(object);
-        }
-
-        return this.removeTrailingSlashes(url);
+        return params
     }
 
     /**
-     * Bind a given plain value
+     * Get fragment component
      *
      */
-    private bindPlainValue(value: any) : string
+    get fragment() : string | null
     {
-        const original = value
-        const required = this.parameters.getRequired()
-
-        if(required.length > 1) {
-            const msg = `Cannot bind a given ${typeof value} as url parameters: this type is handled as a plain value and can only be bound to one parameter but there are ${required.length} required parameters (${this.content}).`
-            throw new ParameterBindingError(msg)
-        }
-
-        const parameter = this.parameters[0]
-
-        try {
-            value = this.convertToString(value)
-        }
-        catch(error) {
-            if(error instanceof TypeConversionError) {
-                const msg = `Cannot bind value for parameter '${parameter.name}', unable to convert ${typeof value} to string.`
-                throw new ParameterBindingError(msg, error)
-            }
-            throw error
-        }
-
-        if(value === '') {
-            const msg = `Cannot bind given value of type ${typeof original} because string conversion results in an empty string`
-            throw new ParameterBindingError(msg)
-        }
-
-        return this.parameters.bindParameter(this.content, parameter, value)
-    }
-
-
-    /**
-     * Bind values in given order without caring about keys.
-     *
-     */
-    private bindArray(array: Array<any>) : string
-    {
-        let url = this.content;
-
-        this.parameters.forEach((parameter, index) => {
-
-            let valueToBind = array[index] ?? '';
-
-            if(parameter.required && valueToBind === '') {
-                this.throwBindingError(parameter.name);
-            }
-
-            try {
-                valueToBind = this.convertToString(valueToBind)
-            }
-            catch(error) {
-                if(error instanceof TypeConversionError) {
-                    const msg = `Cannot bind value for parameter '${parameter.name}', unable to convert ${typeof valueToBind} to string.`
-                    throw new ParameterBindingError(msg, error)
-                }
-                throw error
-            }
-
-            url = this.parameters.bindParameter(url, parameter, valueToBind)
-        })
-
-        return this.removeTrailingSlashes(url);
+        return this.getComponent(UrlComponent.Fragment)
     }
 
     /**
-     * Bind given object's properties as key value pairs for GET parameters
+     * Get url component
      *
      */
-    private bindGetParameters(values : object) : string
+    getComponent(component: UrlComponent) : string | null
     {
-        let url = this.content
-
-        for(const [key, value] of Object.entries(values)) {
-
-            // Append the query indicator for first param
-            if(url === '') url += '?';
-
-            // For params after, start with &
-            else url += '&';
-
-            // Append the key value pair
-            url += `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
-        }
-
-        return url;
+        return this.builder.get(component) ?? null
     }
 
     /**
-     * Removes trailing slashes from a given string
+     * Check if the url has the given component
      *
      */
-    private removeTrailingSlashes(url: string) : string
+    hasComponent(component: UrlComponent) : boolean
     {
-        let lastChar = url.slice(-1)
-
-        while(lastChar === '/') {
-            url = url.slice(0, -1)
-            lastChar = url.slice(-1)
-        }
-
-        return url
-    }
-
-    /**
-     * Throw a binding error
-     *
-     */
-    private throwBindingError(parameterName: string)
-    {
-        // Generate example method call for hint.
-        const required = this.parameters.getRequired().getNames()
-
-        const msg = `Cannot bind given parameters to url '${this.content}' - value of the required parameter '${parameterName}' is missing.`;
-        const hint = `Try binding with the required values: {${required.join(', ')}}`;
-        throw new ParameterBindingError(`${msg}\n${hint}`);
-    }
-
-    /**
-     * Convert a given value to string according to the configured parameter type conversion function
-     *
-     */
-    private convertToString(value: any) : string
-    {
-        if(typeof value !== 'string') {
-            value = this.configuration.parameterTypeConversionFunction(value)
-
-            if(value === null) {
-                const msg = 'String conversion failed'
-                throw new ParameterBindingError(msg)
-            }
-        }
-
-        return value.trim()
+        return this.builder.has(component)
     }
 }

@@ -1,5 +1,5 @@
 import UrlParameter from './UrlParameter'
-import ParameterBindingError from './error/ParameterBindingError'
+import UrlParameterSyntaxError from './error/UrlParameterSyntaxError'
 
 export default class UrlParameterCollection extends Array<UrlParameter>
 {
@@ -11,13 +11,15 @@ export default class UrlParameterCollection extends Array<UrlParameter>
     /**
      * Create a new url parameter collection from parameter placeholders in a given url string
      *
+     * @throws UrlParameterSyntaxError
+     *
      */
     static parseFromUrl(url: string) : UrlParameterCollection
     {
         const parameters = []
 
         // Parse the url parameter placeholders with surrounding {curly braces}.
-        const pattern = /\{.*?\}/
+        const pattern = '\{.*?\}'
         let match = url.match(pattern)
         let lastParameterOptional = false
 
@@ -27,8 +29,8 @@ export default class UrlParameterCollection extends Array<UrlParameter>
             const parameter = new UrlParameter(placeholder)
 
             if(lastParameterOptional && parameter.required) {
-                const msg = `Invalid parameters for url: '${url}', all optional parameters must be declared after required ones`
-                throw new ParameterBindingError(msg)
+                const msg = `Invalid parameters for url: '${url}', all optional parameters must be declared after required ones.`
+                throw new UrlParameterSyntaxError(msg)
             }
 
             lastParameterOptional = ! parameter.required
@@ -85,42 +87,14 @@ export default class UrlParameterCollection extends Array<UrlParameter>
      * Get the parameter with the given name
      *
      */
-    getParameter(name: string) : UrlParameter
+    getParameter(name: string) : UrlParameter | null
     {
         const parameter = this.find(param => param.name === name)
 
         if(parameter === undefined) {
-            const msg = `Parameter '${name}' does not exist`
-            throw new ParameterBindingError(msg)
+            return null
         }
 
         return parameter
-    }
-
-    /**
-     * Bind a single value to parameter of the given url string
-     *
-     */
-    bindParameter(url: string, parameter: string | UrlParameter, value: string) : string
-    {
-        let urlParameter : UrlParameter
-
-        try {
-            urlParameter = typeof parameter === 'string' ? this.getParameter(parameter) : parameter
-        }
-        catch(error) {
-            if(error instanceof ParameterBindingError) {
-                const msg = `Cannot bind non-existent parameter '${parameter}' to url '${url}'`
-                throw new ParameterBindingError(msg, error)
-            }
-            throw error
-        }
-
-        if(urlParameter.required && value.trim().length === 0) {
-            const msg = `Cannot bind empty value '${parameter}' to url '${url}'`
-            throw new ParameterBindingError(msg)
-        }
-
-        return url.replace(urlParameter.placeholder, encodeURIComponent(value));
     }
 }

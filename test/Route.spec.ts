@@ -1,33 +1,23 @@
 import Route from '../src/Route'
 
-describe('constructor', () => {
+describe('Route', () => {
 
-    it('initializes the object', () => {
+    describe('constructor', () => {
 
-        const route: Route = new Route('test', 'GET', '/foo')
-		expect(route).toBeInstanceOf(Route)
+        it('initializes the object', () => {
+
+            const route: Route = new Route('test', 'GET', '/foo')
+            expect(route).toBeInstanceOf(Route)
+        })
     })
-})
 
-describe('initial state', () => {
+    describe('initial state', () => {
 
-    it('url is the one given to constructor', () => {
+        it('url is the one given to constructor', () => {
 
-        const url = '/foo'
-        const route = new Route('test', 'GET', url)
-        expect(route.url.toString()).toEqual(url)
-    })
-})
-
-describe('apply prefix', () => {
-
-    it('prepends a given prefix to the url', () => {
-
-        const prefix = 'foo'
-        const url = '/foo'
-        const route = new Route('test', 'GET', url)
-
-        route.applyPrefix(prefix)
-        expect(route.url.toString()).toEqual(`${prefix}${url}`)
+            const url = '/foo'
+            const route = new Route('test', 'GET', url)
+            expect(route.url.toString()).toEqual(url)
+        })
     })
 })

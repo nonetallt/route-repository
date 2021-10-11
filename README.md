@@ -30,7 +30,7 @@ As usual, you can install the package by using NPM:
 ```
 npm install front-to-back-router
 ```
-Or include it directly from on the public CDN providers:
+Or include it directly from one the public CDN providers:
 
 ```
 <script src="https://jsdelivr.com/jsonp-modernized/dist/jsonp.min.js"></script>
@@ -134,7 +134,7 @@ route.name();
 ```
 
 ### Route parameters
-The UrlParameters object returned by `route.routeParameters()` contains a couple of useful methods.
+The RouteParameters object returned by `route.routeParameters()` contains a couple of useful methods.
 
 ```javascript
 /**
@@ -148,7 +148,9 @@ params.required();
 params.areRequired();
 
 /**
-* Directly check if a given variable can be bound to the route parameters.
+* Check if a given variable can be bound to the route parameters.
+*
+* Returns false if the given variable can't be bound or contains too few parameters.
 */
 params.canBind(object);
 ```
@@ -162,21 +164,18 @@ Parameters are bound when calling the `route.bindUrl()` method. Obviously, if th
 3. an **object** with keys matching plain values
 
 
----
 When using a single parameter, the first method is often desirable.
 ```javascript
 var route = r.add('GET', 'example/{parameter}', 'test');
 var url = route.bindUrl(1);
 // url = example/1
 ```
----
 When multiple parameters are required, arrays can be used to bind the values in the same order as in the given array.
 ```javascript
 var route = r.add('GET', 'example/{p1}/{p2}/{p3}', 'test');
 var url = route.bindUrl([1,2,3]);
 // url = example/1/2/3
 ```
----
 For most fine grained control and making sure that every parameter matches as intended by the user, using a keyed object is the method of choice.
 ```javascript
 var route = r.add('GET', 'example/{fruit}/{vegetable}/{meat}', 'test');

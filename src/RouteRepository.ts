@@ -1,46 +1,40 @@
 import Route from './Route'
-import { RepositoryConfiguration, ConfigurationInterface } from './RepositoryConfiguration'
-import RegistrationError from './Error/RegistrationError'
-import RequestMethodType from './RequestMethod'
-import { RequestMethod } from './RequestMethod'
+import RouteRegistrar from './RouteRegistrar'
+import RouteGroupRegistrar from './RouteGroupRegistrar'
+import RouteRegistrarConfigurationInterface from './contract/RouteRegistrarConfigurationInterface'
+import Configuration from './config/RouteRepositoryConfiguration'
+import ConfigurationInterface from './contract/RouteRepositoryConfigurationInterface'
+import RegistrationError from './error/RegistrationError'
+import RequestMethod from './RequestMethod'
+import RequestMethodType from './RequestMethodType'
 
-export default class RouteRepository
+export default class RouteRepository extends RouteRegistrar
 {
-    routes: Map<string, Route>
-    config: ConfigurationInterface
-    signatures: Map<string, string>
-    routePrefix: string | null
+    private routes: Map<string, Route>
+    private signatures: Map<string, string>
+    private configuration: Configuration
 
     constructor(config : ConfigurationInterface = {})
     {
+        const configuration = new Configuration(config)
+        super(configuration.registration)
         this.routes = new Map()
-        this.config = new RepositoryConfiguration(config);
-        this.signatures = new Map();
-        this.routePrefix = null;
-    }
-
-    /**
-     * Create and register a new route from parameters
-     *
-     */
-    register(name: string, method: RequestMethodType, url: string)
-    {
-        return this.registerRoute(new Route(name, method, url))
+        this.signatures = new Map()
+        this.configuration = configuration
     }
 
     /**
      * Register a new route using a route object
      *
      */
-    registerRoute(route: Route)
+    protected registerRoute(route: Route) : void
     {
         const oldRoute = this.routes.get(route.name);
 
         // Check if a route with this name is already registered and thus being modified
         if(oldRoute !== undefined) {
 
-            // Throw error if routes are immutable
-            if(! this.config.mutable) {
+            if(this.configuration.mutable === false) {
                 const msg = `Route '${route.name}' is already defined and immutable!`
                 throw new RegistrationError(msg)
             }
@@ -49,17 +43,14 @@ export default class RouteRepository
             this.signatures.delete(this.routeSignature(oldRoute.method, oldRoute.url.toString()));
         }
 
-        if(this.routePrefix !== null) {
-            route.applyPrefix(this.routePrefix)
-        }
-
         const signature = this.routeSignature(route.method, route.url.toString());
         const duplicateRoute = this.signatures.get(signature);
 
-        if(this.config.duplicates === false && duplicateRoute !== undefined) {
+        if(this.configuration.duplicates === false && duplicateRoute !== undefined) {
 
-            const msg = `Route '${route.name}' is a duplicate of existing route '${duplicateRoute}'. If you want to enable multiple aliases for the same url and method combination, set 'duplicates' option as true.`
-            throw new RegistrationError(msg)
+            const msg = `Route '${route.name}' is a duplicate of existing route '${duplicateRoute}'.`
+            const hint =  "If you want to enable multiple aliases for the same url and method combination, set 'duplicates' option as true."
+            throw new RegistrationError(msg + "\n" + hint)
         }
 
         this.signatures.set(signature, route.name)
@@ -67,55 +58,19 @@ export default class RouteRepository
     }
 
     /**
-     * Register a new get route
+     * Count the number of routes
      *
      */
-    get(name: string, url: string)
+    countRoutes() : number
     {
-        this.register(name, 'GET', url);
-    }
-
-    /**
-     * Register a new post route
-     *
-     */
-    post(name: string, url: string)
-    {
-        this.register(name, 'POST', url);
-    }
-
-    /**
-     * Register a new put route
-     *
-     */
-    put(name: string, url: string)
-    {
-        this.register(name, 'PUT', url);
-    }
-
-    /**
-     * Register a new patch route
-     *
-     */
-    patch(name: string, url: string)
-    {
-        this.register(name, 'PATCH', url);
-    }
-
-    /**
-     * Register a new delete route
-     *
-     */
-    delete(name: string, url: string)
-    {
-        this.register(name, 'DELETE', url);
+        return this.routes.size
     }
 
     /**
      * Get a route with the given name
      *
      */
-    route(name: string) : Route | null
+    getRoute(name: string) : Route | null
     {
         const route = this.routes.get(name)
         return route !== undefined ? route : null
@@ -156,19 +111,53 @@ export default class RouteRepository
      * Get a string representation of a given route's destination
      *
      */
-    routeSignature(method: RequestMethodType, url: string) : string
+    private routeSignature(method: RequestMethodType, url: string) : string
     {
         return `${method}:${url}`
     }
 
     /**
-     * Prefix routes registered inside callback with a given prefix
+     * Register routes using same registrar settings for the whole group
      *
      */
-    prefix(prefix: string, callback : (repository: RouteRepository) => void)
+    group(config: RouteRegistrarConfigurationInterface, callback : (registrar: RouteRegistrar) => void) : void
     {
-        this.routePrefix = prefix;
-        callback(this);
-        this.routePrefix = null;
+        const registrar = new RouteGroupRegistrar(this, config)
+        callback(registrar)
+    }
+
+    /**
+     * Get a formatted list of all registered routes.
+     *
+     */
+    listRoutes() : string
+    {
+        const rows = [['NAME', 'METHOD', 'URL']]
+
+        this.routes.forEach(route => {
+            rows.push([route.name, route.method, route.url.toString()])
+        })
+
+        const nameLen   = Math.max(...rows.map(row => row[0].length))
+        const methodLen = Math.max(...rows.map(row => row[1].length))
+        const urlLen    = Math.max(...rows.map(row => row[2].length))
+
+        rows.splice(1, 0, [
+            '-'.padEnd(nameLen, '-'),
+            '-'.padEnd(methodLen, '-'),
+            '-'.padEnd(urlLen, '-'),
+        ])
+
+        const table = rows.map(row => {
+
+            row[0] = row[0].padEnd(nameLen)
+            row[1] = row[1].padEnd(methodLen)
+            row[2] = row[2].padEnd(urlLen)
+
+            return '| ' + row.join(' | ') + ' |'
+
+        }).join("\n")
+
+        return table
     }
 }

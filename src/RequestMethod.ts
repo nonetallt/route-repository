@@ -2,7 +2,7 @@
  * A simple enum that contains valid HTTP methods
  *
  */
-export enum RequestMethod
+enum RequestMethod
 {
     GET     = 'GET',
     POST    = 'POST',
@@ -15,6 +15,4 @@ export enum RequestMethod
     TRACE   = 'TRACE'
 }
 
-type RequestMethodType = `${RequestMethod}`
-
-export default RequestMethodType
+export default RequestMethod
