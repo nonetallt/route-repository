@@ -5,5 +5,5 @@ export default interface RouteRegistrarConfigurationInterface
 {
     extra?: object
     uris?: UriConfigurationInterface
-    baseUri?: BaseUriConfigurationInterface
+    baseUri?: BaseUriConfigurationInterface | null
 }

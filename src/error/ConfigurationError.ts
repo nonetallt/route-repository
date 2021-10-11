@@ -1,8 +1,11 @@
 export default class ConfigurationError extends Error
 {
-    constructor(message: string)
+    readonly previous?: Error
+
+    constructor(message: string, previous?: Error)
     {
         super(message)
         Object.setPrototypeOf(this, ConfigurationError.prototype);
+        this.previous = previous
     }
 }

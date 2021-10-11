@@ -11,10 +11,10 @@ export default class UriParameterBinder
     readonly parameters: UriParameterCollection
     readonly configuration: UriParameterConfiguration
 
-    constructor(uri: string, config: UriParameterConfiguration)
+    constructor(uri: string, config: UriParameterConfiguration | null = null)
     {
         this.uri = uri
-        this.configuration = config
+        this.configuration = config === null ? new UriParameterConfiguration() : config
         this.parameters = UriParameterCollection.parseFromUri(uri.toString())
     }
 

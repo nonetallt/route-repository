@@ -238,16 +238,9 @@ describe('Uri', () => {
 
     describe('configuration', () => {
 
-        describe('baseUri', () => {
+        describe('todo', () => {
 
-            it('applies to relative uri', () => {
-                const uri = new Uri('/bar/baz', {baseUri: 'http://example.com/foo'})
-                expect(uri.toString()).toEqual('http://example.com/foo/bar/baz')
-            })
-
-            it('does not apply to absolute uri', () => {
-                const uri = new Uri('http://foo.com/bar/baz', {baseUri: 'http://example.com/foo'})
-                expect(uri.toString()).toEqual('http://foo.com/bar/baz')
+            it('todo', () => {
             })
         })
     })

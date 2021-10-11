@@ -8,13 +8,13 @@ export default class RouteRegistrarConfiguration implements ConfigurationInterfa
 {
     readonly extra: object
     readonly uris: UriConfigurationInterface
-    readonly baseUri: BaseUriConfigurationInterface
+    readonly baseUri: BaseUriConfigurationInterface | null
 
     constructor(config: ConfigurationInterface = {})
     {
         this.extra = {}
         this.uris = new UriConfiguration()
-        this.baseUri = new BaseUriConfiguration()
+        this.baseUri = null
 
         Object.assign(this, config);
     }

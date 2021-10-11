@@ -22,7 +22,7 @@ export default class ApplyConfiguration implements RouteRegistrationMiddlewareIn
 
     private updateUri(route: Route) : Uri
     {
-        if(this.configuration.baseUri.uri === null) {
+        if(this.configuration.baseUri === null) {
             return route.uri
         }
 

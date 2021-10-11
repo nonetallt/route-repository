@@ -2,6 +2,7 @@ import Uri from './Uri'
 import UriComponent from './UriComponent'
 import UriSyntaxError from './error/UriSyntaxError'
 import BaseUriConfiguration from './config/BaseUriConfiguration'
+import BaseUriConfigurationInterface from './contract/BaseUriConfigurationInterface'
 
 const parseRegex = new RegExp(/^((?<scheme>https?):\/\/)?((?<userinfo>(?<username>[^:]+):(?<password>[^@]+))?@)?(?<host>[^\/?#:]+)?(:(?<port>[0-9]+))?(\/(?<path>[^?#]+))?(\?(?<query>[^#]+))?(#(?<fragment>.+))?/)
 
@@ -11,12 +12,12 @@ const parseRegex = new RegExp(/^((?<scheme>https?):\/\/)?((?<userinfo>(?<usernam
  */
 export default class UriBuilder extends Map<UriComponent, string>
 {
-    constructor(components: Map<UriComponent, string>, baseConfig: BaseUriConfiguration | null = null)
+    constructor(components: Map<UriComponent, string>, baseConfig: BaseUriConfigurationInterface | null = null)
     {
         super(components)
 
         if(baseConfig !== null) {
-            this.applyBaseUri(baseConfig)
+            this.applyBaseUri(new BaseUriConfiguration(baseConfig))
         }
     }
 
@@ -24,7 +25,7 @@ export default class UriBuilder extends Map<UriComponent, string>
      * @throws UriSyntaxError
      *
      */
-    static fromUriString(uri: string, baseUri: Uri | null = null) : UriBuilder
+    static fromUriString(uri: string, baseConfig: BaseUriConfigurationInterface | null = null) : UriBuilder
     {
         const match = uri.match(parseRegex)
 
@@ -45,7 +46,7 @@ export default class UriBuilder extends Map<UriComponent, string>
             }
         })
 
-        return new UriBuilder(parsed, baseUri)
+        return new UriBuilder(parsed, baseConfig)
     }
 
     build() : string
@@ -65,8 +66,9 @@ export default class UriBuilder extends Map<UriComponent, string>
 
     private applyBaseUri(baseConfig: BaseUriConfiguration)
     {
-
+        /* TODO */
         if(! this.has(UriComponent.Scheme)) {
+        }
 
         const baseComponents = [
             UriComponent.Scheme,
@@ -90,7 +92,7 @@ export default class UriBuilder extends Map<UriComponent, string>
         })
 
         /* TODO merge path, merge query (depending on config arg) */
-        if(baseConfig.mergeBasePath)
+        /* if(baseConfig.mergeBasePath) */
     }
 
     /**

@@ -1,17 +1,19 @@
 import ConfigurationInterface from '../contract/BaseUriConfigurationInterface'
 import Uri from '../Uri'
+import UriSyntaxError from '../error/UriSyntaxError'
+import ConfigurationError from '../error/ConfigurationError'
 
 export default class BaseUriConfiguration implements ConfigurationInterface
 {
-    private _uri: Uri | null
+    private _uri: Uri
     readonly mergePath: boolean
     readonly mergeQuery: boolean
     readonly defaultScheme: 'http' | 'https' | null
     readonly overrideScheme: boolean
 
-    constructor(config : ConfigurationInterface = {})
+    constructor(config : ConfigurationInterface)
     {
-        this._uri = null
+        this.uri = config.uri
         this.mergePath = true
         this.mergeQuery = false
         this.defaultScheme = null
@@ -20,15 +22,26 @@ export default class BaseUriConfiguration implements ConfigurationInterface
         Object.assign(this, config);
     }
 
-    public get uri() : Uri | null
+    public get uri() : Uri
     {
         return this._uri
     }
 
-    private set uri(uri: Uri | string | null)
+    private set uri(uri: Uri | string)
     {
         if(typeof uri === 'string') {
-            uri = new Uri(uri)
+
+            try {
+                uri = new Uri(uri)
+            }
+            catch(error) {
+                if(! (error instanceof UriSyntaxError)) {
+                    throw error
+                }
+
+                const msg = `Invalid base uri given. See previous error for more details.`
+                throw new ConfigurationError(msg, error)
+            }
         }
 
         this._uri = uri

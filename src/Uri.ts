@@ -4,7 +4,7 @@ import UriParameterBinder from './UriParameterBinder'
 import UriComponent from './UriComponent'
 import UriSyntaxError from './error/UriSyntaxError'
 import UriBuilder from './UriBuilder'
-import BaseUriConfiguration from './config/BaseUriConfiguration'
+import BaseUriConfigurationInterface from './contract/BaseUriConfigurationInterface'
 
 export default class Uri
 {
@@ -18,7 +18,7 @@ export default class Uri
      *  @throws UriSyntaxError
      *
      */
-    constructor(uri: string | Map<UriComponent, string>, config: ConfigurationInterface = {}, baseUri: BaseUriConfiguration | null = null)
+    constructor(uri: string | Map<UriComponent, string>, config: ConfigurationInterface = {}, baseUri: BaseUriConfigurationInterface | null = null)
     {
         if(uri instanceof Map && (! uri.has(UriComponent.Scheme) && ! uri.has(UriComponent.Host)) && ! uri.has(UriComponent.Path)) {
             const msg = `Uri constructed from components should have at least either scheme and host or path.`

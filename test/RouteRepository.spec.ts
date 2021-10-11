@@ -235,7 +235,7 @@ describe('RouteRepository', () => {
                 const baseUri = '/prefix_'
                 const uri = '/foo'
 
-                router.group({baseUri: baseUri}, (router: RouteRegistrar) => {
+                router.group({baseUri: {uri: baseUri}}, (router: RouteRegistrar) => {
                     router.register('new_route', 'GET', uri);
                 })
 
@@ -248,7 +248,7 @@ describe('RouteRepository', () => {
                 const baseUri = 'prefix_'
                 const uri = '/foo'
 
-                router.group({baseUri: baseUri}, (router: RouteRegistrar) => {
+                router.group({baseUri: {uri: baseUri}}, (router: RouteRegistrar) => {
                     router.register('new_route_1', 'GET', uri);
                 })
 
