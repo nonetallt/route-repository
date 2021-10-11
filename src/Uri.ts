@@ -166,6 +166,15 @@ export default class Uri
     }
 
     /**
+     * Get all uri components
+     *
+     */
+    get components() : Map<UriComponent, string>
+    {
+        return this.builder
+    }
+
+    /**
      * Get uri component
      *
      */
