@@ -1,3 +1,8 @@
+- rename url to uri
+
+
+
+
 merge group registrar config from original config (repo's registrar config) so that non-overridden values are as default
 
 check if route parameter encoding works
@@ -27,7 +32,6 @@ FIX prefix (this is what merge is for! change merge to "setComponent" ?) and App
 
 
 
-- rename url to uri
 - make relevant props readonly / private + consistent setters / getters
 - make http verbs case insensitive
 - documentation
