@@ -16,14 +16,14 @@ FIX prefix (this is what merge is for! change merge to "setComponent" ?) and App
 
 
 
-- url configuration
-    - base url (test and more options: merge path, merge query)
+- uri configuration
+    - base uri (test and more options: merge path, merge query)
     - strip leading
     - strip trailing
     - conversion function (TESTS)
 
 
-- handle nested url parameters?
+- handle nested uri parameters?
 
 - create example dir with mix compilation and make sure everything works
 
