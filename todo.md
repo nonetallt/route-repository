@@ -1,6 +1,3 @@
-- rename url to uri
-
-
 
 
 merge group registrar config from original config (repo's registrar config) so that non-overridden values are as default
