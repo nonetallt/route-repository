@@ -28,9 +28,9 @@ export default abstract class RouteRegistrar
      * Create and register a new route from parameters
      *
      */
-    register(name: string, method: RequestMethodType, url: string, extra: object = {}) : void
+    register(name: string, method: RequestMethodType, uri: string, extra: object = {}) : void
     {
-        let route = new Route(name, method, url, extra)
+        let route = new Route(name, method, uri, extra)
         route = this.applyRegistrationMiddleware(route)
         return this.registerRoute(route)
     }
@@ -39,45 +39,45 @@ export default abstract class RouteRegistrar
      * Register a new get route
      *
      */
-    get(name: string, url: string, extra: object = {}) : void
+    get(name: string, uri: string, extra: object = {}) : void
     {
-        this.register(name, 'GET', url, extra);
+        this.register(name, 'GET', uri, extra);
     }
 
     /**
      * Register a new post route
      *
      */
-    post(name: string, url: string, extra: object = {}) : void
+    post(name: string, uri: string, extra: object = {}) : void
     {
-        this.register(name, 'POST', url, extra);
+        this.register(name, 'POST', uri, extra);
     }
 
     /**
      * Register a new put route
      *
      */
-    put(name: string, url: string, extra: object = {}) : void
+    put(name: string, uri: string, extra: object = {}) : void
     {
-        this.register(name, 'PUT', url, extra);
+        this.register(name, 'PUT', uri, extra);
     }
 
     /**
      * Register a new patch route
      *
      */
-    patch(name: string, url: string, extra: object = {}) : void
+    patch(name: string, uri: string, extra: object = {}) : void
     {
-        this.register(name, 'PATCH', url, extra);
+        this.register(name, 'PATCH', uri, extra);
     }
 
     /**
      * Register a new delete route
      *
      */
-    delete(name: string, url: string, extra: object = {}) : void
+    delete(name: string, uri: string, extra: object = {}) : void
     {
-        this.register(name, 'DELETE', url, extra);
+        this.register(name, 'DELETE', uri, extra);
     }
 
     /**

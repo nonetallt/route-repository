@@ -1,6 +1,6 @@
 import RouteRegistrationMiddlewareInterface from '../../contract/RouteRegistrationMiddlewareInterface'
 import RouteRegistrarConfiguration from '../../config/RouteRegistrarConfiguration'
-import Url from '../../Url'
+import Uri from '../../Uri'
 import Route from '../../Route'
 
 export default class ApplyConfiguration implements RouteRegistrationMiddlewareInterface
@@ -14,20 +14,20 @@ export default class ApplyConfiguration implements RouteRegistrationMiddlewareIn
 
     apply(route: Route) : Route
     {
-        const url = this.updateUrl(route)
+        const uri = this.updateUri(route)
         const extra = Object.assign(route.extra, this.configuration.extra)
 
-        return new Route(route.name, route.method, url, extra)
+        return new Route(route.name, route.method, uri, extra)
     }
 
-    private updateUrl(route: Route) : Url
+    private updateUri(route: Route) : Uri
     {
         if(this.configuration.prefix.length > 0) {
-            const urlString = this.configuration.prefix + route.url.toString()
-            const urlConfig = Object.assign(route.url.configuration, this.configuration.urls)
-            return new Url(urlString, urlConfig)
+            const uriString = this.configuration.prefix + route.uri.toString()
+            const uriConfig = Object.assign(route.uri.configuration, this.configuration.uris)
+            return new Uri(uriString, uriConfig)
         }
 
-        return route.url
+        return route.uri
     }
 }

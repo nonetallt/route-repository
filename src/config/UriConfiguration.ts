@@ -1,8 +1,8 @@
-import ConfigurationInterface from '../contract/UrlConfigurationInterface'
-import Url from '../Url'
+import ConfigurationInterface from '../contract/UriConfigurationInterface'
+import Uri from '../Uri'
 import UriParameterConfiguration from '../config/UriParameterConfiguration'
 
-export default class UrlConfiguration implements ConfigurationInterface
+export default class UriConfiguration implements ConfigurationInterface
 {
     readonly prependSlash: boolean
     readonly parameters: UriParameterConfiguration

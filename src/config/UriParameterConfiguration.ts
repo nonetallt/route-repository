@@ -3,7 +3,7 @@ import ConfigurationInterface from '../contract/UriParameterConfigurationInterfa
 export default class UriParameterConfiguration implements ConfigurationInterface
 {
     readonly acceptWhitespace: boolean
-    readonly encodeUrlParameters: boolean
+    readonly encodeUriParameters: boolean
     readonly encodeGetParameters: boolean
     readonly typeConversionFunction: (parameterValue: any) => string | null
 

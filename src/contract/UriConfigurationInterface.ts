@@ -1,9 +1,9 @@
 import UriParameterConfigurationInterface from './UriParameterConfigurationInterface'
 
-export default interface UrlConfigurationInterface
+export default interface UriConfigurationInterface
 {
     prependSlash?: boolean
-    parameters?: UrlParameterConfigurationInterface
+    parameters?: UriParameterConfigurationInterface
     stripLeadingSlashes?: boolean
     stripTrailingSlashes?: boolean
 };

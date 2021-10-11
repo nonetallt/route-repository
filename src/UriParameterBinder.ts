@@ -1,27 +1,27 @@
-import Url from './Url'
-import UrlParameter from './UrlParameter'
-import UrlParameterCollection from './UrlParameterCollection'
-import UrlParameterBindingError from './error/UrlParameterBindingError'
+import Uri from './Uri'
+import UriParameter from './UriParameter'
+import UriParameterCollection from './UriParameterCollection'
+import UriParameterBindingError from './error/UriParameterBindingError'
 import TypeConversionError from './error/TypeConversionError'
 import UriParameterConfiguration from './config/UriParameterConfiguration'
 
-export default class UrlParameterBinder
+export default class UriParameterBinder
 {
     private uri: string
-    readonly parameters: UrlParameterCollection
+    readonly parameters: UriParameterCollection
     readonly configuration: UriParameterConfiguration
 
     constructor(uri: string, config: UriParameterConfiguration)
     {
         this.uri = uri
         this.configuration = config
-        this.parameters = UrlParameterCollection.parseFromUrl(url.toString())
+        this.parameters = UriParameterCollection.parseFromUri(uri.toString())
     }
 
     /**
-     * Bind given values to the url parameter placeholders
+     * Bind given values to the uri parameter placeholders
      *
-     *  @throws UrlParameterBindingError
+     *  @throws UriParameterBindingError
      *
      */
     bind(values : any, bindGetParameters: boolean = false) : string
@@ -49,10 +49,10 @@ export default class UrlParameterBinder
     canBindObject(object: object) : boolean
     {
         try {
-            this.bindObject(this.url, object)
+            this.bindObject(this.uri, object)
         }
         catch(error) {
-            if(error instanceof UrlParameterBindingError) {
+            if(error instanceof UriParameterBindingError) {
                 return false
             }
             throw error
@@ -66,11 +66,11 @@ export default class UrlParameterBinder
      * Bind each object property to a to the parameter with a matching name.
      *
      */
-    private bindObject(url: string, object : object, bindGetParameters: boolean = false) : string
+    private bindObject(uri: string, object : object, bindGetParameters: boolean = false) : string
     {
         this.parameters.forEach(parameter => {
 
-            url = this.bindParameter(url, parameter, (object as any)[parameter.name])
+            uri = this.bindParameter(uri, parameter, (object as any)[parameter.name])
 
             // Remove already bound values from the object's keys
             delete (object as any)[parameter.name];
@@ -78,80 +78,80 @@ export default class UrlParameterBinder
 
         // Bind rest of the parameters as get params if specified
         if(bindGetParameters) {
-            url = this.bindGetParameters(url, object);
+            uri = this.bindGetParameters(uri, object);
         }
 
-        return url
+        return uri
     }
 
     /**
      * Bind values in given order without caring about keys.
      *
      */
-    private bindArray(url: string, array: Array<any>) : string
+    private bindArray(uri: string, array: Array<any>) : string
     {
         this.parameters.forEach((parameter, index) => {
-            url = this.bindParameter(url, parameter, array[index])
+            uri = this.bindParameter(uri, parameter, array[index])
         })
 
-        return url
+        return uri
     }
 
     /**
      * Bind a given plain value
      *
      */
-    private bindValue(url: string, value: any) : string
+    private bindValue(uri: string, value: any) : string
     {
         const original = value
         const required = this.parameters.getRequired()
 
         if(required.length > 1) {
-            const msg = `Cannot bind a given ${typeof value} as url parameters: this type is handled as a plain value and can only be bound to one parameter but there are ${required.length} required parameters.`
-            throw new UrlParameterBindingError(msg)
+            const msg = `Cannot bind a given ${typeof value} as uri parameters: this type is handled as a plain value and can only be bound to one parameter but there are ${required.length} required parameters.`
+            throw new UriParameterBindingError(msg)
         }
 
-        return this.bindParameter(url, this.parameters[0], value)
+        return this.bindParameter(uri, this.parameters[0], value)
     }
 
     /**
      * Bind given object's properties as key value pairs for GET parameters
      *
      */
-    private bindGetParameters(url: string, values : object) : string
+    private bindGetParameters(uri: string, values : object) : string
     {
         for(const [key, value] of Object.entries(values)) {
 
             // Append the query indicator for first param
-            if(url === '') url += '?';
+            if(uri === '') uri += '?';
 
             // For params after, start with &
-            else url += '&';
+            else uri += '&';
 
             // Append the key value pair
-            url += `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+            uri += `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
         }
 
-        return url;
+        return uri;
     }
 
     /**
-     * Bind a single value to parameter of the given url string
+     * Bind a single value to parameter of the given uri string
      *
      */
-    private bindParameter(url: string, parameter: string | UrlParameter, value: any) : string
+    private bindParameter(uri: string, parameter: string | UriParameter, value: any) : string
     {
-        const urlParameter = typeof parameter === 'string' ? this.parameters.getParameter(parameter) : parameter
+        const uriParameter = typeof parameter === 'string' ? this.parameters.getParameter(parameter) : parameter
 
-        if(urlParameter === null) {
+        if(uriParameter === null) {
             const msg = `Cannot bind value to non-existent parameter '${parameter}'.`
-            throw new UrlParameterBindingError(msg)
+            throw new UriParameterBindingError(msg)
         }
 
         if(value === undefined) {
-            if(urlParameter.required) {
-                const msg = `Cannot bind missing value for required parameter '${urlParameter.name}'.`
-                throw new UrlParameterBindingError(msg)
+            if(uriParameter.required) {
+                const msg = `Cannot bind missing value for required parameter '${uriParameter.name}'.`
+                throw new UriParameterBindingError(msg)
             }
             value = ''
         }
@@ -163,45 +163,45 @@ export default class UrlParameterBinder
         }
         catch(error) {
             if(error instanceof TypeConversionError) {
-                const msg = `Cannot bind value for parameter '${urlParameter.name}', unable to convert ${typeof value} to string.`
-                throw new UrlParameterBindingError(msg, error)
+                const msg = `Cannot bind value for parameter '${uriParameter.name}', unable to convert ${typeof value} to string.`
+                throw new UriParameterBindingError(msg, error)
             }
             throw error
         }
 
-        if(urlParameter.required && value.length === 0) {
+        if(uriParameter.required && value.length === 0) {
 
             if(typeof original === 'string') {
-                const msg = `Cannot bind empty string for required parameter ${urlParameter.name}.`
-                throw new UrlParameterBindingError(msg)
+                const msg = `Cannot bind empty string for required parameter ${uriParameter.name}.`
+                throw new UriParameterBindingError(msg)
             }
 
-            const msg = `Cannot bind given ${typeof original} value for required parameter ${urlParameter.name} because string conversion results in an empty string.`
-            throw new UrlParameterBindingError(msg)
+            const msg = `Cannot bind given ${typeof original} value for required parameter ${uriParameter.name} because string conversion results in an empty string.`
+            throw new UriParameterBindingError(msg)
         }
 
         /* TODO use config */
 
-        url = url.replace(urlParameter.placeholder, encodeURIComponent(value))
-        url = this.removeTrailingSlashes(url)
+        uri = uri.replace(uriParameter.placeholder, encodeURIComponent(value))
+        uri = this.removeTrailingSlashes(uri)
 
-        return url
+        return uri
     }
 
     /**
      * Removes trailing slashes from a given string
      *
      */
-    private removeTrailingSlashes(url: string) : string
+    private removeTrailingSlashes(uri: string) : string
     {
-        let lastChar = url.slice(-1)
+        let lastChar = uri.slice(-1)
 
         while(lastChar === '/') {
-            url = url.slice(0, -1)
-            lastChar = url.slice(-1)
+            uri = uri.slice(0, -1)
+            lastChar = uri.slice(-1)
         }
 
-        return url
+        return uri
     }
 
     /**
@@ -215,7 +215,7 @@ export default class UrlParameterBinder
 
             if(value === null) {
                 const msg = 'String conversion failed'
-                throw new UrlParameterBindingError(msg)
+                throw new UriParameterBindingError(msg)
             }
         }
 

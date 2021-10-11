@@ -1,50 +1,50 @@
-import UrlParameter from './UrlParameter'
-import UrlParameterSyntaxError from './error/UrlParameterSyntaxError'
+import UriParameter from './UriParameter'
+import UriParameterSyntaxError from './error/UriParameterSyntaxError'
 
-export default class UrlParameterCollection extends Array<UrlParameter>
+export default class UriParameterCollection extends Array<UriParameter>
 {
-    constructor(...items : Array<UrlParameter>)
+    constructor(...items : Array<UriParameter>)
     {
         super(...items)
     }
 
     /**
-     * Create a new url parameter collection from parameter placeholders in a given url string
+     * Create a new uri parameter collection from parameter placeholders in a given uri string
      *
-     * @throws UrlParameterSyntaxError
+     * @throws UriParameterSyntaxError
      *
      */
-    static parseFromUrl(url: string) : UrlParameterCollection
+    static parseFromUri(uri: string) : UriParameterCollection
     {
         const parameters = []
 
-        // Parse the url parameter placeholders with surrounding {curly braces}.
+        // Parse the uri parameter placeholders with surrounding {curiy braces}.
         const pattern = '\{.*?\}'
-        let match = url.match(pattern)
+        let match = uri.match(pattern)
         let lastParameterOptional = false
 
         while(match !== null) {
 
             const placeholder = match[0];
-            const parameter = new UrlParameter(placeholder)
+            const parameter = new UriParameter(placeholder)
 
             if(lastParameterOptional && parameter.required) {
-                const msg = `Invalid parameters for url: '${url}', all optional parameters must be declared after required ones.`
-                throw new UrlParameterSyntaxError(msg)
+                const msg = `Invalid parameters for uri: '${uri}', all optional parameters must be declared after required ones.`
+                throw new UriParameterSyntaxError(msg)
             }
 
             lastParameterOptional = ! parameter.required
 
             parameters.push(parameter)
-            url = url.replace(placeholder, '');
-            match = url.match(pattern);
+            uri = uri.replace(placeholder, '');
+            match = uri.match(pattern);
         }
 
-        return new UrlParameterCollection(...parameters)
+        return new UriParameterCollection(...parameters)
     }
 
     /**
-     * Check if any url parameters are required
+     * Check if any uri parameters are required
      *
      */
     areRequired() : boolean
@@ -62,12 +62,12 @@ export default class UrlParameterCollection extends Array<UrlParameter>
     }
 
     /**
-     * Get a list of the required url parameters
+     * Get a list of the required uri parameters
      *
      */
-    getRequired() : UrlParameterCollection
+    getRequired() : UriParameterCollection
     {
-        return new UrlParameterCollection(...this.filter(parameter => {
+        return new UriParameterCollection(...this.filter(parameter => {
             return parameter.required
         }))
     }
@@ -87,7 +87,7 @@ export default class UrlParameterCollection extends Array<UrlParameter>
      * Get the parameter with the given name
      *
      */
-    getParameter(name: string) : UrlParameter | null
+    getParameter(name: string) : UriParameter | null
     {
         const parameter = this.find(param => param.name === name)
 

@@ -40,16 +40,16 @@ export default class RouteRepository extends RouteRegistrar
             }
 
             // If existing route is being modified, remove the old signature
-            this.signatures.delete(this.routeSignature(oldRoute.method, oldRoute.url.toString()));
+            this.signatures.delete(this.routeSignature(oldRoute.method, oldRoute.uri.toString()));
         }
 
-        const signature = this.routeSignature(route.method, route.url.toString());
+        const signature = this.routeSignature(route.method, route.uri.toString());
         const duplicateRoute = this.signatures.get(signature);
 
         if(this.configuration.duplicates === false && duplicateRoute !== undefined) {
 
             const msg = `Route '${route.name}' is a duplicate of existing route '${duplicateRoute}'.`
-            const hint =  "If you want to enable multiple aliases for the same url and method combination, set 'duplicates' option as true."
+            const hint =  "If you want to enable multiple aliases for the same uri and method combination, set 'duplicates' option as true."
             throw new RegistrationError(msg + "\n" + hint)
         }
 
@@ -86,10 +86,10 @@ export default class RouteRepository extends RouteRegistrar
     }
 
     /**
-     * Check if a route with a given url and optionally method, exists
+     * Check if a route with a given uri and optionally method, exists
      *
      */
-    hasRouteWithUrl(url: string, ...methods: Array<RequestMethodType>) : boolean
+    hasRouteWithUri(uri: string, ...methods: Array<RequestMethodType>) : boolean
     {
         let hasRoute = false
 
@@ -98,7 +98,7 @@ export default class RouteRepository extends RouteRegistrar
         }
 
         methods.forEach(method => {
-            if(this.signatures.has(this.routeSignature(method, url))) {
+            if(this.signatures.has(this.routeSignature(method, uri))) {
                 hasRoute = true
                 return false
             }
@@ -111,9 +111,9 @@ export default class RouteRepository extends RouteRegistrar
      * Get a string representation of a given route's destination
      *
      */
-    private routeSignature(method: RequestMethodType, url: string) : string
+    private routeSignature(method: RequestMethodType, uri: string) : string
     {
-        return `${method}:${url}`
+        return `${method}:${uri}`
     }
 
     /**
@@ -132,27 +132,27 @@ export default class RouteRepository extends RouteRegistrar
      */
     listRoutes() : string
     {
-        const rows = [['NAME', 'METHOD', 'URL']]
+        const rows = [['NAME', 'METHOD', 'URI']]
 
         this.routes.forEach(route => {
-            rows.push([route.name, route.method, route.url.toString()])
+            rows.push([route.name, route.method, route.uri.toString()])
         })
 
         const nameLen   = Math.max(...rows.map(row => row[0].length))
         const methodLen = Math.max(...rows.map(row => row[1].length))
-        const urlLen    = Math.max(...rows.map(row => row[2].length))
+        const uriLen    = Math.max(...rows.map(row => row[2].length))
 
         rows.splice(1, 0, [
             '-'.padEnd(nameLen, '-'),
             '-'.padEnd(methodLen, '-'),
-            '-'.padEnd(urlLen, '-'),
+            '-'.padEnd(uriLen, '-'),
         ])
 
         const table = rows.map(row => {
 
             row[0] = row[0].padEnd(nameLen)
             row[1] = row[1].padEnd(methodLen)
-            row[2] = row[2].padEnd(urlLen)
+            row[2] = row[2].padEnd(uriLen)
 
             return '| ' + row.join(' | ') + ' |'
 

@@ -1,4 +1,4 @@
-enum UrlComponent
+enum UriComponent
 {
     Scheme   = 'scheme',
     Userinfo = 'userinfo',
@@ -11,4 +11,4 @@ enum UrlComponent
     Fragment = 'fragment'
 }
 
-export default UrlComponent
+export default UriComponent

@@ -1,9 +1,9 @@
-import UrlConfigurationInterface from './UrlConfigurationInterface'
-import BaseUrlConfigurationInterface from './BaseUrlConfigurationInterface'
+import UriConfigurationInterface from './UriConfigurationInterface'
+import BaseUriConfigurationInterface from './BaseUriConfigurationInterface'
 
 export default interface RouteRegistrarConfigurationInterface
 {
     extra?: object
-    urls?: UrlConfigurationInterface
-    baseUri?: BaseUrlConfigurationInterface
+    uris?: UriConfigurationInterface
+    baseUri?: BaseUriConfigurationInterface
 }

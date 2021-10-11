@@ -1,9 +1,9 @@
-import ConfigurationInterface from '../contract/BaseUrlConfigurationInterface'
-import Url from '../Url'
+import ConfigurationInterface from '../contract/BaseUriConfigurationInterface'
+import Uri from '../Uri'
 
-export default class BaseUrlConfiguration implements ConfigurationInterface
+export default class BaseUriConfiguration implements ConfigurationInterface
 {
-    private _uri: Url | null
+    private _uri: Uri | null
     readonly mergePath: boolean
     readonly mergeQuery: boolean
     readonly defaultScheme: 'http' | 'https' | null
@@ -20,15 +20,15 @@ export default class BaseUrlConfiguration implements ConfigurationInterface
         Object.assign(this, config);
     }
 
-    public get uri() : Url | null
+    public get uri() : Uri | null
     {
         return this._uri
     }
 
-    private set uri(uri: Url | string | null)
+    private set uri(uri: Uri | string | null)
     {
         if(typeof uri === 'string') {
-            uri = new Url(uri)
+            uri = new Uri(uri)
         }
 
         this._uri = uri

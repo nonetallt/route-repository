@@ -1,7 +1,7 @@
-export default interface UrlParameterConfigurationInterface
+export default interface UriParameterConfigurationInterface
 {
     acceptWhitespace?: boolean
-    encodeUrlParameters?: boolean
+    encodeUriParameters?: boolean
     encodeGetParameters?: boolean
     typeConversionFunction?: (parameterValue: any) => string | null
 };

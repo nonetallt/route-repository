@@ -1,8 +1,8 @@
-import Url from '../Url'
+import Uri from '../Uri'
 
-export default interface BaseUrlConfigurationInterface
+export default interface BaseUriConfigurationInterface
 {
-    url: Url | null
+    uri: Uri | null
     mergePath?: boolean
     mergeQuery?: boolean
     defaultScheme?: 'http' | 'https' | null

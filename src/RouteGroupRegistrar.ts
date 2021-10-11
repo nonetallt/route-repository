@@ -1,7 +1,7 @@
 import RouteRepository from './RouteRepository'
 import RouteRegistrar from './RouteRegistrar'
 import Route from './Route'
-import Url from './Url'
+import Uri from './Uri'
 import Configuration from './config/RouteRegistrarConfiguration'
 import ConfigurationInterface from './contract/RouteRegistrarConfigurationInterface'
 
@@ -25,6 +25,6 @@ export default class RouteGroupRegistrar extends RouteRegistrar
 
     registerRoute(route: Route) : void
     {
-        this.repository.register(route.name, route.method, route.url.toString(), route.extra)
+        this.repository.register(route.name, route.method, route.uri.toString(), route.extra)
     }
 }

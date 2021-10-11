@@ -1,11 +1,11 @@
-export default class UrlParameterBindingError extends Error
+export default class UriParameterSyntaxError extends Error
 {
     readonly previous?: Error
 
     constructor(message: string, previous?: Error)
     {
         super(message)
-        Object.setPrototypeOf(this, UrlParameterBindingError.prototype);
+        Object.setPrototypeOf(this, UriParameterSyntaxError.prototype);
         this.previous = previous
     }
 }

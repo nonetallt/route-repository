@@ -1,20 +1,20 @@
 import ConfigurationInterface from '../contract/RouteRegistrarConfigurationInterface'
-import UrlConfiguration from './UrlConfiguration'
-import UrlConfigurationInterface from '../contract/UrlConfigurationInterface'
-import BaseUrlConfiguration from './BaseUrlConfiguration'
-import BaseUrlConfigurationInterface from '../contract/BaseUrlConfigurationInterface'
+import UriConfiguration from './UriConfiguration'
+import UriConfigurationInterface from '../contract/UriConfigurationInterface'
+import BaseUriConfiguration from './BaseUriConfiguration'
+import BaseUriConfigurationInterface from '../contract/BaseUriConfigurationInterface'
 
 export default class RouteRegistrarConfiguration implements ConfigurationInterface
 {
     readonly extra: object
-    readonly urls: UrlConfigurationInterface
-    readonly baseUri: BaseUrlConfigurationInterface
+    readonly uris: UriConfigurationInterface
+    readonly baseUri: BaseUriConfigurationInterface
 
     constructor(config: ConfigurationInterface = {})
     {
         this.extra = {}
-        this.urls = new UrlConfiguration()
-        this.baseUri = new BaseUrlConfiguration()
+        this.uris = new UriConfiguration()
+        this.baseUri = new BaseUriConfiguration()
 
         Object.assign(this, config);
     }

@@ -1,4 +1,4 @@
-export default class UrlParameter
+export default class UriParameter
 {
     readonly name: string
     readonly required: boolean
