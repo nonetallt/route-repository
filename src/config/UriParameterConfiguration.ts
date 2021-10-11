@@ -10,7 +10,7 @@ export default class UriParameterConfiguration implements ConfigurationInterface
     constructor(config : ConfigurationInterface = {})
     {
         this.acceptWhitespace = false
-        this.encodeUrlParameters = true
+        this.encodeUriParameters = true
         this.encodeGetParameters = true
 
         this.typeConversionFunction = (parameterValue: any) => {
