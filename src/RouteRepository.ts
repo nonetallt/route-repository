@@ -26,6 +26,8 @@ export default class RouteRepository extends RouteRegistrar
     /**
      * Register a new route using a route object
      *
+     * @throws RegistrationError
+     *
      */
     protected registerRoute(route: Route) : void
     {

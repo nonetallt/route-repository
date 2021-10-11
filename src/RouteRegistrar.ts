@@ -21,11 +21,15 @@ export default abstract class RouteRegistrar
     /**
      * Register a new route using a route object
      *
+     * @throws RegistrationError
+     *
      */
     protected abstract registerRoute(route: Route) : void
 
     /**
      * Create and register a new route from parameters
+     *
+     * @throws RegistrationError
      *
      */
     register(name: string, method: RequestMethodType, uri: string, extra: object = {}) : void
@@ -38,6 +42,8 @@ export default abstract class RouteRegistrar
     /**
      * Register a new get route
      *
+     * @throws RegistrationError
+     *
      */
     get(name: string, uri: string, extra: object = {}) : void
     {
@@ -46,6 +52,8 @@ export default abstract class RouteRegistrar
 
     /**
      * Register a new post route
+     *
+     * @throws RegistrationError
      *
      */
     post(name: string, uri: string, extra: object = {}) : void
@@ -56,6 +64,8 @@ export default abstract class RouteRegistrar
     /**
      * Register a new put route
      *
+     * @throws RegistrationError
+     *
      */
     put(name: string, uri: string, extra: object = {}) : void
     {
@@ -65,6 +75,8 @@ export default abstract class RouteRegistrar
     /**
      * Register a new patch route
      *
+     * @throws RegistrationError
+     *
      */
     patch(name: string, uri: string, extra: object = {}) : void
     {
@@ -73,6 +85,8 @@ export default abstract class RouteRegistrar
 
     /**
      * Register a new delete route
+     *
+     * @throws RegistrationError
      *
      */
     delete(name: string, uri: string, extra: object = {}) : void
