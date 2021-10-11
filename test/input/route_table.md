@@ -1,4 +1,4 @@
-| NAME        | METHOD | URL          |
+| NAME        | METHOD | URI          |
 | ----------- | ------ | ------------ |
 | photos      | GET    | /photos      |
 | albums      | GET    | /albums      |

@@ -13,11 +13,11 @@ describe('Route', () => {
 
     describe('initial state', () => {
 
-        it('url is the one given to constructor', () => {
+        it('uri is the one given to constructor', () => {
 
-            const url = '/foo'
-            const route = new Route('test', 'GET', url)
-            expect(route.url.toString()).toEqual(url)
+            const uri = '/foo'
+            const route = new Route('test', 'GET', uri)
+            expect(route.uri.toString()).toEqual(uri)
         })
     })
 })
