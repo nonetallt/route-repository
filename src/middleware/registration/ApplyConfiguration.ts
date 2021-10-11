@@ -22,12 +22,11 @@ export default class ApplyConfiguration implements RouteRegistrationMiddlewareIn
 
     private updateUri(route: Route) : Uri
     {
-        if(this.configuration.prefix.length > 0) {
-            const uriString = this.configuration.prefix + route.uri.toString()
-            const uriConfig = Object.assign(route.uri.configuration, this.configuration.uris)
-            return new Uri(uriString, uriConfig)
+        if(this.configuration.baseUri.uri === null) {
+            return route.uri
         }
 
-        return route.uri
+        const uriConfig = Object.assign(route.uri.configuration, this.configuration.uris)
+        return new Uri(route.uri.components, uriConfig, this.configuration.baseUri)
     }
 }
