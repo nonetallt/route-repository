@@ -3,6 +3,7 @@ import UriComponent from './UriComponent'
 import UriSyntaxError from './error/UriSyntaxError'
 import BaseUriConfiguration from './config/BaseUriConfiguration'
 import BaseUriConfigurationInterface from './contract/BaseUriConfigurationInterface'
+import QueryParameterCollection from './QueryParameterCollection'
 
 const parseRegex = new RegExp(/^((?<scheme>https?):\/\/)?((?<userinfo>(?<username>[^:]+):(?<password>[^@]+))?@)?(?<host>[^\/?#:]+)?(:(?<port>[0-9]+))?(\/(?<path>[^?#]+))?(\?(?<query>[^#]+))?(#(?<fragment>.+))?/)
 
@@ -64,35 +65,52 @@ export default class UriBuilder extends Map<UriComponent, string>
         return uri
     }
 
-    private applyBaseUri(baseConfig: BaseUriConfiguration)
+
+
+    private applyBaseUri(config: BaseUriConfiguration)
     {
-        /* TODO */
         if(! this.has(UriComponent.Scheme)) {
+
+            const baseComponents = [
+                UriComponent.Scheme,
+                UriComponent.Userinfo,
+                UriComponent.Username,
+                UriComponent.Password,
+                UriComponent.Host,
+                UriComponent.Port
+            ]
+
+            baseComponents.forEach(component => {
+                const baseValue = config.uri.getComponent(component)
+
+                if(! this.has(component) && baseValue !== null) {
+                    const componentValue = config.uri.getComponent(component)
+
+                    if(componentValue !== null) {
+                        this.set(component, componentValue)
+                    }
+                }
+            })
         }
 
-        const baseComponents = [
-            UriComponent.Scheme,
-            UriComponent.Userinfo,
-            UriComponent.Username,
-            UriComponent.Password,
-            UriComponent.Host,
-            UriComponent.Port
-        ]
+        if(config.uri.hasComponent(UriComponent.Path)) {
+            const basePath = config.uri.getComponent(UriComponent.Path) ?? ''
+            const uriPath = this.get(UriComponent.Path) ?? ''
+            this.set(UriComponent.Path, basePath + uriPath)
+        }
 
-        baseComponents.forEach(component => {
-            const baseValue = baseConfig.uri.getComponent(component)
+        let query = config.uri.queryParameters
 
-            if(! this.has(component) && baseValue !== null) {
-                const componentValue = baseConfig.uri.getComponent(component)
+        if(config.mergeQuery && query !== null) {
 
-                if(componentValue !== null) {
-                    this.set(component, componentValue)
-                }
+            const uriQueryString = this.get(UriComponent.Query)
+
+            if(uriQueryString !== null) {
+                query = query.merge(new QueryParameterCollection(uriQueryString))
             }
-        })
 
-        /* TODO merge path, merge query (depending on config arg) */
-        /* if(baseConfig.mergeBasePath) */
+            this.set(UriComponent.Query, query.toString())
+        }
     }
 
     /**

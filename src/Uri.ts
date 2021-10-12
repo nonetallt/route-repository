@@ -5,6 +5,8 @@ import UriComponent from './UriComponent'
 import UriSyntaxError from './error/UriSyntaxError'
 import UriBuilder from './UriBuilder'
 import BaseUriConfigurationInterface from './contract/BaseUriConfigurationInterface'
+import UriParameterBinderConfigurationInterface from './contract/UriParameterBinderConfigurationInterface'
+import QueryParameterCollection from './QueryParameterCollection'
 
 export default class Uri
 {
@@ -139,21 +141,9 @@ export default class Uri
      * Get query parameters
      *
      */
-    get queryParameters() : Map<string, string> | null
+    get queryParameters() : QueryParameterCollection
     {
-        const params = new Map<string, string>()
-        const query = this.getComponent(UriComponent.Query)
-
-        if(query === null) {
-            return null
-        }
-
-        query.split('&').forEach(keyValuePair => {
-            const [key, value] = keyValuePair.split('=')
-            params.set(key, decodeURIComponent(value))
-        })
-
-        return params
+        return new QueryParameterCollection(this.queryString)
     }
 
     /**
@@ -172,6 +162,21 @@ export default class Uri
     get components() : Map<UriComponent, string>
     {
         return this.builder
+    }
+
+    /**
+     * Bind given values as uri parameters
+     *
+     * @throws UriParameterBindingError
+     *
+     */
+    bindParameters(values : any, config: UriParameterBinderConfigurationInterface | null = null) : string
+    {
+        if(config !== null) {
+            return this.binder.bind(values, config)
+        }
+
+        return this.binder.bind(values)
     }
 
     /**

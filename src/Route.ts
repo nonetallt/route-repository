@@ -12,7 +12,7 @@ export default class Route
     {
         this.name = name
         this.method = method
-        this.uri = typeof uri === 'string' ? new Uri(uri) : uri
+        this.uri = uri instanceof Uri ? uri : new Uri(uri)
         this.extra = extra
     }
 }

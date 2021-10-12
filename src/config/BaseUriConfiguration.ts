@@ -5,7 +5,7 @@ import ConfigurationError from '../error/ConfigurationError'
 
 export default class BaseUriConfiguration implements ConfigurationInterface
 {
-    private _uri: Uri
+    private _uri!: Uri
     readonly mergePath: boolean
     readonly mergeQuery: boolean
     readonly defaultScheme: 'http' | 'https' | null
@@ -13,7 +13,6 @@ export default class BaseUriConfiguration implements ConfigurationInterface
 
     constructor(config : ConfigurationInterface)
     {
-        this.uri = config.uri
         this.mergePath = true
         this.mergeQuery = false
         this.defaultScheme = null
@@ -29,21 +28,20 @@ export default class BaseUriConfiguration implements ConfigurationInterface
 
     private set uri(uri: Uri | string)
     {
-        if(typeof uri === 'string') {
+        if(uri instanceof Uri) {
+            this._uri = uri
+            return
+        }
 
-            try {
-                uri = new Uri(uri)
-            }
-            catch(error) {
-                if(! (error instanceof UriSyntaxError)) {
-                    throw error
-                }
-
+        try {
+            this._uri = new Uri(uri)
+        }
+        catch(error) {
+            if(error instanceof UriSyntaxError) {
                 const msg = `Invalid base uri given. See previous error for more details.`
                 throw new ConfigurationError(msg, error)
             }
+            throw error
         }
-
-        this._uri = uri
     }
 }

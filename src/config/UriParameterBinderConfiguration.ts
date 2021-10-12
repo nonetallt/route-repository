@@ -1,8 +1,9 @@
-import ConfigurationInterface from '../contract/UriParameterConfigurationInterface'
+import ConfigurationInterface from '../contract/UriParameterBinderConfigurationInterface'
 
-export default class UriParameterConfiguration implements ConfigurationInterface
+export default class UriParameterBinderConfiguration implements ConfigurationInterface
 {
     readonly acceptWhitespace: boolean
+    readonly bindGetParameters: boolean
     readonly encodeUriParameters: boolean
     readonly encodeGetParameters: boolean
     readonly typeConversionFunction: (parameterValue: any) => string | null
@@ -10,6 +11,7 @@ export default class UriParameterConfiguration implements ConfigurationInterface
     constructor(config : ConfigurationInterface = {})
     {
         this.acceptWhitespace = false
+        this.bindGetParameters = false
         this.encodeUriParameters = true
         this.encodeGetParameters = true
 

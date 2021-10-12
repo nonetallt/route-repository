@@ -3,18 +3,23 @@ import UriParameter from './UriParameter'
 import UriParameterCollection from './UriParameterCollection'
 import UriParameterBindingError from './error/UriParameterBindingError'
 import TypeConversionError from './error/TypeConversionError'
-import UriParameterConfiguration from './config/UriParameterConfiguration'
+import Configuration from './config/UriParameterBinderConfiguration'
+import ConfigurationInterface from './contract/UriParameterBinderConfigurationInterface'
 
+/**
+ * Not part of the external API, use Uri as a wrapper
+ *
+ */
 export default class UriParameterBinder
 {
     private uri: string
     readonly parameters: UriParameterCollection
-    readonly configuration: UriParameterConfiguration
+    readonly configuration: Configuration
 
-    constructor(uri: string, config: UriParameterConfiguration | null = null)
+    constructor(uri: string, config: ConfigurationInterface = {})
     {
         this.uri = uri
-        this.configuration = config === null ? new UriParameterConfiguration() : config
+        this.configuration = new Configuration(config)
         this.parameters = UriParameterCollection.parseFromUri(uri.toString())
     }
 
@@ -24,32 +29,36 @@ export default class UriParameterBinder
      *  @throws UriParameterBindingError
      *
      */
-    bind(values : any, bindGetParameters: boolean = false) : string
+    bind(values : any, config: ConfigurationInterface | null = null) : string
     {
+        const configuration = config !== null ? new Configuration(config) : this.configuration
+
         // Return base uri if there's nothing to bind.
-        if(this.parameters.length === 0 && bindGetParameters === false) {
+        if(this.parameters.length === 0 && configuration.bindGetParameters === false) {
             return this.uri
         }
 
         if(Array.isArray(values)) {
-            return this.bindArray(this.uri, (values as Array<string>));
+            return this.bindArray(this.uri, (values as Array<string>), configuration);
         }
 
         if(typeof values === 'object' && values !== null) {
-            return this.bindObject(this.uri, values, bindGetParameters);
+            return this.bindObject(this.uri, values, configuration);
         }
 
-        return this.bindValue(this.uri, values)
+        return this.bindValue(this.uri, values, configuration)
     }
 
     /**
      * Check if a given object has properties matching all required parameters
      *
      */
-    canBindObject(object: object) : boolean
+    canBindObject(object: object, config: ConfigurationInterface | null = null) : boolean
     {
+        const configuration = config !== null ? new Configuration(config) : this.configuration
+
         try {
-            this.bindObject(this.uri, object)
+            this.bindObject(this.uri, object, configuration)
         }
         catch(error) {
             if(error instanceof UriParameterBindingError) {
@@ -66,19 +75,19 @@ export default class UriParameterBinder
      * Bind each object property to a to the parameter with a matching name.
      *
      */
-    private bindObject(uri: string, object : object, bindGetParameters: boolean = false) : string
+    private bindObject(uri: string, object : object, config: Configuration) : string
     {
         this.parameters.forEach(parameter => {
 
-            uri = this.bindParameter(uri, parameter, (object as any)[parameter.name])
+            uri = this.bindParameter(uri, parameter, (object as any)[parameter.name], config)
 
             // Remove already bound values from the object's keys
             delete (object as any)[parameter.name];
         })
 
         // Bind rest of the parameters as get params if specified
-        if(bindGetParameters) {
-            uri = this.bindGetParameters(uri, object);
+        if(config.bindGetParameters) {
+            uri = this.bindGetParameters(uri, object, config);
         }
 
         return uri
@@ -88,10 +97,10 @@ export default class UriParameterBinder
      * Bind values in given order without caring about keys.
      *
      */
-    private bindArray(uri: string, array: Array<any>) : string
+    private bindArray(uri: string, array: Array<any>, config: Configuration) : string
     {
         this.parameters.forEach((parameter, index) => {
-            uri = this.bindParameter(uri, parameter, array[index])
+            uri = this.bindParameter(uri, parameter, array[index], config)
         })
 
         return uri
@@ -101,7 +110,7 @@ export default class UriParameterBinder
      * Bind a given plain value
      *
      */
-    private bindValue(uri: string, value: any) : string
+    private bindValue(uri: string, value: any, config: Configuration) : string
     {
         const original = value
         const required = this.parameters.getRequired()
@@ -111,14 +120,14 @@ export default class UriParameterBinder
             throw new UriParameterBindingError(msg)
         }
 
-        return this.bindParameter(uri, this.parameters[0], value)
+        return this.bindParameter(uri, this.parameters[0], value, config)
     }
 
     /**
      * Bind given object's properties as key value pairs for GET parameters
      *
      */
-    private bindGetParameters(uri: string, values : object) : string
+    private bindGetParameters(uri: string, values : object, config: Configuration) : string
     {
         for(const [key, value] of Object.entries(values)) {
 
@@ -139,7 +148,7 @@ export default class UriParameterBinder
      * Bind a single value to parameter of the given uri string
      *
      */
-    private bindParameter(uri: string, parameter: string | UriParameter, value: any) : string
+    private bindParameter(uri: string, parameter: string | UriParameter, value: any, config: Configuration) : string
     {
         const uriParameter = typeof parameter === 'string' ? this.parameters.getParameter(parameter) : parameter
 
