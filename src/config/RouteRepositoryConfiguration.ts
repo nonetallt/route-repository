@@ -1,6 +1,5 @@
 import ConfigurationInterface from '../contract/RouteRepositoryConfigurationInterface'
 import RouteRegistrarConfiguration from './RouteRegistrarConfiguration'
-import RouteRegistrarConfigurationInterface from '../contract/RouteRegistrarConfigurationInterface'
 
 export default class RouteRepositoryConfiguration extends RouteRegistrarConfiguration implements ConfigurationInterface
 {

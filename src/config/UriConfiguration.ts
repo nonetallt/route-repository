@@ -1,5 +1,4 @@
 import ConfigurationInterface from '../contract/UriConfigurationInterface'
-import Uri from '../Uri'
 import ParameterInterface from '../contract/UriParameterBinderConfigurationInterface'
 
 export default class UriConfiguration implements ConfigurationInterface
