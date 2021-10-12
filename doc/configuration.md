@@ -2,32 +2,37 @@
 
 ## Hierarchy
 
+```javascript
+{
+    mutable: false,
+    duplicates: false,
+    extra: {},
+    uris: {
+        prependSlash: true,
+        defaultScheme: null,
+        overrideScheme: null,
+        parameters: {
+            acceptWhitespace: false,
+            bindGetParameters: false,
+            encodeUriParameters: true,
+            encodeGetParameters: true,
+            typeConversionFunction: (parameterValue: any) => {
+                return String(parameterValue)
+            }
+        }
+    },
+    baseUri: {
+        uri: null,
+        mergeQuery: false
+    }
+}
 ```
-(RouteRepositoryConfiguration)
-├── mutable
-├── duplicates
-└── registration (RouteRegistrarConfiguration)
-    ├── extra
-    ├── uris (UriConfiguration)
-    │   ├── prependSlash
-    │   ├── removeLeadingSlashes
-    │   ├── removeTrailingSlashes
-    │   └── parameters (UriParameterConfiguration)
-    │       ├── acceptWhitespace
-    │       ├── encodeUriParameters
-    │       ├── encodeGetParameters
-    │       └── typeConversionFunction
-    └── baseUri (BaseUriConfiguration)
-        ├── uri
-        ├── mergePath
-        ├── mergeQuery
-        ├── defaultScheme
-        └── overrideScheme
-```
+
+Note that **mutable** and **duplicates** are not available inside registration groups.
 
 ## RouteRepositoryConfiguration
 
-Configuration of the repository object storing route information.
+Configuration of the repository storing route information.
 
 #### mutable
 
@@ -54,6 +59,20 @@ Configuration of an object that's capable of registering routes.
 - Default: `{}`
 
 Extra defines any abitrary information you want this registrar to pass into each registered Route object.
+
+#### uris
+
+- Type: UriConfigurationInterface
+- Default: `{}`
+
+Configuration applied to each uri registered through this registrar.
+
+#### baseUri
+
+- Type: BaseUriConfigurationInterface
+- Default: `null`
+
+The base uri of each route registered through this registrar.
 
 ## UriConfiguration
 
