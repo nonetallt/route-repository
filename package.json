@@ -34,8 +34,12 @@
     "example": "./example",
     "test": "./test"
   },
+  "dependencies": {
+    "lodash.merge": "^4.6.2"
+  },
   "devDependencies": {
     "@types/jest": "^27.0.1",
+    "@types/lodash.merge": "^4.6.6",
     "cross-env": "^7.0.3",
     "jest": "^27.0.4",
     "laravel-mix": "^6.0.16",
