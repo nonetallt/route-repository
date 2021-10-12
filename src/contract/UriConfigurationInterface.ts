@@ -1,9 +1,9 @@
-import UriParameterConfigurationInterface from './UriParameterConfigurationInterface'
+import UriParameterBinderConfigurationInterface from './UriParameterBinderConfigurationInterface'
 
 export default interface UriConfigurationInterface
 {
     prependSlash?: boolean
-    parameters?: UriParameterConfigurationInterface
+    parameters?: UriParameterBinderConfigurationInterface
     stripLeadingSlashes?: boolean
     stripTrailingSlashes?: boolean
 };
