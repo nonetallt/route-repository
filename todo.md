@@ -1,10 +1,7 @@
-test that mergeQuery prioritizes uri params over base params
-
-- fix base uri config
-
+- test that mergeQuery prioritizes uri params over base params
+- make sure that object assign in RouteRepositoryConfiguration does not override registrar set values
 - tests have todos
 - merge group registrar config from original config (repo's registrar config) so that non-overridden values are as default
-
 - allow user to supply configuration as argument when binding parameters, merge / override configs
 
 - Configuration proxies (using setters and getters)
@@ -14,8 +11,8 @@ test that mergeQuery prioritizes uri params over base params
     - add defaultScheme option? defaulting to https (relevant when slash is not prepended)
 
 
-check if route parameter encoding works
-don't trim if route params can be whitespace strings
+- check if route parameter encoding works
+- don't trim if route params can be whitespace strings
 
 - uri configuration
     - base uri (test and more options: merge path, merge query)
