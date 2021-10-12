@@ -1,17 +1,18 @@
 import ConfigurationInterface from '../contract/RouteRepositoryConfigurationInterface'
 import RouteRegistrarConfiguration from './RouteRegistrarConfiguration'
+import RouteRegistrarConfigurationInterface from '../contract/RouteRegistrarConfigurationInterface'
 
-export default class RouteRepositoryConfiguration implements ConfigurationInterface
+export default class RouteRepositoryConfiguration extends RouteRegistrarConfiguration implements ConfigurationInterface
 {
     readonly mutable: boolean
     readonly duplicates: boolean
-    readonly registration: RouteRegistrarConfiguration
 
     constructor(config : ConfigurationInterface = {})
     {
-        this.mutable = false;
-        this.duplicates = false;
-        this.registration = new RouteRegistrarConfiguration()
+        super(config)
+
+        this.mutable = false
+        this.duplicates = false
 
         Object.assign(this, config);
     }

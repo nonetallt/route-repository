@@ -12,24 +12,25 @@ export default class RouteRepository extends RouteRegistrar
 {
     private routes: Map<string, Route>
     private signatures: Map<string, string>
-    private configuration: Configuration
+    protected configuration: Configuration
 
     constructor(config : ConfigurationInterface = {})
     {
         const configuration = new Configuration(config)
-        super(configuration.registration)
+
+        super(configuration)
         this.routes = new Map()
         this.signatures = new Map()
         this.configuration = configuration
     }
 
     /**
-     * Register a new route using a route object
+     * Stores a route. Note that this does not apply any registrar configuration or middlewares associated with registration.
      *
      * @throws RegistrationError
      *
      */
-    protected registerRoute(route: Route) : void
+    storeRoute(route: Route) : void
     {
         const oldRoute = this.routes.get(route.name);
 

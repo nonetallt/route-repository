@@ -4,6 +4,7 @@ import Route from './Route'
 import Uri from './Uri'
 import Configuration from './config/RouteRegistrarConfiguration'
 import ConfigurationInterface from './contract/RouteRegistrarConfigurationInterface'
+import RequestMethodType from './RequestMethodType'
 
 /**
  * This class acts as a container for temporary configuration that can be
@@ -13,18 +14,15 @@ import ConfigurationInterface from './contract/RouteRegistrarConfigurationInterf
 export default class RouteGroupRegistrar extends RouteRegistrar
 {
     private repository: RouteRepository
-    private configuration: Configuration
 
     constructor(repository: RouteRepository, config: ConfigurationInterface = {})
     {
-        const configuration = new Configuration(config)
-        super(configuration)
+        super(new Configuration(config))
         this.repository = repository
-        this.configuration = configuration
     }
 
-    registerRoute(route: Route) : void
+    storeRoute(route: Route) : void
     {
-        this.repository.register(route.name, route.method, route.uri.toString(), route.extra)
+        this.repository.storeRoute(route)
     }
 }

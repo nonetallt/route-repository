@@ -96,7 +96,7 @@ export default class UriBuilder extends Map<UriComponent, string>
         if(config.uri.hasComponent(UriComponent.Path)) {
             const basePath = config.uri.getComponent(UriComponent.Path) ?? ''
             const uriPath = this.get(UriComponent.Path) ?? ''
-            this.set(UriComponent.Path, basePath + uriPath)
+            this.set(UriComponent.Path, basePath + '/' + uriPath)
         }
 
         let query = config.uri.queryParameters

@@ -1,8 +1,10 @@
+import Uri from './Uri'
 import Route from './Route'
 import RequestMethodType from './RequestMethodType'
 import RouteRegistrationMiddlewareInterface from './contract/RouteRegistrationMiddlewareInterface'
 import Configuration from './config/RouteRegistrarConfiguration'
-import ApplyConfiguration from './middleware/registration/ApplyConfiguration'
+import ConfigurationInterface from './contract/RouteRegistrarConfigurationInterface'
+import merge from 'lodash.merge'
 
 /**
  * Describes a class that can register routes
@@ -10,21 +12,22 @@ import ApplyConfiguration from './middleware/registration/ApplyConfiguration'
  */
 export default abstract class RouteRegistrar
 {
+    protected configuration: Configuration
     readonly registrationMiddleware: Array<RouteRegistrationMiddlewareInterface>
 
     constructor(config: Configuration)
     {
+        this.configuration = new Configuration(config)
         this.registrationMiddleware = new Array<RouteRegistrationMiddlewareInterface>()
-        this.registrationMiddleware.push(new ApplyConfiguration(config))
     }
 
     /**
-     * Register a new route using a route object
+     * Register a new route using a route object. This method has the responsibility of actually storing the route.
      *
      * @throws RegistrationError
      *
      */
-    protected abstract registerRoute(route: Route) : void
+    abstract storeRoute(route: Route) : void
 
     /**
      * Create and register a new route from parameters
@@ -34,9 +37,10 @@ export default abstract class RouteRegistrar
      */
     register(name: string, method: RequestMethodType, uri: string, extra: object = {}) : void
     {
-        let route = new Route(name, method, uri, extra)
-        route = this.applyRegistrationMiddleware(route)
-        return this.registerRoute(route)
+        const uriObj = new Uri(uri, this.configuration.uris, this.configuration.baseUri)
+        let route = new Route(name, method, uriObj, merge(this.configuration.extra, extra))
+
+        this.storeRoute(this.applyRegistrationMiddleware(route))
     }
 
     /**
