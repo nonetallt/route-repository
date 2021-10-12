@@ -3,24 +3,26 @@
 ## Hierarchy
 
 ```
-RouteRepositoryConfiguration/
+(RouteRepositoryConfiguration)
 ├── mutable
 ├── duplicates
-└── registration/
-    └── RouteRegistrarConfiguration/
-        ├── extra
-        └── urls/
-            └── UrlConfiguration/
-                ├── prependSlash
-                ├── removeLeadingSlashes
-                ├── removeTrailingSlashes
-                ├── baseUrl
-                └── parameters/
-                    └── UrlParameterConfiguration/
-                        ├── typeConversionFunction
-                        ├── encodeUrlParameters
-                        ├── encodeGetParameters
-                        └── acceptWhitespace
+└── registration (RouteRegistrarConfiguration)
+    ├── extra
+    ├── uris (UriConfiguration)
+    │   ├── prependSlash
+    │   ├── removeLeadingSlashes
+    │   ├── removeTrailingSlashes
+    │   └── parameters (UriParameterConfiguration)
+    │       ├── acceptWhitespace
+    │       ├── encodeUriParameters
+    │       ├── encodeGetParameters
+    │       └── typeConversionFunction
+    └── baseUri (BaseUriConfiguration)
+        ├── uri
+        ├── mergePath
+        ├── mergeQuery
+        ├── defaultScheme
+        └── overrideScheme
 ```
 
 ## RouteRepositoryConfiguration
@@ -53,29 +55,54 @@ Configuration of an object that's capable of registering routes.
 
 Extra defines any abitrary information you want this registrar to pass into each registered Route object.
 
-## UrlConfiguration
+## UriConfiguration
 
-Configuration of an url. Applies to all urls of the given registrar.
+Configuration of an uri. Applies to all uris of the given registrar.
 
 #### prependSlash
 
 - Type: boolean
 - Default: `true`
 
-Whether the url should be preceded by a leading `/` character. This determines if the url will be considered as relative or absolute when it does not begin with a protocol (either `http://` or `https://`).
+Whether the uri should be preceded by a leading `/` character. This determines if the uri will be considered as relative or absolute when it does not begin with a protocol (either `http://` or `https://`).
 
-#### removeTrailingSlashes
+#### defaultScheme
 
-- Type: boolean
-- Default: `true`
+- Type: `'http'` | `'https'` | `null`
+- Default: `null`
 
-Whether trailing slashes should be removed from the url. This might be relevant in cases where the url has multiple optional trailing parameters that can be left empty.
+Determines the default uri scheme that should be used if not explicitly set.
 
-#### baseUrl
+#### overrideScheme
+
+- Type: `'http'` | `'https'` | `null`
+- Default: `null`
+
+Determines the uri scheme that should replace every explictly set uri scheme.
+
+#### baseUri
 
 - Type: string
 - Default: `''`
 
-## UrlParameterConfiguration
+## UriParameterConfiguration
 
-Configuration of url parameters. Applies to all parameters of a given url.
+Configuration of uri parameters. Applies to all parameters of a given uri.
+
+## BaseUriConfiguration
+
+Configuration of the base uri of a given route registrar.
+
+#### uri
+
+- Type: string | Uri
+- **Required**
+
+The base uri.
+
+#### mergeQuery
+
+- Type: boolean
+- Default: `false`
+
+Determines whether get parameters of the base uri should be added to registered uris.
