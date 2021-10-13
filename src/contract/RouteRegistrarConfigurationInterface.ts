@@ -1,9 +1,8 @@
 import UriConfigurationInterface from './UriConfigurationInterface'
-import BaseUriConfigurationInterface from './BaseUriConfigurationInterface'
+import UriBuilderConfigurationInterface from './UriBuilderConfigurationInterface'
 
-export default interface RouteRegistrarConfigurationInterface
+export default interface RouteRegistrarConfigurationInterface extends UriBuilderConfigurationInterface
 {
     extra?: object
     uris?: UriConfigurationInterface
-    baseUri?: BaseUriConfigurationInterface | null
 }

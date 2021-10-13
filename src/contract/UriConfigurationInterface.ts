@@ -3,7 +3,7 @@ import UriParameterBinderConfigurationInterface from './UriParameterBinderConfig
 export default interface UriConfigurationInterface
 {
     prependSlash?: boolean
+    defaultScheme?: 'http' | 'https' | null
+    overrideScheme?: 'http' | 'https' | null
     parameters?: UriParameterBinderConfigurationInterface
-    stripLeadingSlashes?: boolean
-    stripTrailingSlashes?: boolean
 };

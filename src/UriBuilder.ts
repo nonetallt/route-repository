@@ -1,8 +1,8 @@
 import Uri from './Uri'
 import UriComponent from './UriComponent'
 import UriSyntaxError from './error/UriSyntaxError'
-import BaseUriConfiguration from './config/BaseUriConfiguration'
-import BaseUriConfigurationInterface from './contract/BaseUriConfigurationInterface'
+import Configuration from './config/UriBuilderConfiguration'
+import ConfigurationInterface from './contract/UriBuilderConfigurationInterface'
 import QueryParameterCollection from './QueryParameterCollection'
 
 const parseRegex = new RegExp(/^((?<scheme>https?):\/\/)?((?<userinfo>(?<username>[^:]+):(?<password>[^@]+))?@)?(?<host>[^\/?#:]+)?(:(?<port>[0-9]+))?(\/(?<path>[^?#]+))?(\?(?<query>[^#]+))?(#(?<fragment>.+))?/)
@@ -13,20 +13,20 @@ const parseRegex = new RegExp(/^((?<scheme>https?):\/\/)?((?<userinfo>(?<usernam
  */
 export default class UriBuilder extends Map<UriComponent, string>
 {
-    constructor(components: Map<UriComponent, string>, baseConfig: BaseUriConfigurationInterface | null = null)
+    private configuration: Configuration
+
+    constructor(components: Map<UriComponent, string>, config: ConfigurationInterface = {})
     {
         super(components)
-
-        if(baseConfig !== null) {
-            this.applyBaseUri(new BaseUriConfiguration(baseConfig))
-        }
+        this.configuration = new Configuration(config)
+        this.applyBaseUri()
     }
 
     /**
      * @throws UriSyntaxError
      *
      */
-    static fromUriString(uri: string, baseConfig: BaseUriConfigurationInterface | null = null) : UriBuilder
+    static fromUriString(uri: string, config: ConfigurationInterface = {}) : UriBuilder
     {
         const match = uri.match(parseRegex)
 
@@ -47,7 +47,7 @@ export default class UriBuilder extends Map<UriComponent, string>
             }
         })
 
-        return new UriBuilder(parsed, baseConfig)
+        return new UriBuilder(parsed, config)
     }
 
     build() : string
@@ -67,8 +67,14 @@ export default class UriBuilder extends Map<UriComponent, string>
 
 
 
-    private applyBaseUri(config: BaseUriConfiguration)
+    private applyBaseUri() : void
     {
+        if(this.configuration.baseUri === null) {
+            return
+        }
+
+        const baseUri = this.configuration.baseUri
+
         if(! this.has(UriComponent.Scheme)) {
 
             const baseComponents = [
@@ -81,10 +87,10 @@ export default class UriBuilder extends Map<UriComponent, string>
             ]
 
             baseComponents.forEach(component => {
-                const baseValue = config.uri.getComponent(component)
+                const baseValue = baseUri.getComponent(component)
 
                 if(! this.has(component) && baseValue !== null) {
-                    const componentValue = config.uri.getComponent(component)
+                    const componentValue = baseUri.getComponent(component)
 
                     if(componentValue !== null) {
                         this.set(component, componentValue)
@@ -93,15 +99,15 @@ export default class UriBuilder extends Map<UriComponent, string>
             })
         }
 
-        if(config.uri.hasComponent(UriComponent.Path)) {
-            const basePath = config.uri.getComponent(UriComponent.Path) ?? ''
+        if(baseUri.hasComponent(UriComponent.Path)) {
+            const basePath = baseUri.getComponent(UriComponent.Path) ?? ''
             const uriPath = this.get(UriComponent.Path) ?? ''
             this.set(UriComponent.Path, basePath + '/' + uriPath)
         }
 
-        let query = config.uri.queryParameters
+        let query = baseUri.queryParameters
 
-        if(config.mergeQuery && query !== null) {
+        if(this.configuration.mergeQuery && query !== null) {
 
             const uriQueryString = this.get(UriComponent.Query)
 

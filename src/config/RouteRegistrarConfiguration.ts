@@ -1,6 +1,6 @@
 import ConfigurationInterface from '../contract/RouteRegistrarConfigurationInterface'
 import UriConfigurationInterface from '../contract/UriConfigurationInterface'
-import BaseUriConfigurationInterface from '../contract/BaseUriConfigurationInterface'
+import UriBuilderConfigurationInterface from '../contract/UriBuilderConfigurationInterface'
 
 export default class RouteRegistrarConfiguration implements ConfigurationInterface
 {
@@ -11,13 +11,18 @@ export default class RouteRegistrarConfiguration implements ConfigurationInterfa
      * The reason this defaults to null instead of {} like other interfaces is because it has required properties.
      *
      */
-    readonly baseUri: BaseUriConfigurationInterface | null
+    readonly uriBuilder: UriBuilderConfigurationInterface
 
     constructor(config: ConfigurationInterface = {})
     {
         this.extra = {}
         this.uris = {}
-        this.baseUri = null
+
+        // Proxy values from the configuration interface
+        this.uriBuilder = {
+            baseUri: config.baseUri ?? null,
+            mergeQuery: config.mergeQuery
+        }
 
         Object.assign(this, config);
     }

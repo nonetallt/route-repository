@@ -4,16 +4,16 @@ import ParameterInterface from '../contract/UriParameterBinderConfigurationInter
 export default class UriConfiguration implements ConfigurationInterface
 {
     readonly prependSlash: boolean
+    readonly defaultScheme: 'http' | 'https' | null
+    readonly overrideScheme: 'http' | 'https' | null
     readonly parameters: ParameterInterface
-    readonly stripLeadingSlashes: boolean
-    readonly stripTrailingSlashes: boolean
 
     constructor(config : ConfigurationInterface = {})
     {
         this.prependSlash = false
+        this.defaultScheme = null
+        this.overrideScheme = null
         this.parameters = {}
-        this.stripLeadingSlashes = false
-        this.stripTrailingSlashes = false
 
         Object.assign(this, config);
     }

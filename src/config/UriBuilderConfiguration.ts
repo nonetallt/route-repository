@@ -1,40 +1,34 @@
-import ConfigurationInterface from '../contract/BaseUriConfigurationInterface'
+import ConfigurationInterface from '../contract/UriBuilderConfigurationInterface'
 import Uri from '../Uri'
 import UriSyntaxError from '../error/UriSyntaxError'
 import ConfigurationError from '../error/ConfigurationError'
 
-export default class BaseUriConfiguration implements ConfigurationInterface
+export default class UriBuilderConfiguration implements ConfigurationInterface
 {
-    private _uri!: Uri
-    readonly mergePath: boolean
+    private _baseUri: Uri | null
     readonly mergeQuery: boolean
-    readonly defaultScheme: 'http' | 'https' | null
-    readonly overrideScheme: boolean
 
     constructor(config : ConfigurationInterface)
     {
-        this.mergePath = true
+        this._baseUri = null
         this.mergeQuery = false
-        this.defaultScheme = null
-        this.overrideScheme = false
-
         Object.assign(this, config);
     }
 
-    public get uri() : Uri
+    public get baseUri() : Uri | null
     {
-        return this._uri
+        return this._baseUri
     }
 
-    private set uri(uri: Uri | string)
+    private set baseUri(uri: Uri | string | null)
     {
-        if(uri instanceof Uri) {
-            this._uri = uri
+        if(typeof uri !== 'string') {
+            this._baseUri = uri
             return
         }
 
         try {
-            this._uri = new Uri(uri)
+            this._baseUri = new Uri(uri)
         }
         catch(error) {
             if(error instanceof UriSyntaxError) {

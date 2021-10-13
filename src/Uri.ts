@@ -4,7 +4,7 @@ import UriParameterBinder from './UriParameterBinder'
 import UriComponent from './UriComponent'
 import UriSyntaxError from './error/UriSyntaxError'
 import UriBuilder from './UriBuilder'
-import BaseUriConfigurationInterface from './contract/BaseUriConfigurationInterface'
+import UriBuilderConfigurationInterface from './contract/UriBuilderConfigurationInterface'
 import UriParameterBinderConfigurationInterface from './contract/UriParameterBinderConfigurationInterface'
 import QueryParameterCollection from './QueryParameterCollection'
 
@@ -20,7 +20,7 @@ export default class Uri
      *  @throws UriSyntaxError
      *
      */
-    constructor(uri: string | Map<UriComponent, string>, config: ConfigurationInterface = {}, baseUri: BaseUriConfigurationInterface | null = null)
+    constructor(uri: string | Map<UriComponent, string>, config: ConfigurationInterface = {}, builderConfig: UriBuilderConfigurationInterface = {})
     {
         if(uri instanceof Map && (! uri.has(UriComponent.Scheme) && ! uri.has(UriComponent.Host)) && ! uri.has(UriComponent.Path)) {
             const msg = `Uri constructed from components should have at least either scheme and host or path.`
@@ -28,7 +28,7 @@ export default class Uri
         }
 
         this.configuration = new Configuration(config)
-        this.builder = uri instanceof Map ? new UriBuilder(uri, baseUri) : UriBuilder.fromUriString(uri, baseUri)
+        this.builder = uri instanceof Map ? new UriBuilder(uri, builderConfig) : UriBuilder.fromUriString(uri, builderConfig)
         this.binder = new UriParameterBinder(this.toString(), this.configuration.parameters)
     }
 

@@ -6,6 +6,8 @@
 {
     mutable: false,
     duplicates: false,
+    baseUri: null,
+    mergeQuery: false,
     extra: {},
     uris: {
         prependSlash: true,
@@ -20,10 +22,6 @@
                 return String(parameterValue)
             }
         }
-    },
-    baseUri: {
-        uri: null,
-        mergeQuery: false
     }
 }
 ```
