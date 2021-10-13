@@ -201,12 +201,12 @@ describe('Uri', () => {
 
         it('returns query when uri is relative', () => {
             const uri = new Uri('/foo/bar?foo=1&bar=2')
-            expect(uri.queryParameters.toString()).toEqual('foo=1&bar=2')
+            expect(uri.queryParameters?.toString()).toEqual('foo=1&bar=2')
         })
 
         it('returns query when uri is absolute', () => {
             const uri = new Uri('http://example.com/foo/bar?foo=1&bar=2')
-            expect(uri.queryParameters.toString()).toEqual('foo=1&bar=2')
+            expect(uri.queryParameters?.toString()).toEqual('foo=1&bar=2')
         })
     })
 

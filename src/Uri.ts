@@ -141,9 +141,13 @@ export default class Uri
      * Get query parameters
      *
      */
-    get queryParameters() : QueryParameterCollection
+    get queryParameters() : QueryParameterCollection | null
     {
-        return new QueryParameterCollection(this.queryString)
+        if(this.queryString === null) {
+            return null
+        }
+
+        return QueryParameterCollection.fromQueryString(this.queryString)
     }
 
     /**

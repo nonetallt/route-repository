@@ -1,4 +1,3 @@
-- test that mergeQuery prioritizes uri params over base params
 - make sure that object assign in RouteRepositoryConfiguration does not override registrar set values
 - tests have todos
 - merge group registrar config from original config (repo's registrar config) so that non-overridden values are as default

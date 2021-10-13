@@ -111,8 +111,8 @@ export default class UriBuilder extends Map<UriComponent, string>
 
             const uriQueryString = this.get(UriComponent.Query)
 
-            if(uriQueryString !== null) {
-                query = query.merge(new QueryParameterCollection(uriQueryString))
+            if(uriQueryString !== undefined) {
+                query = query.merge(QueryParameterCollection.fromQueryString(uriQueryString))
             }
 
             this.set(UriComponent.Query, query.toString())
