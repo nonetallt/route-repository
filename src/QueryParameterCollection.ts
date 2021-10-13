@@ -1,15 +1,15 @@
 export default class QueryParameterCollection extends Map<string, string>
 {
-    constructor(query: string | null = null)
+    static fromQueryString(query: string) : QueryParameterCollection
     {
-        super()
+        const params = new QueryParameterCollection()
 
-        if(query !== null) {
-            query.split('&').forEach(keyValuePair => {
-                const [key, value] = keyValuePair.split('=')
-                this.set(key, value)
-            })
-        }
+        query.split('&').forEach(keyValuePair => {
+            const [key, value] = keyValuePair.split('=')
+            params.set(key, value)
+        })
+
+        return params
     }
 
     toString() : string
@@ -34,14 +34,14 @@ export default class QueryParameterCollection extends Map<string, string>
 
     merge(...collections: Array<Map<string, string>>) : QueryParameterCollection
     {
-        const collection = new QueryParameterCollection()
+        const newCollection = new QueryParameterCollection(this)
 
         collections.forEach(collection => {
             collection.forEach((value, name) => {
-                collection.set(name, value)
+                newCollection.set(name, value)
             })
         })
 
-        return collection
+        return newCollection
     }
 }
