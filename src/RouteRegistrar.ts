@@ -37,7 +37,7 @@ export default abstract class RouteRegistrar
      */
     register(name: string, method: RequestMethodType, uri: string, extra: object = {}) : void
     {
-        const uriObj = new Uri(uri, this.configuration.uris, this.configuration.uriBuilder)
+        const uriObj = new Uri(uri, this.configuration.uris)
         let route = new Route(name, method, uriObj, merge(this.configuration.extra, extra))
 
         this.storeRoute(this.applyRegistrationMiddleware(route))

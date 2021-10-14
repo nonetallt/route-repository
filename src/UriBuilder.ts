@@ -19,7 +19,21 @@ export default class UriBuilder extends Map<UriComponent, string>
     {
         super(components)
         this.configuration = new Configuration(config)
-        this.applyBaseUri()
+
+        if(this.configuration.baseUri !== null) {
+            this.applyBaseUri(this.configuration.baseUri)
+        }
+
+        // Set uri scheme if missing or overwritten
+        if(this.has(UriComponent.Host)) {
+
+            if(this.configuration.overrideScheme !== null) {
+                this.set(UriComponent.Scheme, this.configuration.overrideScheme)
+            }
+            else if(! this.has(UriComponent.Scheme) && this.configuration.defaultScheme !== null) {
+                this.set(UriComponent.Scheme, this.configuration.defaultScheme)
+            }
+        }
     }
 
     /**
@@ -65,46 +79,34 @@ export default class UriBuilder extends Map<UriComponent, string>
         return uri
     }
 
-
-
-    private applyBaseUri() : void
+    private applyBaseUri(baseUri : Uri) : void
     {
-        if(this.configuration.baseUri === null) {
-            return
-        }
+        // Set base uri authority
+        if(! this.get(UriComponent.Host)) {
 
-        const baseUri = this.configuration.baseUri
-
-        if(! this.has(UriComponent.Scheme)) {
-
-            const baseComponents = [
+            const authorityComponents = [
                 UriComponent.Scheme,
                 UriComponent.Userinfo,
-                UriComponent.Username,
-                UriComponent.Password,
                 UriComponent.Host,
                 UriComponent.Port
             ]
 
-            baseComponents.forEach(component => {
-                const baseValue = baseUri.getComponent(component)
-
-                if(! this.has(component) && baseValue !== null) {
-                    const componentValue = baseUri.getComponent(component)
-
-                    if(componentValue !== null) {
-                        this.set(component, componentValue)
-                    }
+            authorityComponents.forEach(component => {
+                const value = baseUri.getComponent(component)
+                if(value !== null) {
+                    this.set(component, value)
                 }
             })
         }
 
+        // Set base uri path
         if(baseUri.hasComponent(UriComponent.Path)) {
             const basePath = baseUri.getComponent(UriComponent.Path) ?? ''
             const uriPath = this.get(UriComponent.Path) ?? ''
             this.set(UriComponent.Path, basePath + '/' + uriPath)
         }
 
+        // Set base uri query
         let query = baseUri.queryParameters
 
         if(this.configuration.mergeQuery && query !== null) {

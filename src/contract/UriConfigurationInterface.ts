@@ -1,9 +1,8 @@
 import UriParameterBinderConfigurationInterface from './UriParameterBinderConfigurationInterface'
+import UriBuilderConfigurationInterface from './UriBuilderConfigurationInterface'
 
-export default interface UriConfigurationInterface
+export default interface UriConfigurationInterface extends UriBuilderConfigurationInterface
 {
     prependSlash?: boolean
-    defaultScheme?: 'http' | 'https' | null
-    overrideScheme?: 'http' | 'https' | null
     parameters?: UriParameterBinderConfigurationInterface
 };

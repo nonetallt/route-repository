@@ -6,11 +6,11 @@
 {
     mutable: false,
     duplicates: false,
-    baseUri: null,
-    mergeQuery: false,
     extra: {},
     uris: {
         prependSlash: true,
+        baseUri: null,
+        mergeQuery: false,
         defaultScheme: null,
         overrideScheme: null,
         parameters: {

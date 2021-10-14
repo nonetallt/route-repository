@@ -7,11 +7,16 @@ export default class UriBuilderConfiguration implements ConfigurationInterface
 {
     private _baseUri: Uri | null
     readonly mergeQuery: boolean
+    readonly defaultScheme: 'http' | 'https' | null
+    readonly overrideScheme: 'http' | 'https' | null
 
     constructor(config : ConfigurationInterface)
     {
         this._baseUri = null
         this.mergeQuery = false
+        this.defaultScheme = null
+        this.overrideScheme = null
+
         Object.assign(this, config);
     }
 

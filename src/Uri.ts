@@ -4,7 +4,6 @@ import UriParameterBinder from './UriParameterBinder'
 import UriComponent from './UriComponent'
 import UriSyntaxError from './error/UriSyntaxError'
 import UriBuilder from './UriBuilder'
-import UriBuilderConfigurationInterface from './contract/UriBuilderConfigurationInterface'
 import UriParameterBinderConfigurationInterface from './contract/UriParameterBinderConfigurationInterface'
 import QueryParameterCollection from './QueryParameterCollection'
 
@@ -20,7 +19,7 @@ export default class Uri
      *  @throws UriSyntaxError
      *
      */
-    constructor(uri: string | Map<UriComponent, string>, config: ConfigurationInterface = {}, builderConfig: UriBuilderConfigurationInterface = {})
+    constructor(uri: string | Map<UriComponent, string>, config: ConfigurationInterface = {})
     {
         if(uri instanceof Map && (! uri.has(UriComponent.Scheme) && ! uri.has(UriComponent.Host)) && ! uri.has(UriComponent.Path)) {
             const msg = `Uri constructed from components should have at least either scheme and host or path.`
@@ -32,15 +31,23 @@ export default class Uri
         if(
            this.configuration.prependSlash &&
            typeof uri === 'string' &&
-           uri.substr(0, 'http://'.length) !== 'http://' &&
-           uri.substr(0, 'https://'.length) !== 'https://' &&
+           ! Uri.hasScheme(uri) &&
            uri.charAt(0) !== '/'
         ) {
                uri = '/' + uri
         }
 
-        this.builder = uri instanceof Map ? new UriBuilder(uri, builderConfig) : UriBuilder.fromUriString(uri, builderConfig)
+        this.builder = uri instanceof Map ? new UriBuilder(uri, config) : UriBuilder.fromUriString(uri, config)
         this.binder = new UriParameterBinder(this.toString(), this.configuration.parameters)
+    }
+
+    /**
+     * Check if the given uri has a scheme
+     *
+     */
+    private static hasScheme(uri: string) : boolean
+    {
+        return uri.substr(0, 'http://'.length) === 'http://' || uri.substr(0, 'https://'.length) === 'https://'
     }
 
     /**
@@ -58,7 +65,7 @@ export default class Uri
      */
     isAbsolute() : boolean
     {
-        return this.builder.has(UriComponent.Scheme) && this.builder.has(UriComponent.Host)
+        return this.builder.has(UriComponent.Host)
     }
 
     /**
