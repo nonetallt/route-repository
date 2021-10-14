@@ -21,8 +21,8 @@ export default class Uri
      */
     constructor(uri: string | Map<UriComponent, string>, config: ConfigurationInterface = {})
     {
-        if(uri instanceof Map && (! uri.has(UriComponent.Scheme) && ! uri.has(UriComponent.Host)) && ! uri.has(UriComponent.Path)) {
-            const msg = `Uri constructed from components should have at least either scheme and host or path.`
+        if(uri instanceof Map && ! uri.has(UriComponent.Host) && ! uri.has(UriComponent.Path)) {
+            const msg = `Uri constructed from components should have at least either host or path.`
             throw new UriSyntaxError(msg)
         }
 
