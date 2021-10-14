@@ -20,7 +20,8 @@ export default class UriBuilder extends Map<UriComponent, string>
         super(components)
         this.configuration = new Configuration(config)
 
-        if(this.configuration.baseUri !== null) {
+        // Set base uri if uri is not absolute
+        if(! this.has(UriComponent.Host) && this.configuration.baseUri !== null) {
             this.applyBaseUri(this.configuration.baseUri)
         }
 
@@ -81,23 +82,19 @@ export default class UriBuilder extends Map<UriComponent, string>
 
     private applyBaseUri(baseUri : Uri) : void
     {
-        // Set base uri authority
-        if(! this.get(UriComponent.Host)) {
+        const authorityComponents = [
+            UriComponent.Scheme,
+            UriComponent.Userinfo,
+            UriComponent.Host,
+            UriComponent.Port
+        ]
 
-            const authorityComponents = [
-                UriComponent.Scheme,
-                UriComponent.Userinfo,
-                UriComponent.Host,
-                UriComponent.Port
-            ]
-
-            authorityComponents.forEach(component => {
-                const value = baseUri.getComponent(component)
-                if(value !== null) {
-                    this.set(component, value)
-                }
-            })
-        }
+        authorityComponents.forEach(component => {
+            const value = baseUri.getComponent(component)
+            if(value !== null) {
+                this.set(component, value)
+            }
+        })
 
         // Set base uri path
         if(baseUri.hasComponent(UriComponent.Path)) {

@@ -1,29 +1,15 @@
-- tests have todos
+- implement parameter configuration options
+    - allow user to supply configuration, preserve user supplied values from the original config?
+    - acceptWhitespace
+    - bindGetParameters
+    - typeConversion function
+    - make sure that extra slashes are stripped
+    - check if parameter encoding works
 
-- merge group registrar config from original config (repo's registrar config) so that non-overridden values are as default
-- allow user to supply configuration as argument when binding parameters, merge / override configs
+- tests
+    - Configurations?
 
-- move registration middleware to config?
-
-
-
-- check if route parameter encoding works
-- don't trim if route params can be whitespace strings
-
-- uri configuration
-    - base uri (test and more options: merge path, merge query)
-    - strip leading
-    - strip trailing
-    - conversion function (TESTS)
-
-
-- create example dir with mix compilation and make sure everything works
-- make relevant props readonly / private + consistent setters / getters
-- documentation
-- make http verbs case insensitive
-- handle nested uri parameters?
-
-CI? (travis?)
+- move registration middleware to config or take as constructor arg
 
 RouteRepo
 - load
@@ -31,3 +17,10 @@ RouteRepo
 - disableRoute
 - enableRoute
 - removeRoute / unregister
+
+Refactor and cleanup:
+- make relevant props readonly / private + consistent setters / getters
+- documentation
+- make http verbs case insensitive
+- create example dir with mix compilation and make sure everything works
+- CI? (travis?)

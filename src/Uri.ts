@@ -31,7 +31,8 @@ export default class Uri
         if(
            this.configuration.prependSlash &&
            typeof uri === 'string' &&
-           ! Uri.hasScheme(uri) &&
+           uri.substr(0, 'http://'.length) !== 'http://' &&
+           uri.substr(0, 'https://'.length) !== 'https://' &&
            uri.charAt(0) !== '/'
         ) {
                uri = '/' + uri
@@ -39,15 +40,6 @@ export default class Uri
 
         this.builder = uri instanceof Map ? new UriBuilder(uri, config) : UriBuilder.fromUriString(uri, config)
         this.binder = new UriParameterBinder(this.toString(), this.configuration.parameters)
-    }
-
-    /**
-     * Check if the given uri has a scheme
-     *
-     */
-    private static hasScheme(uri: string) : boolean
-    {
-        return uri.substr(0, 'http://'.length) === 'http://' || uri.substr(0, 'https://'.length) === 'https://'
     }
 
     /**

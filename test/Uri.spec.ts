@@ -260,57 +260,5 @@ describe('Uri', () => {
                 expect(uri.toString()).toEqual('/foo')
             })
         })
-
-        describe('defaultScheme', () => {
-
-            it('sets default scheme when hostname is defined but scheme is not', () => {
-                const uri = new Uri('foo', {defaultScheme: 'http', prependSlash: false})
-                expect(uri.toString()).toEqual('http://foo')
-            })
-
-            it('does not set default scheme when scheme is already defined by uri', () => {
-                const uri = new Uri('https://foo', {defaultScheme: 'http', prependSlash: false})
-                expect(uri.toString()).toEqual('https://foo')
-            })
-
-            it('does not set default scheme when scheme is already defined by baseUri', () => {
-                const uri = new Uri('/foo', {defaultScheme: 'http', baseUri: 'https://example.com',prependSlash: false})
-                expect(uri.toString()).toEqual('https://example.com/foo')
-            })
-
-            it('does not set scheme when hostname is not defined', () => {
-                const uri = new Uri('/foo', {defaultScheme: 'http', prependSlash: false})
-                expect(uri.toString()).toEqual('/foo')
-            })
-        })
-
-        describe('overrideScheme', () => {
-
-            it('sets scheme when hostname is defined but scheme is not', () => {
-                const uri = new Uri('foo', {overrideScheme: 'http', prependSlash: false})
-                expect(uri.toString()).toEqual('http://foo')
-            })
-
-            it('overrides scheme when scheme is already defined by uri', () => {
-                const uri = new Uri('http://foo', {overrideScheme: 'https', prependSlash: false})
-                expect(uri.toString()).toEqual('https://foo')
-            })
-
-            it('overrides scheme when scheme is already defined by defaultScheme', () => {
-                const uri = new Uri('foo', {overrideScheme: 'https', defaultScheme: 'http', prependSlash: false})
-                expect(uri.toString()).toEqual('https://foo')
-            })
-
-            it('overrides scheme when scheme is already defined by baseUri', () => {
-                const uri = new Uri('/foo', {overrideScheme: 'https', baseUri: 'http://example.com', prependSlash: false})
-                expect(uri.toString()).toEqual('https://example.com/foo')
-            })
-
-            it('does not set scheme when hostname is not defined', () => {
-                const uri = new Uri('/foo', {overrideScheme: 'http', prependSlash: false})
-                expect(uri.toString()).toEqual('/foo')
-            })
-
-        })
     })
 })
