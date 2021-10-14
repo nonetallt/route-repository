@@ -6,11 +6,6 @@ export default class RouteRegistrarConfiguration implements ConfigurationInterfa
 {
     readonly extra: object
     readonly uris: UriConfigurationInterface
-
-    /**
-     * The reason this defaults to null instead of {} like other interfaces is because it has required properties.
-     *
-     */
     readonly uriBuilder: UriBuilderConfigurationInterface
 
     constructor(config: ConfigurationInterface = {})

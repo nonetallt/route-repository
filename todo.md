@@ -1,10 +1,11 @@
-- make sure that object assign in RouteRepositoryConfiguration does not override registrar set values
+- add defaultScheme option? defaulting to https (relevant when slash is not prepended)
+
 - tests have todos
+
 - merge group registrar config from original config (repo's registrar config) so that non-overridden values are as default
 - allow user to supply configuration as argument when binding parameters, merge / override configs
 
-- prepend slash in apply configuration (enable setting by default)
-    - add defaultScheme option? defaulting to https (relevant when slash is not prepended)
+
 
 - check if route parameter encoding works
 - don't trim if route params can be whitespace strings

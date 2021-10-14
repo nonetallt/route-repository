@@ -28,6 +28,17 @@ export default class Uri
         }
 
         this.configuration = new Configuration(config)
+
+        if(
+           this.configuration.prependSlash &&
+           typeof uri === 'string' &&
+           uri.substr(0, 'http://'.length) !== 'http://' &&
+           uri.substr(0, 'https://'.length) !== 'https://' &&
+           uri.charAt(0) !== '/'
+        ) {
+               uri = '/' + uri
+        }
+
         this.builder = uri instanceof Map ? new UriBuilder(uri, builderConfig) : UriBuilder.fromUriString(uri, builderConfig)
         this.binder = new UriParameterBinder(this.toString(), this.configuration.parameters)
     }

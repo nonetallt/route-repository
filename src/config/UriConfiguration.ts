@@ -10,7 +10,7 @@ export default class UriConfiguration implements ConfigurationInterface
 
     constructor(config : ConfigurationInterface = {})
     {
-        this.prependSlash = false
+        this.prependSlash = true
         this.defaultScheme = null
         this.overrideScheme = null
         this.parameters = {}

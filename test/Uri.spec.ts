@@ -231,16 +231,33 @@ describe('Uri', () => {
         })
 
         it('returns userinfo when uri is relative', () => {
-            const uri = new Uri('foo:bar@foo/bar#baz')
+            const uri = new Uri('foo:bar@foo/bar#baz', {prependSlash: false})
             expect(uri.userinfo).toEqual('foo:bar')
         })
     })
 
     describe('configuration', () => {
 
-        describe('todo', () => {
+        describe('prependSlash', () => {
 
-            it('todo', () => {
+            it('prepends slash before uri when true', () => {
+                const uri = new Uri('foo', {'prependSlash': true})
+                expect(uri.toString()).toEqual('/foo')
+            })
+
+            it('does not prepend additional slashes when uri already starts with one', () => {
+                const uri = new Uri('/foo', {'prependSlash': true})
+                expect(uri.toString()).toEqual('/foo')
+            })
+
+            it('does not prepend slash before uri when false', () => {
+                const uri = new Uri('foo', {'prependSlash': false})
+                expect(uri.toString()).toEqual('foo')
+            })
+
+            it('is true by default', () => {
+                const uri = new Uri('foo')
+                expect(uri.toString()).toEqual('/foo')
             })
         })
     })
