@@ -1,11 +1,11 @@
 export default class UriParameterBindingError extends Error
 {
-    readonly previous?: Error
+    readonly previous: Error | null
 
     constructor(message: string, previous?: Error)
     {
         super(message)
         Object.setPrototypeOf(this, UriParameterBindingError.prototype);
-        this.previous = previous
+        this.previous = previous ?? null
     }
 }

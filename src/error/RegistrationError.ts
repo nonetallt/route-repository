@@ -1,8 +1,11 @@
 export default class RegistrationError extends Error
 {
-    constructor(message: string)
+    readonly previous: Error | null
+
+    constructor(message: string, previous?: Error)
     {
         super(message)
         Object.setPrototypeOf(this, RegistrationError.prototype);
+        this.previous = previous ?? null
     }
 }
