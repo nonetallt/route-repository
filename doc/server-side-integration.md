@@ -1,6 +1,6 @@
 # Server-side integration
 
-Allowing sharing of back-end routes to front-end javascript is a core feature of this package. This is achieved by having a back-end server command that exports the relevant routes into a json file that can then be imported by the RouteRepository.
+Sharing back-end routes to front-end javascript is the key to effectively utilizing this package. This is achieved by having a back-end server command that exports the relevant routes into a **json file** that can then be imported by the [RouteRepository](./RouteRepository.md).
 
 ## Importing routes from the back-end
 
@@ -30,7 +30,7 @@ See the relevant issues on github:
 
 ## Route file json schema
 
- The schema for the json file looks something like this:
+ An example routes.json file:
 
 ```json
 [
@@ -73,7 +73,7 @@ Http method (verb) to access the route.
 
 #### uri
 
-Uri of the route. Can be either a string or an object with any of the following optional properties:
+Uri of the route. Can be either a string or an object with any of the following optional properties (it is required that you specify at least either **host** or **path** for each uri object):
 
 - scheme
 - userinfo
