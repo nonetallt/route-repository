@@ -1,0 +1,29 @@
+[
+    {
+        "name": "foo",
+        "method": "GET",
+        "uri": {
+            "host": "example.com",
+            "path": "foo"
+        }
+    },
+    {
+        "name": "bar",
+        "method": "POST",
+        "uri": {
+            "host": "example.com",
+            "path": "bar"
+        }
+    },
+    {
+        "name": "baz",
+        "method": "PUT",
+        "uri": {
+            "host": "example.com",
+            "path": "baz"
+        },
+        "extra": {
+            "foo": "bar"
+        }
+    }
+]

@@ -1,10 +1,14 @@
 import Uri from './Uri'
+import UriComponent from './UriComponent'
 import Route from './Route'
 import RequestMethodType from './RequestMethodType'
 import RouteRegistrationMiddlewareInterface from './contract/RouteRegistrationMiddlewareInterface'
 import Configuration from './config/RouteRegistrarConfiguration'
 import ConfigurationInterface from './contract/RouteRegistrarConfigurationInterface'
 import merge from 'lodash.merge'
+import RegistrationError from './error/RegistrationError'
+import RouteInterface from './contract/RouteInterface'
+import UriInterface from './contract/UriInterface'
 
 /**
  * Describes a class that can register routes
@@ -35,12 +39,58 @@ export default abstract class RouteRegistrar
      * @throws RegistrationError
      *
      */
-    register(name: string, method: RequestMethodType, uri: string, extra: object = {}) : void
+    register(name: string, method: RequestMethodType, uri: string | Map<UriComponent, string>, extra: object = {}) : void
     {
         const uriObj = new Uri(uri, this.configuration.uris)
         let route = new Route(name, method, uriObj, merge(this.configuration.extra, extra))
 
         this.storeRoute(this.applyRegistrationMiddleware(route))
+    }
+
+    /**
+     * Register all routes from a given schema
+     *
+     * @throws RegistrationError
+     *
+     */
+    registerAll(routes: Array<RouteInterface> | string) : void
+    {
+        if(typeof routes === 'string') {
+            try {
+                routes = Object.assign(new Array<RouteInterface>(), JSON.parse(routes))
+            }
+            catch(error) {
+                if(error instanceof SyntaxError) {
+                    const msg = 'Could not load given json. See previous error for more details.'
+                    throw new RegistrationError(msg, error)
+                }
+            }
+
+            if(! Array.isArray(routes)) {
+                const msg = 'Could not load given json: array data.'
+                throw new RegistrationError(msg)
+            }
+        }
+
+        for(const route of routes) {
+
+            if(typeof route.uri === 'string') {
+                this.register(route.name, route.method, route.uri, route.extra)
+                continue
+            }
+
+            const uri = new Map<UriComponent, string>()
+
+            for(const [key, value] of Object.entries(UriComponent)) {
+                const tmp = route.uri[value as keyof UriInterface]
+
+                if(tmp !== undefined) {
+                    uri.set(value, tmp)
+                }
+            }
+
+            this.register(route.name, route.method, uri, route.extra)
+        }
     }
 
     /**
