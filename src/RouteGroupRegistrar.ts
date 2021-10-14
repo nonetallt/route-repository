@@ -1,10 +1,8 @@
 import RouteRepository from './RouteRepository'
 import RouteRegistrar from './RouteRegistrar'
 import Route from './Route'
-import Uri from './Uri'
 import Configuration from './config/RouteRegistrarConfiguration'
 import ConfigurationInterface from './contract/RouteRegistrarConfigurationInterface'
-import RequestMethodType from './RequestMethodType'
 
 /**
  * This class acts as a container for temporary configuration that can be
