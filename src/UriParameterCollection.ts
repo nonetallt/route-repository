@@ -1,6 +1,8 @@
 import UriParameter from './UriParameter'
 import UriParameterSyntaxError from './error/UriParameterSyntaxError'
 
+const parseRegex = new RegExp(/\{.*?\}/)
+
 export default class UriParameterCollection extends Array<UriParameter>
 {
     constructor(...items : Array<UriParameter>)
@@ -19,8 +21,7 @@ export default class UriParameterCollection extends Array<UriParameter>
         const parameters = []
 
         // Parse the uri parameter placeholders with surrounding {curiy braces}.
-        const pattern = '\{.*?\}'
-        let match = uri.match(pattern)
+        let match = uri.match(parseRegex)
         let lastParameterOptional = false
 
         while(match !== null) {
@@ -37,7 +38,7 @@ export default class UriParameterCollection extends Array<UriParameter>
 
             parameters.push(parameter)
             uri = uri.replace(placeholder, '');
-            match = uri.match(pattern);
+            match = uri.match(parseRegex);
         }
 
         return new UriParameterCollection(...parameters)
