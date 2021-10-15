@@ -1,14 +1,12 @@
-- tests
-    - Configurations specs?
-    - Other missing tests
-
 Refactor and cleanup:
-- make relevant props readonly / private + consistent setters / getters
 - documentation
 - make http verbs case insensitive
+- accept uricomponentType instead of uricomponent
 - create example dir with mix compilation and make sure everything works
 - CI? (travis?)
-- accept uricomponentType instead of uricomponent
+- more tests:
+    - Configurations specs?
+    - Other missing tests
 
 RouteRepo
 - removeRoute / unregister
