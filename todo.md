@@ -1,7 +1,5 @@
 - implement parameter configuration options
     - allow user to supply configuration, preserve user supplied values from the original config?
-    - acceptWhitespace
-    - make sure that extra slashes are stripped
 
 - tests
     - Configurations specs?

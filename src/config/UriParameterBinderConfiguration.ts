@@ -2,7 +2,7 @@ import ConfigurationInterface from '../contract/UriParameterBinderConfigurationI
 
 export default class UriParameterBinderConfiguration implements ConfigurationInterface
 {
-    readonly acceptWhitespace: boolean
+    readonly trailingSlashes: boolean
     readonly bindGetParameters: boolean
     readonly encodeUriParameters: boolean
     readonly encodeGetParameters: boolean
@@ -10,7 +10,7 @@ export default class UriParameterBinderConfiguration implements ConfigurationInt
 
     constructor(config : ConfigurationInterface = {})
     {
-        this.acceptWhitespace = false
+        this.trailingSlashes = false
         this.bindGetParameters = false
         this.encodeUriParameters = true
         this.encodeGetParameters = true

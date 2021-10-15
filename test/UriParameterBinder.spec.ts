@@ -206,5 +206,18 @@ describe('UriParameterBinder', () => {
                 expect(binder.bind('/foo', {bar: bar, baz: baz})).toEqual(`/foo?bar=${bar}&baz=${baz}`)
             })
         })
+
+        describe('trailingSlashes', () => {
+
+            it('does not remove trailing slashes when true', () => {
+                const binder = new UriParameterBinder({trailingSlashes: true})
+                expect(binder.bind('/foo/{bar?}/{baz?}/', {})).toEqual('/foo///')
+            })
+
+            it('removes trailing slashes when false', () => {
+                const binder = new UriParameterBinder({trailingSlashes: false})
+                expect(binder.bind('/foo/{bar?}/{baz?}/', {})).toEqual('/foo')
+            })
+        })
     })
 })

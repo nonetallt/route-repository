@@ -27,7 +27,7 @@ export default class UriParameterBinder
      *  @throws UriParameterBindingError
      *
      */
-    bind(uri: string, values : any, config: ConfigurationInterface | null = null) : string
+    bind(uri: string, values: any, config: ConfigurationInterface | null = null) : string
     {
         const configuration = config !== null ? new Configuration(config) : this.configuration
         const parameters = UriParameterCollection.fromUriString(uri.toString())
@@ -145,10 +145,8 @@ export default class UriParameterBinder
             throw new UriParameterBindingError(msg)
         }
 
-        /* TODO use config */
-
         uri = uri.replace(parameter.placeholder, config.encodeUriParameters ? encodeURIComponent(value) : value)
-        uri = this.removeTrailingSlashes(uri)
+        uri = config.trailingSlashes ? uri : this.removeTrailingSlashes(uri)
 
         return uri
     }
@@ -188,6 +186,6 @@ export default class UriParameterBinder
             throw error
         }
 
-        return value.trim()
+        return value
     }
 }

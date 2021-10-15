@@ -14,7 +14,6 @@
         defaultScheme: null,
         overrideScheme: null,
         parameters: {
-            acceptWhitespace: false,
             bindGetParameters: false,
             encodeUriParameters: true,
             encodeGetParameters: true,

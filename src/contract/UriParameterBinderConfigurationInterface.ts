@@ -1,6 +1,6 @@
 export default interface UriParameterBinderConfigurationInterface
 {
-    acceptWhitespace?: boolean
+    trailingSlashes?: boolean
     bindGetParameters?: boolean
     encodeUriParameters?: boolean
     encodeGetParameters?: boolean
