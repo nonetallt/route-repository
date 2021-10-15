@@ -1,5 +1,6 @@
 import UriParameterBinder from '../src/UriParameterBinder'
 import UriParameterBindingError from '../src/error/UriParameterBindingError'
+import TypeConversionError from '../src/error/TypeConversionError'
 
 describe('UriParameterBinder', () => {
 
@@ -143,6 +144,31 @@ describe('UriParameterBinder', () => {
             it('merges query parameters when query exists on uri', () => {
                 const binder = new UriParameterBinder({bindGetParameters: true})
                 expect(binder.bind('/products/{category}?search=example', {category: 'foo', page: 1, preview: false})).toEqual('/products/foo?search=example&page=1&preview=false')
+            })
+        })
+
+        describe('typeConversionFunction', () => {
+
+            it('converts values using the given function', () => {
+
+                const binder = new UriParameterBinder({typeConversionFunction: (value) => {
+                    if(value === true) return 'true'
+                    throw new TypeConversionError("Value was not good")
+                }})
+
+                expect(binder.bind('/foo/{bar}', {bar: true})).toEqual('/foo/true')
+            })
+
+            it('wraps TypeConversionException', () => {
+
+                const binder = new UriParameterBinder({typeConversionFunction: (value) => {
+                    if(value === true) return 'true'
+                    throw new TypeConversionError("Value was not good")
+                }})
+
+                expect(() => {
+                    binder.bind('/foo/{bar}', {bar: false})
+                }).toThrow(UriParameterBindingError)
             })
         })
     })

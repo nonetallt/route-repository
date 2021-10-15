@@ -1,13 +1,11 @@
 - implement parameter configuration options
     - allow user to supply configuration, preserve user supplied values from the original config?
     - acceptWhitespace
-    - bindGetParameters
-    - typeConversion function
     - make sure that extra slashes are stripped
     - check if parameter encoding works
 
 - tests
-    - Configurations?
+    - Configurations specs?
 
 - move registration middleware to config or take as constructor arg
 
