@@ -1,5 +1,5 @@
 /**
- * Error that should be thrown when parameter type conversion fails.
+ * Error that is thrown when parameter type conversion fails.
  *
  */
 export default class TypeConversionError extends Error
