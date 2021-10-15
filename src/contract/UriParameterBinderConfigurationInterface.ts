@@ -4,5 +4,5 @@ export default interface UriParameterBinderConfigurationInterface
     bindGetParameters?: boolean
     encodeUriParameters?: boolean
     encodeGetParameters?: boolean
-    typeConversionFunction?: (parameterValue: any) => string | null
+    typeConversionFunction?: (parameterValue: any) => string
 };

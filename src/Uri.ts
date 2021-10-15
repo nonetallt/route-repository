@@ -6,12 +6,14 @@ import UriSyntaxError from './error/UriSyntaxError'
 import UriBuilder from './UriBuilder'
 import UriParameterBinderConfigurationInterface from './contract/UriParameterBinderConfigurationInterface'
 import QueryParameterCollection from './QueryParameterCollection'
+import cloneDeep from 'lodash.clonedeep'
+import UriParameterCollection from './UriParameterCollection'
 
 export default class Uri
 {
     private builder: UriBuilder
-    readonly binder: UriParameterBinder
-    readonly configuration: Configuration
+    private binder: UriParameterBinder
+    private configuration: Configuration
 
     /**
      * Create a new uri
@@ -39,7 +41,7 @@ export default class Uri
         }
 
         this.builder = uri instanceof Map ? new UriBuilder(uri, config) : UriBuilder.fromUriString(uri, config)
-        this.binder = new UriParameterBinder(this.toString(), this.configuration.parameters)
+        this.binder = new UriParameterBinder(this.configuration.parameters)
     }
 
     /**
@@ -179,6 +181,15 @@ export default class Uri
     }
 
     /**
+     * Get the uri parameters
+     *
+     */
+    get uriParameters() : UriParameterCollection
+    {
+        return UriParameterCollection.fromUriString(this.toString())
+    }
+
+    /**
      * Bind given values as uri parameters
      *
      * @throws UriParameterBindingError
@@ -187,10 +198,10 @@ export default class Uri
     bindParameters(values : any, config: UriParameterBinderConfigurationInterface | null = null) : string
     {
         if(config !== null) {
-            return this.binder.bind(values, config)
+            return this.binder.bind(this.toString(), values, config)
         }
 
-        return this.binder.bind(values)
+        return this.binder.bind(this.toString(), values)
     }
 
     /**
@@ -209,5 +220,25 @@ export default class Uri
     hasComponent(component: UriComponent) : boolean
     {
         return this.builder.has(component)
+    }
+
+    /**
+     * Create a new uri instance with the given component
+     *
+     */
+    withComponent(component: UriComponent, value: string) : Uri
+    {
+        const instance = cloneDeep(this)
+        instance.setComponent(component, value)
+        return instance
+    }
+
+    /**
+     *  Set the value of a given component
+     *
+     */
+    protected setComponent(component: UriComponent, value: string)
+    {
+        this.builder.set(component, value)
     }
 }

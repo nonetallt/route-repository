@@ -6,7 +6,7 @@ export default class UriParameterBinderConfiguration implements ConfigurationInt
     readonly bindGetParameters: boolean
     readonly encodeUriParameters: boolean
     readonly encodeGetParameters: boolean
-    readonly typeConversionFunction: (parameterValue: any) => string | null
+    readonly typeConversionFunction: (parameterValue: any) => string
 
     constructor(config : ConfigurationInterface = {})
     {

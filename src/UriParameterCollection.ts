@@ -16,7 +16,7 @@ export default class UriParameterCollection extends Array<UriParameter>
      * @throws UriParameterSyntaxError
      *
      */
-    static parseFromUri(uri: string) : UriParameterCollection
+    static fromUriString(uri: string) : UriParameterCollection
     {
         const parameters = []
 
