@@ -120,6 +120,14 @@ describe('UriParameterBinder', () => {
 
             expect(bound).toEqual('/products/cpu')
         })
+
+        it('can override configuration when new configuration is supplied', () => {
+
+            const binder = new UriParameterBinder({trailingSlashes: false})
+            const bound = binder.bind('/products/{category}/{productId?}/{spec?}', {category: 'cpu'}, {trailingSlashes: true})
+
+            expect(bound).toEqual('/products/cpu//')
+        })
     })
 
     describe('configuration', () => {

@@ -1,6 +1,3 @@
-- implement parameter configuration options
-    - allow user to supply configuration, preserve user supplied values from the original config?
-
 - tests
     - Configurations specs?
 
