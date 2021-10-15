@@ -21,7 +21,8 @@
                 return String(parameterValue)
             }
         }
-    }
+    },
+    registrationMiddleware: []
 }
 ```
 

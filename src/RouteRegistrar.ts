@@ -2,7 +2,6 @@ import Uri from './Uri'
 import UriComponent from './UriComponent'
 import Route from './Route'
 import RequestMethodType from './RequestMethodType'
-import RouteRegistrationMiddlewareInterface from './contract/RouteRegistrationMiddlewareInterface'
 import Configuration from './config/RouteRegistrarConfiguration'
 import ConfigurationInterface from './contract/RouteRegistrarConfigurationInterface'
 import merge from 'lodash.merge'
@@ -17,12 +16,10 @@ import UriInterface from './contract/UriInterface'
 export default abstract class RouteRegistrar
 {
     protected configuration: Configuration
-    readonly registrationMiddleware: Array<RouteRegistrationMiddlewareInterface>
 
     constructor(config: Configuration)
     {
         this.configuration = new Configuration(config)
-        this.registrationMiddleware = new Array<RouteRegistrationMiddlewareInterface>()
     }
 
     /**
@@ -154,7 +151,7 @@ export default abstract class RouteRegistrar
      */
     private applyRegistrationMiddleware(route: Route) : Route
     {
-        this.registrationMiddleware.forEach(middleware => {
+        this.configuration.registrationMiddleware.forEach(middleware => {
             route = middleware.apply(route)
         })
 

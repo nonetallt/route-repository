@@ -1,5 +1,6 @@
 - tests
     - Configurations specs?
+    - Other missing tests
 
 - move registration middleware to config or take as constructor arg
 
