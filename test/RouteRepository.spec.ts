@@ -5,6 +5,7 @@ import RegistrationError from '../src/error/RegistrationError'
 import Route from '../src/Route'
 import fs from 'fs'
 import json from './input/routes.json'
+import UriComponent from '../src/UriComponent'
 
 describe('RouteRepository', () => {
 
@@ -30,50 +31,6 @@ describe('RouteRepository', () => {
             const repo = new RouteRepository
             repo.register('new_route', 'GET', '/foo')
             expect(repo.hasRouteWithName('new_route')).toEqual(true)
-        })
-
-        it('throws error registering route with duplicate name when mutable is false', () => {
-            const repo = new RouteRepository({
-                mutable: false
-            })
-
-            expect(() => {
-                repo.register('foo', 'GET', '/foo');
-                repo.register('foo', 'GET', '/foo');
-            }).toThrow(RegistrationError)
-        })
-
-        it('does not throw error registering route with duplicate name when mutable is true', () => {
-            const repo = new RouteRepository({
-                mutable: true
-            })
-
-            expect(() => {
-                repo.register('foo', 'GET', '/foo1');
-                repo.register('foo', 'GET', '/foo2');
-            }).not.toThrow()
-        })
-
-        it('throws error when registering route with duplicate uri + method when duplicates is false', () => {
-            const repo = new RouteRepository({
-                duplicates: false
-            })
-
-            expect(() => {
-                repo.register('foo', 'GET', '/foo');
-                repo.register('bar', 'GET', '/foo');
-            }).toThrow(RegistrationError)
-        })
-
-        it('does not throw error when registering route with duplicate uri + method when duplicates is true', () => {
-            const repo = new RouteRepository({
-                duplicates: true
-            })
-
-            expect(() => {
-                repo.register('foo', 'GET', '/foo');
-                repo.register('bar', 'GET', '/foo');
-            }).not.toThrow(RegistrationError)
         })
 
         it('generates a route signature for a new route', () => {
@@ -372,6 +329,76 @@ describe('RouteRepository', () => {
             expect(repo.getRoute('baz')?.uri.toString()).toEqual('example.com/baz')
             expect(repo.getRoute('baz')?.method).toEqual('PUT')
             expect(repo.getRoute('baz')?.extra).toEqual({foo: 'bar'})
+        })
+    })
+
+    describe('configuration', () => {
+
+        describe('mutable', () => {
+
+            it('throws error registering route with duplicate name when mutable is false', () => {
+                const repo = new RouteRepository({
+                    mutable: false
+                })
+
+                expect(() => {
+                    repo.register('foo', 'GET', '/foo');
+                    repo.register('foo', 'GET', '/foo');
+                }).toThrow(RegistrationError)
+            })
+
+            it('does not throw error registering route with duplicate name when mutable is true', () => {
+                const repo = new RouteRepository({
+                    mutable: true
+                })
+
+                expect(() => {
+                    repo.register('foo', 'GET', '/foo1');
+                    repo.register('foo', 'GET', '/foo2');
+                }).not.toThrow()
+            })
+        })
+
+        describe('duplicates', () => {
+
+            it('throws error when registering route with duplicate uri + method when duplicates is false', () => {
+                const repo = new RouteRepository({
+                    duplicates: false
+                })
+
+                expect(() => {
+                    repo.register('foo', 'GET', '/foo');
+                    repo.register('bar', 'GET', '/foo');
+                }).toThrow(RegistrationError)
+            })
+
+            it('does not throw error when registering route with duplicate uri + method when duplicates is true', () => {
+                const repo = new RouteRepository({
+                    duplicates: true
+                })
+
+                expect(() => {
+                    repo.register('foo', 'GET', '/foo');
+                    repo.register('bar', 'GET', '/foo');
+                }).not.toThrow(RegistrationError)
+            })
+        })
+
+        describe('registrationMiddleware', () => {
+
+            it('applies each middleware before route is registered', () => {
+                const repo = new RouteRepository({
+                    registrationMiddleware: [
+                        {applyMiddleware: (route) => route.withUriComponent(UriComponent.Scheme, 'https')},
+                        {applyMiddleware: (route) => route.withUriComponent(UriComponent.Path, `prefix/${route.uri.path}`)}
+                    ]
+                })
+
+                repo.register('test', 'GET', 'http://example.com/foo')
+                expect(repo.getRoute('test')?.name).toEqual('test')
+                expect(repo.getRoute('test')?.method).toEqual('GET')
+                expect(repo.getRoute('test')?.uri.toString()).toEqual('https://example.com/prefix/foo')
+            })
         })
     })
 })

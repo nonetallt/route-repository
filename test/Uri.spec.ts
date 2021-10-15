@@ -1,4 +1,5 @@
 import Uri from '../src/Uri'
+import UriComponent from '../src/UriComponent'
 
 describe('Uri', () => {
 
@@ -259,6 +260,21 @@ describe('Uri', () => {
                 const uri = new Uri('foo')
                 expect(uri.toString()).toEqual('/foo')
             })
+        })
+    })
+
+    describe('withComponent', () => {
+
+        it('returns new instance with modified component value', () => {
+            const uri = new Uri('foo', {prependSlash: false})
+            expect(uri.withComponent(UriComponent.Scheme, 'https').toString()).toEqual('https://foo')
+        })
+
+        it("'does not modify original component's value", () => {
+            const uri = new Uri('foo', {prependSlash: false})
+            uri.withComponent(UriComponent.Scheme, 'https')
+
+            expect(uri.toString()).toEqual('foo')
         })
     })
 })

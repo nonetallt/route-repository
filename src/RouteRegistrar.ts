@@ -152,7 +152,7 @@ export default abstract class RouteRegistrar
     private applyRegistrationMiddleware(route: Route) : Route
     {
         this.configuration.registrationMiddleware.forEach(middleware => {
-            route = middleware.apply(route)
+            route = middleware.applyMiddleware(route)
         })
 
         return route
