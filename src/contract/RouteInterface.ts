@@ -1,4 +1,3 @@
-import UriComponent from '../UriComponent'
 import UriInterface from './UriInterface'
 import RequestMethodType from '../RequestMethodType'
 
