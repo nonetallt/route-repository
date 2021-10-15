@@ -114,7 +114,7 @@ export default class UriParameterBinder
             newQuery.set(key, this.stringValue(key, value))
         }
 
-        return uriObj.withComponent(UriComponent.Query, oldQuery.merge(newQuery).toString()).toString()
+        return uriObj.withComponent(UriComponent.Query, oldQuery.merge(newQuery).stringify(config.encodeGetParameters)).toString()
     }
 
     /**
@@ -147,7 +147,7 @@ export default class UriParameterBinder
 
         /* TODO use config */
 
-        uri = uri.replace(parameter.placeholder, encodeURIComponent(value))
+        uri = uri.replace(parameter.placeholder, config.encodeUriParameters ? encodeURIComponent(value) : value)
         uri = this.removeTrailingSlashes(uri)
 
         return uri

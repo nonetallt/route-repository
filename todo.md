@@ -2,7 +2,6 @@
     - allow user to supply configuration, preserve user supplied values from the original config?
     - acceptWhitespace
     - make sure that extra slashes are stripped
-    - check if parameter encoding works
 
 - tests
     - Configurations specs?

@@ -171,5 +171,40 @@ describe('UriParameterBinder', () => {
                 }).toThrow(UriParameterBindingError)
             })
         })
+
+        describe('encodeUriParameters', () => {
+
+            it('encodes uri parameters when true', () => {
+                const binder = new UriParameterBinder({encodeUriParameters: true})
+                const bar = 'value=bar'
+                const baz = 'value=baz'
+                expect(binder.bind('/foo/{bar}/{baz}', {bar: bar, baz: baz})).toEqual(`/foo/${encodeURIComponent(bar)}/${encodeURIComponent(baz)}`)
+            })
+
+            it('does not encode uri parameters when false', () => {
+                const binder = new UriParameterBinder({encodeUriParameters: false})
+                const bar = 'value=bar'
+                const baz = 'value=baz'
+                expect(binder.bind('/foo/{bar}/{baz}', {bar: bar, baz: baz})).toEqual(`/foo/${bar}/${baz}`)
+            })
+
+        })
+
+        describe('encodeGetParameters', () => {
+
+            it('encodes get parameters when true', () => {
+                const binder = new UriParameterBinder({bindGetParameters: true, encodeGetParameters: true})
+                const bar = 'value=bar'
+                const baz = 'value=baz'
+                expect(binder.bind('/foo', {bar: bar, baz: baz})).toEqual(`/foo?bar=${encodeURIComponent(bar)}&baz=${encodeURIComponent(baz)}`)
+            })
+
+            it('does not encode get parameters when false', () => {
+                const binder = new UriParameterBinder({bindGetParameters: true, encodeGetParameters: false})
+                const bar = 'value=bar'
+                const baz = 'value=baz'
+                expect(binder.bind('/foo', {bar: bar, baz: baz})).toEqual(`/foo?bar=${bar}&baz=${baz}`)
+            })
+        })
     })
 })
