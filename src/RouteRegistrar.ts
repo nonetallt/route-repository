@@ -17,7 +17,7 @@ export default abstract class RouteRegistrar
 {
     protected configuration: Configuration
 
-    constructor(config: Configuration)
+    constructor(config: ConfigurationInterface)
     {
         this.configuration = new Configuration(config)
     }
@@ -26,6 +26,7 @@ export default abstract class RouteRegistrar
      * Register a new route using a route object. This method has the responsibility of actually storing the route.
      *
      * @throws RegistrationError
+     * @internal
      *
      */
     abstract storeRoute(route: Route) : void
