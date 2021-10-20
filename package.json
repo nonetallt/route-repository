@@ -47,11 +47,12 @@
     "laravel-mix": "^6.0.16",
     "ts-jest": "^27.0.3",
     "ts-node": "^9.1.1",
+    "typedoc": "^0.22.6",
     "typescript": "^4.4.2"
   },
   "optionalPeerDependencies": {
     "markdown-table": "^3.0.0"
   },
-  "jsdelivr": "dist/front-to-back-router.min.js",
-  "unpkg": "dist/front-to-back-router.min.js"
+  "jsdelivr": "dist/route-repository.min.js",
+  "unpkg": "dist/route-repository.min.js"
 }
