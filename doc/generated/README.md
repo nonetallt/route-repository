@@ -1,3 +1,5 @@
+route-repository / [Exports](modules.md)
+
 # Documentation
 
 - [Configuration](./configuration.md)
@@ -63,9 +65,9 @@ Interfaces provided as part of the public API describe user supplied objects:
 
 All errors have public previous field, which is either null or the previous error in the stack:
 
-- [ConfigurationError](/generated/classes/ConfigurationError.md)
-- [RegistrationError](/generated/classes/RegistrationError.md)
-- [TypeConversionError](/generated/classes/TypeConversionError.md)
-- [UriParameterBindingError](/generated/classes/UriParameterBindingError.md)
-- [UriParameterSyntaxError](/generated/classes/UriParameterSyntaxError.md)
-- [UriSyntaxError](/generated/classes/UriSyntaxError.md)
+- [ConfigurationError](#)
+- [RegistrationError](#)
+- [TypeConversionError](#)
+- [UriParameterBindingError](#)
+- [UriParameterSyntaxError](#)
+- [UriSyntaxError](#)

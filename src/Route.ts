@@ -18,21 +18,37 @@ export default class Route
         this.extra = extra
     }
 
+    /**
+     * Create a new instance of this route with the given name
+     *
+     */
     withName(name: string) : Route
     {
         return new Route(name, this.method, this.uri, this.extra)
     }
 
+    /**
+     * Create a new instance of this route with the given request method
+     *
+     */
     withMethod(method: RequestMethodType) : Route
     {
         return new Route(this.name, method, this.uri, this.extra)
     }
 
+    /**
+     * Create a new instance of this route with the given uri
+     *
+     */
     withUri(uri: string | Uri) : Route
     {
         return new Route(this.name, this.method, uri, this.extra)
     }
 
+    /**
+     * Create a new instance of this route with the given uri component
+     *
+     */
     withUriComponent(component: UriComponent, value: string) : Route
     {
         const instance = cloneDeep(this)
@@ -41,6 +57,10 @@ export default class Route
         return instance
     }
 
+    /**
+     * Create a new instnace of this route with the given extra
+     *
+     */
     withExtra(extra: object) : Route
     {
         return new Route(this.name, this.method, this.uri, extra)

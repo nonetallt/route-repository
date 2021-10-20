@@ -4,6 +4,7 @@
   "main": "index.js",
   "types": "./src/index.d.ts",
   "scripts": {
+    "doc": "typedoc --excludeInternal --excludeProtected --excludePrivate",
     "test": "jest",
     "test-watch": "jest --watch",
     "prepublishOnly": "npm run test && npm run production"
@@ -48,6 +49,7 @@
     "ts-jest": "^27.0.3",
     "ts-node": "^9.1.1",
     "typedoc": "^0.22.6",
+    "typedoc-plugin-markdown": "^3.11.3",
     "typescript": "^4.4.2"
   },
   "optionalPeerDependencies": {

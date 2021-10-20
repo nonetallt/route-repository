@@ -28,6 +28,7 @@ export default class RouteRepository extends RouteRegistrar
      * Stores a route. Note that this does not apply any registrar configuration or middlewares associated with registration.
      *
      * @throws RegistrationError
+     * @internal
      *
      */
     storeRoute(route: Route) : void

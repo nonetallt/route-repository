@@ -223,7 +223,7 @@ export default class Uri
     }
 
     /**
-     * Create a new uri instance with the given component
+     * Create a new instance of this uri with the given component uri component
      *
      */
     withComponent(component: UriComponent, value: string) : Uri
