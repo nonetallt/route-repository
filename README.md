@@ -46,7 +46,7 @@ var repository = require('route-repository').RouteRepository;
 import {RouteRepository} from 'route-repository';
 ```
 
-## Quickstart
+## Basic usage
 
 Initialize a new container of the routes for the application:
 
@@ -77,7 +77,7 @@ repository.registerAll([{
     uri: '/backend/users/{id}'
 }]);
 
-var route = routes.getRoute('user.index');
+var route = repository.getRoute('user.index');
 
 // Bind the userId as uri parameter, the resulting uri will be /backend/users/1
 var userId = 1;
