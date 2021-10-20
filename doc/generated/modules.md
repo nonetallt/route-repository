@@ -47,4 +47,4 @@
 
 #### Defined in
 
-[src/RequestMethodType.ts:3](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/RequestMethodType.ts#L3)
+[src/RequestMethodType.ts:3](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/RequestMethodType.ts#L3)

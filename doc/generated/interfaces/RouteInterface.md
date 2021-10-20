@@ -19,7 +19,7 @@
 
 #### Defined in
 
-[src/contract/RouteInterface.ts:9](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/contract/RouteInterface.ts#L9)
+[src/contract/RouteInterface.ts:9](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/contract/RouteInterface.ts#L9)
 
 ___
 
@@ -29,7 +29,7 @@ ___
 
 #### Defined in
 
-[src/contract/RouteInterface.ts:7](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/contract/RouteInterface.ts#L7)
+[src/contract/RouteInterface.ts:7](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/contract/RouteInterface.ts#L7)
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 #### Defined in
 
-[src/contract/RouteInterface.ts:6](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/contract/RouteInterface.ts#L6)
+[src/contract/RouteInterface.ts:6](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/contract/RouteInterface.ts#L6)
 
 ___
 
@@ -49,4 +49,4 @@ ___
 
 #### Defined in
 
-[src/contract/RouteInterface.ts:8](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/contract/RouteInterface.ts#L8)
+[src/contract/RouteInterface.ts:8](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/contract/RouteInterface.ts#L8)

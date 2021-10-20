@@ -1,6 +1,6 @@
-# Front to back router
+# route-repository
 
-A simple front to back router package for JavaScript. Useful when your front-end has to fetch some data from the back-end APIs.
+A simple front to back router package for JavaScript. Useful when your front-end has to send request to back-end APIs.
 
 > **What this package provides**:
 > * A javascript way of storing and accessing your route aliases, URIs and their associated HTTP methods.
@@ -14,12 +14,13 @@ A simple front to back router package for JavaScript. Useful when your front-end
 In short, you get access to the following features and benefits:
 
 * A layer of abstraction makes it easy to replace and reuse routes
-* Reduces the headache of refactoring when uris or HTTP methods change
+* Reduces the headache of refactoring when URIs or HTTP methods change
 * No more hardcoded URI strings
-* Dynamically register or deregister routes
+* Dynamically register routes
 * Supports URI parameter binding (for example: `/users/{id}`)
 * Routes keep track of the correct HTTP method (verb), making ajax calls more dynamic
 * List all registered routes for easy debugging
+* You can easily swap the base URIs of your entire application, which makes development and using proxies very convenient. Simply enable cross-origin request and point the base URI of your application to a mock backend
 
 ## Installation
 
@@ -89,6 +90,6 @@ axios({
 ```
 ## Documentation
 
-Check out the [documentation](/doc/index.md) for all methods and public API provided by this package.
+Check out the [documentation](/doc/README.md) for all methods and public API provided by this package.
 
 It is also highly recommended to take a look at the [server side integration](/doc/server_side_integration.md) to understand the optimal workflow and how to get the most out of using this package.

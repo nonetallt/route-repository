@@ -48,7 +48,7 @@ Error.constructor
 
 #### Defined in
 
-[src/error/UriParameterBindingError.ts:9](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/error/UriParameterBindingError.ts#L9)
+[src/error/UriParameterBindingError.ts:9](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/error/UriParameterBindingError.ts#L9)
 
 ## Properties
 
@@ -86,7 +86,7 @@ ___
 
 #### Defined in
 
-[src/error/UriParameterBindingError.ts:7](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/error/UriParameterBindingError.ts#L7)
+[src/error/UriParameterBindingError.ts:7](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/error/UriParameterBindingError.ts#L7)
 
 ___
 

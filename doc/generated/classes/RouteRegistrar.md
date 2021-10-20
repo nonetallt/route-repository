@@ -40,7 +40,7 @@ Describes a class that can register routes
 
 #### Defined in
 
-[src/RouteRegistrar.ts:20](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/RouteRegistrar.ts#L20)
+[src/RouteRegistrar.ts:20](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/RouteRegistrar.ts#L20)
 
 ## Methods
 
@@ -66,7 +66,7 @@ Register a new delete route
 
 #### Defined in
 
-[src/RouteRegistrar.ts:144](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/RouteRegistrar.ts#L144)
+[src/RouteRegistrar.ts:144](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/RouteRegistrar.ts#L144)
 
 ___
 
@@ -92,7 +92,7 @@ Register a new get route
 
 #### Defined in
 
-[src/RouteRegistrar.ts:100](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/RouteRegistrar.ts#L100)
+[src/RouteRegistrar.ts:100](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/RouteRegistrar.ts#L100)
 
 ___
 
@@ -118,7 +118,7 @@ Register a new patch route
 
 #### Defined in
 
-[src/RouteRegistrar.ts:133](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/RouteRegistrar.ts#L133)
+[src/RouteRegistrar.ts:133](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/RouteRegistrar.ts#L133)
 
 ___
 
@@ -144,7 +144,7 @@ Register a new post route
 
 #### Defined in
 
-[src/RouteRegistrar.ts:111](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/RouteRegistrar.ts#L111)
+[src/RouteRegistrar.ts:111](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/RouteRegistrar.ts#L111)
 
 ___
 
@@ -170,7 +170,7 @@ Register a new put route
 
 #### Defined in
 
-[src/RouteRegistrar.ts:122](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/RouteRegistrar.ts#L122)
+[src/RouteRegistrar.ts:122](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/RouteRegistrar.ts#L122)
 
 ___
 
@@ -197,7 +197,7 @@ Create and register a new route from parameters
 
 #### Defined in
 
-[src/RouteRegistrar.ts:40](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/RouteRegistrar.ts#L40)
+[src/RouteRegistrar.ts:40](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/RouteRegistrar.ts#L40)
 
 ___
 
@@ -221,4 +221,4 @@ Register all routes from a given schema
 
 #### Defined in
 
-[src/RouteRegistrar.ts:54](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/RouteRegistrar.ts#L54)
+[src/RouteRegistrar.ts:54](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/RouteRegistrar.ts#L54)

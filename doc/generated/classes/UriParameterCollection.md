@@ -82,7 +82,7 @@ Array&lt;UriParameter\&gt;.constructor
 
 #### Defined in
 
-[src/UriParameterCollection.ts:8](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/UriParameterCollection.ts#L8)
+[src/UriParameterCollection.ts:8](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/UriParameterCollection.ts#L8)
 
 ## Properties
 
@@ -179,7 +179,7 @@ Check if any uri parameters are required
 
 #### Defined in
 
-[src/UriParameterCollection.ts:51](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/UriParameterCollection.ts#L51)
+[src/UriParameterCollection.ts:51](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/UriParameterCollection.ts#L51)
 
 ___
 
@@ -642,7 +642,7 @@ Get names of all parameters
 
 #### Defined in
 
-[src/UriParameterCollection.ts:80](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/UriParameterCollection.ts#L80)
+[src/UriParameterCollection.ts:80](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/UriParameterCollection.ts#L80)
 
 ___
 
@@ -664,7 +664,7 @@ Get the parameter with the given name
 
 #### Defined in
 
-[src/UriParameterCollection.ts:91](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/UriParameterCollection.ts#L91)
+[src/UriParameterCollection.ts:91](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/UriParameterCollection.ts#L91)
 
 ___
 
@@ -680,7 +680,7 @@ Get a list of the required uri parameters
 
 #### Defined in
 
-[src/UriParameterCollection.ts:69](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/UriParameterCollection.ts#L69)
+[src/UriParameterCollection.ts:69](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/UriParameterCollection.ts#L69)
 
 ___
 
@@ -1451,7 +1451,7 @@ Create a new uri parameter collection from parameter placeholders in a given uri
 
 #### Defined in
 
-[src/UriParameterCollection.ts:19](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/UriParameterCollection.ts#L19)
+[src/UriParameterCollection.ts:19](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/UriParameterCollection.ts#L19)
 
 ___
 

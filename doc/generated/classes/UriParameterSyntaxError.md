@@ -48,7 +48,7 @@ Error.constructor
 
 #### Defined in
 
-[src/error/UriParameterSyntaxError.ts:9](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/error/UriParameterSyntaxError.ts#L9)
+[src/error/UriParameterSyntaxError.ts:9](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/error/UriParameterSyntaxError.ts#L9)
 
 ## Properties
 
@@ -86,7 +86,7 @@ ___
 
 #### Defined in
 
-[src/error/UriParameterSyntaxError.ts:7](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/error/UriParameterSyntaxError.ts#L7)
+[src/error/UriParameterSyntaxError.ts:7](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/error/UriParameterSyntaxError.ts#L7)
 
 ___
 

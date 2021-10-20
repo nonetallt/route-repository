@@ -26,4 +26,4 @@
 
 #### Defined in
 
-[src/contract/RouteMiddlewareInterface.ts:5](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/contract/RouteMiddlewareInterface.ts#L5)
+[src/contract/RouteMiddlewareInterface.ts:5](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/contract/RouteMiddlewareInterface.ts#L5)

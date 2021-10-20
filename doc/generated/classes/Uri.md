@@ -52,7 +52,7 @@ Create a new uri
 
 #### Defined in
 
-[src/Uri.ts:24](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/Uri.ts#L24)
+[src/Uri.ts:24](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/Uri.ts#L24)
 
 ## Accessors
 
@@ -68,7 +68,7 @@ Get all uri components
 
 #### Defined in
 
-[src/Uri.ts:178](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/Uri.ts#L178)
+[src/Uri.ts:178](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/Uri.ts#L178)
 
 ___
 
@@ -84,7 +84,7 @@ Get fragment component
 
 #### Defined in
 
-[src/Uri.ts:169](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/Uri.ts#L169)
+[src/Uri.ts:169](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/Uri.ts#L169)
 
 ___
 
@@ -100,7 +100,7 @@ Get uri host component
 
 #### Defined in
 
-[src/Uri.ts:114](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/Uri.ts#L114)
+[src/Uri.ts:114](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/Uri.ts#L114)
 
 ___
 
@@ -116,7 +116,7 @@ Get uri password component
 
 #### Defined in
 
-[src/Uri.ts:105](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/Uri.ts#L105)
+[src/Uri.ts:105](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/Uri.ts#L105)
 
 ___
 
@@ -132,7 +132,7 @@ Get uri path component
 
 #### Defined in
 
-[src/Uri.ts:138](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/Uri.ts#L138)
+[src/Uri.ts:138](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/Uri.ts#L138)
 
 ___
 
@@ -148,7 +148,7 @@ Get uri port component
 
 #### Defined in
 
-[src/Uri.ts:123](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/Uri.ts#L123)
+[src/Uri.ts:123](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/Uri.ts#L123)
 
 ___
 
@@ -164,7 +164,7 @@ Get query parameters
 
 #### Defined in
 
-[src/Uri.ts:156](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/Uri.ts#L156)
+[src/Uri.ts:156](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/Uri.ts#L156)
 
 ___
 
@@ -180,7 +180,7 @@ Get query string
 
 #### Defined in
 
-[src/Uri.ts:147](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/Uri.ts#L147)
+[src/Uri.ts:147](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/Uri.ts#L147)
 
 ___
 
@@ -196,7 +196,7 @@ Get uri scheme component
 
 #### Defined in
 
-[src/Uri.ts:78](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/Uri.ts#L78)
+[src/Uri.ts:78](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/Uri.ts#L78)
 
 ___
 
@@ -212,7 +212,7 @@ Get the uri parameters
 
 #### Defined in
 
-[src/Uri.ts:187](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/Uri.ts#L187)
+[src/Uri.ts:187](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/Uri.ts#L187)
 
 ___
 
@@ -228,7 +228,7 @@ Get uri userinfo component, containing both username and password
 
 #### Defined in
 
-[src/Uri.ts:87](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/Uri.ts#L87)
+[src/Uri.ts:87](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/Uri.ts#L87)
 
 ___
 
@@ -244,7 +244,7 @@ Get uri user component
 
 #### Defined in
 
-[src/Uri.ts:96](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/Uri.ts#L96)
+[src/Uri.ts:96](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/Uri.ts#L96)
 
 ## Methods
 
@@ -269,7 +269,7 @@ Bind given values as uri parameters
 
 #### Defined in
 
-[src/Uri.ts:198](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/Uri.ts#L198)
+[src/Uri.ts:198](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/Uri.ts#L198)
 
 ___
 
@@ -291,7 +291,7 @@ Get uri component
 
 #### Defined in
 
-[src/Uri.ts:211](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/Uri.ts#L211)
+[src/Uri.ts:211](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/Uri.ts#L211)
 
 ___
 
@@ -313,7 +313,7 @@ Check if the uri has the given component
 
 #### Defined in
 
-[src/Uri.ts:220](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/Uri.ts#L220)
+[src/Uri.ts:220](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/Uri.ts#L220)
 
 ___
 
@@ -329,7 +329,7 @@ Check if this uri is absolute
 
 #### Defined in
 
-[src/Uri.ts:60](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/Uri.ts#L60)
+[src/Uri.ts:60](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/Uri.ts#L60)
 
 ___
 
@@ -345,7 +345,7 @@ Check if this uri is relative
 
 #### Defined in
 
-[src/Uri.ts:69](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/Uri.ts#L69)
+[src/Uri.ts:69](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/Uri.ts#L69)
 
 ___
 
@@ -361,7 +361,7 @@ Get a string representation
 
 #### Defined in
 
-[src/Uri.ts:51](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/Uri.ts#L51)
+[src/Uri.ts:51](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/Uri.ts#L51)
 
 ___
 
@@ -384,4 +384,4 @@ Create a new instance of this uri with the given component uri component
 
 #### Defined in
 
-[src/Uri.ts:229](https://github.com/nonetallt/front-to-back-router/blob/8c8599e/src/Uri.ts#L229)
+[src/Uri.ts:229](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/Uri.ts#L229)
