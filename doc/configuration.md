@@ -26,7 +26,7 @@
 }
 ```
 
-Note that **mutable** and **duplicates** are not available inside registration groups.
+Note that **mutable** and **duplicates** are not available in [registration group](registration.md#registering-groups) configuration.
 
 ## RouteRepositoryConfiguration
 
@@ -56,70 +56,99 @@ Configuration of an object that's capable of registering routes.
 - Type: object
 - Default: `{}`
 
-Extra defines any abitrary information you want this registrar to pass into each registered Route object.
+Extra defines any abitrary information you want this registrar to pass into each registered [Route object](generated/classes/Route.md). Can be used to store any sort of route information [from the back-end](server-side-integration) and various other pieces of data for display and application logic purposes.
+
+For example, you could store route permissions to extra.permissions and check if a given user has the permission to access that back-end route before they actually send the request, thus saving server resources (NOTE: this is not a replacement for server-side validation).
 
 #### uris
 
-- Type: UriConfigurationInterface
+- Type: [UriConfigurationInterface](generated/interfaces/UriConfigurationInterface.md)
 - Default: `{}`
 
-Configuration applied to each uri registered through this registrar.
-
-#### baseUri
-
-- Type: BaseUriConfigurationInterface
-- Default: `null`
-
-The base uri of each route registered through this registrar.
+Configuration applied to each URI registered through this registrar.
 
 ## UriConfiguration
 
-Configuration of an uri. Applies to all uris of the given registrar.
-
-#### prependSlash
-
-- Type: boolean
-- Default: `true`
-
-Whether the uri should be preceded by a leading `/` character. This determines if the uri will be considered as relative or absolute when it does not begin with a protocol (either `http://` or `https://`).
-
-#### defaultScheme
-
-- Type: `'http'` | `'https'` | `null`
-- Default: `null`
-
-Determines the default uri scheme that should be used if not explicitly set.
-
-#### overrideScheme
-
-- Type: `'http'` | `'https'` | `null`
-- Default: `null`
-
-Determines the uri scheme that should replace every explictly set uri scheme.
-
-#### baseUri
-
-- Type: string
-- Default: `''`
-
-## UriParameterConfiguration
-
-Configuration of uri parameters. Applies to all parameters of a given uri.
-
-## BaseUriConfiguration
-
-Configuration of the base uri of a given route registrar.
-
-#### uri
-
-- Type: string | Uri
-- **Required**
-
-The base uri.
+Configuration of an URI. Applies to all URIs of the given registrar.
 
 #### mergeQuery
 
 - Type: boolean
 - Default: `false`
 
-Determines whether get parameters of the base uri should be added to registered uris.
+Determines whether GET parameters of the base URI should be added to registered URIs. If `true` and [baseUri](#baseUri) contains a query component, any given route will also include the query component. If both the baseUri query and new URI have same parameters, the values of the new URI will be used.
+
+#### prependSlash
+
+- Type: boolean
+- Default: `true`
+
+Whether the URI should be preceded by a leading `/` character. This determines if the URI will be considered as relative or absolute when it does not begin with a protocol (either `http://` or `https://`).
+
+#### baseUri
+
+- Type: string | Uri
+- Default: `null`
+
+The base URI prepended before registered relative URIs. If the baseUri is itself relative, it will be applied as a path prefix. The baseUri will never be applied to absolute URIs (URIs that contain a host component).
+
+#### defaultScheme
+
+- Type: `'http'` | `'https'` | `null`
+- Default: `null`
+
+Determines the default URI scheme that should be used if a given URI is absolute but does not define a scheme. This option is redundant if [overrideScheme](#overrideScheme) is also set and not `null`.
+
+#### overrideScheme
+
+- Type: `'http'` | `'https'` | `null`
+- Default: `null`
+
+Determines the URI scheme that should always be used when a given URI is absolute. Mostly useful for forcing secure HTTPS scheme for absolute URIs.
+
+#### parameters
+
+- Type: [UriParameterBinderConfigurationInterface](generated/interfaces/UriParameterBinderConfigurationInterface)
+- Default: `{}`
+
+Configuration applied to each URI registered through this registrar.
+
+## UriParameterBinderConfiguration
+
+Configuration used when [binding URI parameters](uri-parameters.md).
+
+#### bindGetParameters
+
+- Type: boolean
+- Default: `false`
+
+Whether key-value pairs of a given object that can't be bound to URI parameters should be included as GET parameters.
+
+#### encodeUriParameters
+
+- Type: boolean
+- Default: `true`
+
+Whether URI parameters of the URI should be URL encoded.
+
+#### encodeGetParameters
+
+- Type: boolean
+- Default: `true`
+
+Whether GET parameters of the URI should be URL encoded.
+
+#### typeConversionFunction
+
+- Type: `'http'` | `'https'` | `null`
+- Default:
+```javascript
+/**
+* @throws TypeConversionError
+*/
+(parameterValue: any) => {
+    return String(parameterValue)
+} : string
+```
+
+Type conversion function applied to convert any given value into a displayable string when binding values to URI parameters. The function **must** return a string or throw [TypeConversionError](generated/classes/TypeConversionError.md) if the value can't be converted.
