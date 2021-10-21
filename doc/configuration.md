@@ -1,3 +1,5 @@
+[Back to documentation index](README.md)
+
 # Configuration
 
 ## Hierarchy

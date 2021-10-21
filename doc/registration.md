@@ -1,3 +1,5 @@
+[Back to documentation index](README.md)
+
 # Registering routes
 
 Check out [RouteRegistrar documentation](generated/classes/RouteRegistrar.md) for all registration methods.
@@ -81,4 +83,15 @@ repository.listRoutes()
 | api.user.show  | GET    | /api/users/{id} |
 | api.user.store | POST   | /api/users      |
 */
+```
+
+### Debugging
+
+As shown in the above example, you can use the [listRoutes](generated/classes/RouteRepository.md#listroutes) method to get a formatted markdown table string containing all routes.
+
+```javascript
+var routeListString = repository.listRoutes();
+
+// For debugging
+console.log(routeListString);
 ```

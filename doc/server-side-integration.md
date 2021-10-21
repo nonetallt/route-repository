@@ -1,3 +1,5 @@
+[Back to documentation index](README.md)
+
 # Server-side integration
 
 Sharing back-end routes to front-end javascript is the key to effectively utilizing this package. This is achieved by having a back-end server command that exports (publishes) the relevant routes into a **json file** that can then be imported by the [RouteRepository](./RouteRepository.md). The widely supported json serialization format works as the bridge that allows communication between javascript and your back-end language of choice.
