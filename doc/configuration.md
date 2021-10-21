@@ -26,7 +26,7 @@
 }
 ```
 
-Note that **mutable** and **duplicates** are not available in [registration group](registration.md#registering-groups) configuration.
+Note that **mutable** and **duplicates** are not available in [registration group](registration.md#registering-routes-as-groups) configuration.
 
 ## RouteRepositoryConfiguration
 

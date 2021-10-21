@@ -73,31 +73,7 @@ The package should provide the following functionality:
 
 ## Importing routes to the front-end
 
-You can use the **registerAll** method to quickly register all routes from a file.
-
-```javascript
-var json = require('./path/to/routes.json')
-
-var repository = new RouteRepository()
-repository.registerAll(json)
-```
-
-Note that if you're using typescript, you will unfortunately have to typecast imported json data:
-
-```typescript
-var json = require('./path/to/routes.json')
-var RouteInterface = require('route-repository').RouteInterface
-
-const repo = new RouteRepository()
-const data = json as Array<RouteInterface>
-repo.registerAll(data)
-```
-This means that you'll have to be careful that you don't supply data that is divergent from the schema, as the type checks won't be of much help. This shouldn't be much of an issue however, as long as the server-side publisher package is working correctly. This happens because the union type for route methods is typed as string by the json import instead of the correct union type, causing the two type declarations to clash.
-
-See the relevant issues on github:
-- [Typescript: 26552](https://github.com/microsoft/TypeScript/issues/26552)
-- [Typescript: 32063](https://github.com/microsoft/TypeScript/issues/32063)
-
+Refer to the [registration documentation](registration.md) for details on how to register routes.
 
 ## Route json schema
 
