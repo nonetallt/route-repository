@@ -1,6 +1,4 @@
 Refactor and cleanup:
-- documentation
-    - binding
 - accept uricomponentType instead of uricomponent
 - create example dir with mix compilation and make sure everything works
 - CI? (travis?)
