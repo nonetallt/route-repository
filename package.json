@@ -7,7 +7,7 @@
     "doc": "typedoc --excludeInternal --excludeProtected --excludePrivate",
     "test": "jest",
     "test-watch": "jest --watch",
-    "prepublishOnly": "npm run test && npm run production"
+    "prepublishOnly": "npm run test && npm run doc && npm run production"
   },
   "author": "Jyri Mikkola",
   "license": "MIT",
