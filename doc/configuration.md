@@ -47,6 +47,8 @@ It's recommended to keep this 'false' in order to avoid unexpected state changes
 
 Duplicates define whether the same route can be referenced to by multiple different aliases.
 
+
+
 ## RouteRegistrarConfiguration
 
 Configuration of an object that's capable of registering routes.
@@ -66,6 +68,13 @@ For example, you could store route permissions to extra.permissions and check if
 - Default: `{}`
 
 Configuration applied to each URI registered through this registrar.
+
+#### registrationMiddleware
+
+- Type: Array<[RouteMiddlewareInterface](generated/interfaces/RouteMiddlewareInterface)>
+- Default: []
+
+An array containing middlewares that should be applied before each route registration. This is mainly useful for modifying routes before they are registered using the with -prefix methods of [Route](generated/classes/Route.md). If you wish to abort registration of a given route, you should throw a [RegistrationError](generated/classes/RegistrationError) inside the [applyMiddleware](generated/interfaces/RouteMiddlewareInterface#applymiddleware) method.
 
 ## UriConfiguration
 
@@ -112,6 +121,8 @@ Determines the URI scheme that should always be used when a given URI is absolut
 - Default: `{}`
 
 Configuration applied to each URI registered through this registrar.
+
+
 
 ## UriParameterBinderConfiguration
 
