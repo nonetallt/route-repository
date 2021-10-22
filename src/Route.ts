@@ -1,6 +1,5 @@
 import Uri from './Uri'
 import RequestMethodType from './RequestMethodType';
-import UriComponent from './UriComponent'
 import UriComponentType from './UriComponentType'
 import cloneDeep from 'lodash.clonedeep'
 
