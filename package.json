@@ -1,8 +1,8 @@
 {
   "name": "route-repository",
   "description": "Framework agnostic storage of front to back routing information.",
-  "main": "index.js",
-  "types": "./src/index.d.ts",
+  "main": "dist/route-repository.js",
+  "module": "dist/route-repository.esm.js",
   "scripts": {
     "doc": "typedoc --excludeInternal --excludeProtected --excludePrivate",
     "test": "jest",
