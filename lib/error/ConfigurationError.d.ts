@@ -1,0 +1,8 @@
+/**
+ * Error that is thrown when configuration value is invalid
+ *
+ */
+export default class ConfigurationError extends Error {
+    readonly previous: Error | null;
+    constructor(message: string, previous?: Error);
+}

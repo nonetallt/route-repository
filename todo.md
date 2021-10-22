@@ -1,11 +1,14 @@
-Refactor and cleanup:
-- create test project, import package using local path
-    - types export?
-- create example dir with mix compilation and make sure everything works
+## Refactor and cleanup:
+
+- remove d.ts files from dist
+- versioning
+- resolve circular dependencies?
 - CI? (travis?)
 - more tests:
     - Configurations specs?
     - Other missing tests
+
+## Features
 
 RouteRepo
 - removeRoute / unregister
