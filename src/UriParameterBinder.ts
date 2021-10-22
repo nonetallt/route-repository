@@ -54,13 +54,13 @@ export default class UriParameterBinder
      */
     private bindObject(uri: string, object : object, parameters: UriParameterCollection, config: Configuration) : string
     {
-        parameters.forEach(parameter => {
+        for(const [index, parameter] of parameters.entries()) {
 
             uri = this.bindParameter(uri, parameter, (object as any)[parameter.name], config)
 
             // Remove already bound values from the object's keys
             delete (object as any)[parameter.name];
-        })
+        }
 
         // Bind rest of the parameters as get params if specified
         if(Object.keys(object).length > 0 && config.bindGetParameters) {
@@ -76,9 +76,9 @@ export default class UriParameterBinder
      */
     private bindArray(uri: string, array: Array<any>, parameters: UriParameterCollection, config: Configuration) : string
     {
-        parameters.forEach((parameter, index) => {
+        for(const [index, parameter] of parameters.entries()) {
             uri = this.bindParameter(uri, parameter, array[index], config)
-        })
+        }
 
         return uri
     }
@@ -89,7 +89,6 @@ export default class UriParameterBinder
      */
     private bindValue(uri: string, value: any, parameters: UriParameterCollection, config: Configuration) : string
     {
-        const original = value
         const required = parameters.getRequired()
 
         if(required.length > 1) {

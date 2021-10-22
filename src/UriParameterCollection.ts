@@ -52,12 +52,12 @@ export default class UriParameterCollection extends Array<UriParameter>
     {
         let required = false
 
-        this.forEach(parameter => {
+        for(const [index, parameter] of this.entries()) {
             if(parameter.required) {
                 required = true
-                return false
+                break
             }
-        })
+        }
 
         return required
     }
@@ -79,9 +79,7 @@ export default class UriParameterCollection extends Array<UriParameter>
      */
     getNames() : Array<string>
     {
-        return this.map(parameter => {
-            return parameter.name
-        })
+        return this.map(parameter => parameter.name)
     }
 
     /**

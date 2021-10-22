@@ -95,20 +95,17 @@ export default class RouteRepository extends RouteRegistrar
      */
     hasRouteWithUri(uri: string, ...methods: Array<RequestMethodType>) : boolean
     {
-        let hasRoute = false
-
         if(methods.length === 0) {
             methods = Object.values(RequestMethod)
         }
 
-        methods.forEach(method => {
+        for(const [index, method] of methods.entries()) {
             if(this.signatures.has(this.routeSignature(method, uri))) {
-                hasRoute = true
-                return false
+                return true
             }
-        })
+        }
 
-        return hasRoute
+        return false
     }
 
     /**
@@ -138,9 +135,9 @@ export default class RouteRepository extends RouteRegistrar
     {
         const rows = [['NAME', 'METHOD', 'URI']]
 
-        this.routes.forEach(route => {
+        for(const [signature, route] of this.routes) {
             rows.push([route.name, route.method, route.uri.toString()])
-        })
+        }
 
         const nameLen   = Math.max(...rows.map(row => row[0].length))
         const methodLen = Math.max(...rows.map(row => row[1].length))

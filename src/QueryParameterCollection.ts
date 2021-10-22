@@ -13,10 +13,10 @@ export default class QueryParameterCollection extends Map<string, string>
     {
         const params = new QueryParameterCollection()
 
-        query.split('&').forEach(keyValuePair => {
+        for(const keyValuePair of query.split('&')) {
             const [key, value] = keyValuePair.split('=')
             params.set(key, value)
-        })
+        }
 
         return params
     }
@@ -38,13 +38,17 @@ export default class QueryParameterCollection extends Map<string, string>
     {
         const parts = new Array<string>()
 
-        this.forEach((value, name) => {
+        for(const [name, value] of this) {
+
+            let paramName = name
+            let paramValue = value
+
             if(urlEncode) {
-                name = encodeURIComponent(name)
-                value = encodeURIComponent(value)
+                paramName = encodeURIComponent(name)
+                paramValue = encodeURIComponent(value)
             }
-            parts.push(`${name}=${value}`)
-        })
+            parts.push(`${paramName}=${paramValue}`)
+        }
 
         return parts.join('&')
     }
@@ -57,11 +61,11 @@ export default class QueryParameterCollection extends Map<string, string>
     {
         const newCollection = new QueryParameterCollection(this)
 
-        collections.forEach(collection => {
-            collection.forEach((value, name) => {
+        for(const collection of collections) {
+            for(const [name, value] of collection) {
                 newCollection.set(name, value)
-            })
-        })
+            }
+        }
 
         return newCollection
     }
