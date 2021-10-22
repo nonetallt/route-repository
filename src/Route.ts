@@ -1,6 +1,7 @@
 import Uri from './Uri'
 import RequestMethodType from './RequestMethodType';
 import UriComponent from './UriComponent'
+import UriComponentType from './UriComponentType'
 import cloneDeep from 'lodash.clonedeep'
 
 export default class Route
@@ -49,7 +50,7 @@ export default class Route
      * Create a new instance of this route with the given uri component
      *
      */
-    withUriComponent(component: UriComponent, value: string) : Route
+    withUriComponent(component: UriComponentType, value: string) : Route
     {
         const instance = cloneDeep(this)
         instance.setUriComponent(component, value)
@@ -66,7 +67,7 @@ export default class Route
         return new Route(this.name, this.method, this.uri, extra)
     }
 
-    protected setUriComponent(component: UriComponent, value: string)
+    protected setUriComponent(component: UriComponentType, value: string)
     {
         this.uri = this.uri.withComponent(component, value)
     }

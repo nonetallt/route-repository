@@ -26,7 +26,7 @@ A simple enum that contains valid HTTP methods
 
 #### Defined in
 
-[src/RequestMethod.ts:13](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/RequestMethod.ts#L13)
+[src/RequestMethod.ts:13](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/RequestMethod.ts#L13)
 
 ___
 
@@ -36,7 +36,7 @@ ___
 
 #### Defined in
 
-[src/RequestMethod.ts:11](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/RequestMethod.ts#L11)
+[src/RequestMethod.ts:11](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/RequestMethod.ts#L11)
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 #### Defined in
 
-[src/RequestMethod.ts:7](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/RequestMethod.ts#L7)
+[src/RequestMethod.ts:7](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/RequestMethod.ts#L7)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 #### Defined in
 
-[src/RequestMethod.ts:12](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/RequestMethod.ts#L12)
+[src/RequestMethod.ts:12](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/RequestMethod.ts#L12)
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 #### Defined in
 
-[src/RequestMethod.ts:14](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/RequestMethod.ts#L14)
+[src/RequestMethod.ts:14](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/RequestMethod.ts#L14)
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 #### Defined in
 
-[src/RequestMethod.ts:10](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/RequestMethod.ts#L10)
+[src/RequestMethod.ts:10](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/RequestMethod.ts#L10)
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 #### Defined in
 
-[src/RequestMethod.ts:8](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/RequestMethod.ts#L8)
+[src/RequestMethod.ts:8](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/RequestMethod.ts#L8)
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 #### Defined in
 
-[src/RequestMethod.ts:9](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/RequestMethod.ts#L9)
+[src/RequestMethod.ts:9](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/RequestMethod.ts#L9)
 
 ___
 
@@ -106,4 +106,4 @@ ___
 
 #### Defined in
 
-[src/RequestMethod.ts:15](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/RequestMethod.ts#L15)
+[src/RequestMethod.ts:15](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/RequestMethod.ts#L15)

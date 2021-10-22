@@ -2,6 +2,7 @@ import Configuration from './config/UriConfiguration'
 import ConfigurationInterface from './contract/UriConfigurationInterface'
 import UriParameterBinder from './UriParameterBinder'
 import UriComponent from './UriComponent'
+import UriComponentType from './UriComponentType'
 import UriSyntaxError from './error/UriSyntaxError'
 import UriBuilder from './UriBuilder'
 import UriParameterBinderConfigurationInterface from './contract/UriParameterBinderConfigurationInterface'
@@ -21,7 +22,7 @@ export default class Uri
      *  @throws UriSyntaxError
      *
      */
-    constructor(uri: string | Map<UriComponent, string>, config: ConfigurationInterface = {})
+    constructor(uri: string | Map<UriComponentType, string>, config: ConfigurationInterface = {})
     {
         if(uri instanceof Map && ! uri.has(UriComponent.Host) && ! uri.has(UriComponent.Path)) {
             const msg = `Uri constructed from components should have at least either host or path.`
@@ -175,7 +176,7 @@ export default class Uri
      * Get all uri components
      *
      */
-    get components() : Map<UriComponent, string>
+    get components() : Map<UriComponentType, string>
     {
         return this.builder
     }
@@ -208,7 +209,7 @@ export default class Uri
      * Get uri component
      *
      */
-    getComponent(component: UriComponent) : string | null
+    getComponent(component: UriComponentType) : string | null
     {
         return this.builder.get(component) ?? null
     }
@@ -217,7 +218,7 @@ export default class Uri
      * Check if the uri has the given component
      *
      */
-    hasComponent(component: UriComponent) : boolean
+    hasComponent(component: UriComponentType) : boolean
     {
         return this.builder.has(component)
     }
@@ -226,7 +227,7 @@ export default class Uri
      * Create a new instance of this uri with the given component uri component
      *
      */
-    withComponent(component: UriComponent, value: string) : Uri
+    withComponent(component: UriComponentType, value: string) : Uri
     {
         const instance = cloneDeep(this)
         instance.setComponent(component, value)
@@ -237,7 +238,7 @@ export default class Uri
      *  Set the value of a given component
      *
      */
-    protected setComponent(component: UriComponent, value: string)
+    protected setComponent(component: UriComponentType, value: string)
     {
         this.builder.set(component, value)
     }

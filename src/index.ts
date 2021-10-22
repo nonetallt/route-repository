@@ -13,6 +13,7 @@ export {default as UriComponent} from './UriComponent'
 
 // Types
 export {default as RequestMethodType} from './RequestMethodType'
+export {default as UriComponentType} from './UriComponentType'
 
 // Interfaces
 export {default as UriInterface} from './contract/UriInterface'

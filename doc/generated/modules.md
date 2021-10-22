@@ -38,6 +38,7 @@
 ### Type aliases
 
 - [RequestMethodType](modules.md#requestmethodtype)
+- [UriComponentType](modules.md#uricomponenttype)
 
 ## Type aliases
 
@@ -47,4 +48,14 @@
 
 #### Defined in
 
-[src/RequestMethodType.ts:3](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/RequestMethodType.ts#L3)
+[src/RequestMethodType.ts:3](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/RequestMethodType.ts#L3)
+
+___
+
+### UriComponentType
+
+Ƭ **UriComponentType**: \`${UriComponent}\`
+
+#### Defined in
+
+[src/UriComponentType.ts:3](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/UriComponentType.ts#L3)

@@ -48,7 +48,7 @@ Error.constructor
 
 #### Defined in
 
-[src/error/UriSyntaxError.ts:9](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/error/UriSyntaxError.ts#L9)
+[src/error/UriSyntaxError.ts:9](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/error/UriSyntaxError.ts#L9)
 
 ## Properties
 
@@ -86,7 +86,7 @@ ___
 
 #### Defined in
 
-[src/error/UriSyntaxError.ts:7](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/error/UriSyntaxError.ts#L7)
+[src/error/UriSyntaxError.ts:7](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/error/UriSyntaxError.ts#L7)
 
 ___
 

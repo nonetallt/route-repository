@@ -1,5 +1,6 @@
 import Uri from './Uri'
 import UriComponent from './UriComponent'
+import UriComponentType from './UriComponentType'
 import UriSyntaxError from './error/UriSyntaxError'
 import Configuration from './config/UriBuilderConfiguration'
 import ConfigurationInterface from './contract/UriBuilderConfigurationInterface'
@@ -11,11 +12,11 @@ const parseRegex = new RegExp(/^((?<scheme>https?):\/\/)?((?<userinfo>(?<usernam
  * Internal, should not be part of the public API
  *
  */
-export default class UriBuilder extends Map<UriComponent, string>
+export default class UriBuilder extends Map<UriComponentType, string>
 {
     private configuration: Configuration
 
-    constructor(components: Map<UriComponent, string>, config: ConfigurationInterface = {})
+    constructor(components: Map<UriComponentType, string>, config: ConfigurationInterface = {})
     {
         super(components)
         this.configuration = new Configuration(config)
@@ -50,7 +51,7 @@ export default class UriBuilder extends Map<UriComponent, string>
             throw new UriSyntaxError(msg)
         }
 
-        const parsed = new Map<UriComponent, string>()
+        const parsed = new Map<UriComponentType, string>()
 
         Object.values(UriComponent).forEach(component => {
             if(match.groups !== undefined) {

@@ -26,7 +26,7 @@
 
 #### Defined in
 
-[src/contract/RouteRepositoryConfigurationInterface.ts:6](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/contract/RouteRepositoryConfigurationInterface.ts#L6)
+[src/contract/RouteRepositoryConfigurationInterface.ts:6](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/contract/RouteRepositoryConfigurationInterface.ts#L6)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 #### Defined in
 
-[src/contract/RouteRegistrarConfigurationInterface.ts:6](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/contract/RouteRegistrarConfigurationInterface.ts#L6)
+[src/contract/RouteRegistrarConfigurationInterface.ts:6](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/contract/RouteRegistrarConfigurationInterface.ts#L6)
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 #### Defined in
 
-[src/contract/RouteRepositoryConfigurationInterface.ts:5](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/contract/RouteRepositoryConfigurationInterface.ts#L5)
+[src/contract/RouteRepositoryConfigurationInterface.ts:5](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/contract/RouteRepositoryConfigurationInterface.ts#L5)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[src/contract/RouteRegistrarConfigurationInterface.ts:8](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/contract/RouteRegistrarConfigurationInterface.ts#L8)
+[src/contract/RouteRegistrarConfigurationInterface.ts:8](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/contract/RouteRegistrarConfigurationInterface.ts#L8)
 
 ___
 
@@ -78,4 +78,4 @@ ___
 
 #### Defined in
 
-[src/contract/RouteRegistrarConfigurationInterface.ts:7](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/contract/RouteRegistrarConfigurationInterface.ts#L7)
+[src/contract/RouteRegistrarConfigurationInterface.ts:7](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/contract/RouteRegistrarConfigurationInterface.ts#L7)

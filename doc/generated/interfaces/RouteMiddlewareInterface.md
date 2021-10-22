@@ -14,6 +14,10 @@
 
 ▸ **applyMiddleware**(`route`): [`Route`](../classes/Route.md)
 
+**`throws`** RegistrationError
+
+Apply the middleware to a given route.
+
 #### Parameters
 
 | Name | Type |
@@ -26,4 +30,4 @@
 
 #### Defined in
 
-[src/contract/RouteMiddlewareInterface.ts:5](https://github.com/nonetallt/front-to-back-router/blob/7fcdd9c/src/contract/RouteMiddlewareInterface.ts#L5)
+[src/contract/RouteMiddlewareInterface.ts:11](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/contract/RouteMiddlewareInterface.ts#L11)

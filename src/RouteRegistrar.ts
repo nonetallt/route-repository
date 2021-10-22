@@ -1,5 +1,6 @@
 import Uri from './Uri'
 import UriComponent from './UriComponent'
+import UriComponentType from './UriComponentType'
 import Route from './Route'
 import RequestMethodType from './RequestMethodType'
 import Configuration from './config/RouteRegistrarConfiguration'
@@ -37,7 +38,7 @@ export default abstract class RouteRegistrar
      * @throws RegistrationError
      *
      */
-    register(name: string, method: RequestMethodType, uri: string | Map<UriComponent, string>, extra: object = {}) : void
+    register(name: string, method: RequestMethodType, uri: string | Map<UriComponentType, string>, extra: object = {}) : void
     {
         const uriObj = new Uri(uri, this.configuration.uris)
         let route = new Route(name, method, uriObj, merge(this.configuration.extra, extra))
@@ -77,7 +78,7 @@ export default abstract class RouteRegistrar
                 continue
             }
 
-            const uri = new Map<UriComponent, string>()
+            const uri = new Map<UriComponentType, string>()
 
             for(const [key, value] of Object.entries(UriComponent)) {
                 const tmp = route.uri[value as keyof UriInterface]

@@ -1,5 +1,6 @@
 Refactor and cleanup:
-- accept uricomponentType instead of uricomponent
+- create test project, import package using local path
+    - types export?
 - create example dir with mix compilation and make sure everything works
 - CI? (travis?)
 - more tests:
