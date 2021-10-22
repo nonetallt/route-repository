@@ -24,35 +24,39 @@ In short, you get access to the following features and benefits:
 
 ## Installation
 
-As usual, you can install the package by using NPM:
+#### NPM
+
+Install package:
 
 ```
 npm install route-repository
 ```
-Or include it directly from one the public CDN providers:
 
+Import the main class:
+
+```javascript
+import { RouteRepository } from 'route-repository';
+var repository = new RouteRepository();
 ```
+
+#### Browser
+
+Include directly from one the public CDN providers:
+
+```html
 <script src="https://jsdelivr.com/route-repository/dist/route-repository.min.js"></script>
 <script src="https://unpkg.com/-modernized/dist/route-repository.min.js"></script>
 ```
 
-Import the package:
+Use the `route_repository` window object to access classes under the package namespace:
 
 ```javascript
-// Using commonjs
-var repository = require('route-repository').RouteRepository;
-
-// Using es2015
-import {RouteRepository} from 'route-repository';
+const library = route_repository
+var repository = new library.RouteRepository()
 ```
 
 ## Basic usage
 
-Initialize a new container of the routes for the application:
-
-```javascript
-var repository = new RouteRepository();
-```
 Register a new route:
 
 ```javascript
