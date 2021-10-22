@@ -13,13 +13,13 @@ describe('UriParameterCollection', () => {
         it('throws error when optional parameters are before required ones', () => {
 
             expect(() => {
-                const params = UriParameterCollection.fromUriString('/foo/{bar?}/{baz}')
+                UriParameterCollection.fromUriString('/foo/{bar?}/{baz}')
             }).toThrow(UriParameterSyntaxError)
         })
 
         it('does not throw error with multiple optional trailing parameters', () => {
             expect(() => {
-                const params = UriParameterCollection.fromUriString('/foo/{bar?}/{baz?}')
+                UriParameterCollection.fromUriString('/foo/{bar?}/{baz?}')
             }).not.toThrow()
         })
     })

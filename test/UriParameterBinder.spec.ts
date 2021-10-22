@@ -37,7 +37,7 @@ describe('UriParameterBinder', () => {
 
             expect(() => {
                 const binder = new UriParameterBinder()
-                const bound = binder.bind('/products/{category}', '')
+                binder.bind('/products/{category}', '')
 
             }).toThrow(UriParameterBindingError)
         })
@@ -46,7 +46,7 @@ describe('UriParameterBinder', () => {
 
             expect(() => {
                 const binder = new UriParameterBinder()
-                const bound = binder.bind('/products/{category?}', '')
+                binder.bind('/products/{category?}', '')
 
             }).not.toThrow()
         })

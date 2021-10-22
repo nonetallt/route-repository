@@ -1,8 +1,6 @@
 import RouteRepository from '../src/RouteRepository'
-import RouteRegistrar from '../src/RouteRegistrar'
 import RouteInterface from '../src/contract/RouteInterface'
 import RegistrationError from '../src/error/RegistrationError'
-import Route from '../src/Route'
 import fs from 'fs'
 import json from './input/routes.json'
 import UriComponent from '../src/UriComponent'
@@ -215,10 +213,6 @@ describe('RouteRepository', () => {
 
                 const route = repo.getRoute('new_route_2') ?? {uri: {toString: function() {return null}}};
                 expect(route.uri.toString()).toEqual(uri);
-            })
-
-            it('removes old signatures from list when route is modified', () => {
-                const repo = new RouteRepository({mutable: true})
             })
         })
     })
