@@ -1,7 +1,8 @@
 {
   "name": "route-repository",
-  "description": "Framework agnostic storage of front to back routing information.",
+  "version": "1.0.0",
   "author": "Jyri Mikkola",
+  "description": "Framework agnostic storage of front to back routing information.",
   "license": "MIT",
   "repository": {
     "type": "git",
