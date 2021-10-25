@@ -324,6 +324,29 @@ describe('RouteRepository', () => {
             expect(repo.getRoute('baz')?.method).toEqual('PUT')
             expect(repo.getRoute('baz')?.extra).toEqual({foo: 'bar'})
         })
+
+        it('throws RegistrationError if json cannot be parsed', () => {
+            const repo = new RouteRepository()
+
+            expect(() => {
+                repo.registerAll('"foo":"bar"}')
+            }).toThrow(RegistrationError)
+        })
+
+        it('can register uris from a given json string', () => {
+
+            const repo = new RouteRepository()
+            const data = JSON.stringify(json)
+            repo.registerAll(data)
+
+            expect(repo.getRoute('foo')?.uri.toString()).toEqual('example.com/foo')
+            expect(repo.getRoute('foo')?.method).toEqual('GET')
+            expect(repo.getRoute('bar')?.uri.toString()).toEqual('example.com/bar')
+            expect(repo.getRoute('bar')?.method).toEqual('POST')
+            expect(repo.getRoute('baz')?.uri.toString()).toEqual('example.com/baz')
+            expect(repo.getRoute('baz')?.method).toEqual('PUT')
+            expect(repo.getRoute('baz')?.extra).toEqual({foo: 'bar'})
+        })
     })
 
     describe('configuration', () => {
