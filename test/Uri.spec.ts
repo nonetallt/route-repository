@@ -1,7 +1,17 @@
 import Uri from '../src/Uri'
 import UriComponent from '../src/UriComponent'
+import UriSyntaxError from '../src/error/UriSyntaxError'
 
 describe('Uri', () => {
+
+    describe('constructor', () => {
+
+        it('throws UriSyntaxError if given uri components lack both host and path', () => {
+            expect(() => {
+                new Uri('')
+            }).toThrow(UriSyntaxError)
+        })
+    })
 
     describe('toString', () => {
 

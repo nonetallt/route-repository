@@ -24,11 +24,6 @@ export default class Uri
      */
     constructor(uri: string | Map<UriComponentType, string>, config: ConfigurationInterface = {})
     {
-        if(uri instanceof Map && ! uri.has(UriComponent.Host) && ! uri.has(UriComponent.Path)) {
-            const msg = `Uri constructed from components should have at least either host or path.`
-            throw new UriSyntaxError(msg)
-        }
-
         this.configuration = new Configuration(config)
 
         if(
@@ -43,6 +38,11 @@ export default class Uri
 
         this.builder = uri instanceof Map ? new UriBuilder(uri, config) : UriBuilder.fromUriString(uri, config)
         this.binder = new UriParameterBinder(this.configuration.parameters)
+
+        if(! this.hasComponent(UriComponent.Host) && ! this.hasComponent(UriComponent.Path)) {
+            const msg = `Uris should have at least either host or path.`
+            throw new UriSyntaxError(msg)
+        }
     }
 
     /**
