@@ -2,7 +2,7 @@
 
 - [Configuration](configuration.md)
 - [Registering routes](registration.md)
-- [Binding URI parameters]('uri-parameters.md')
+- [Binding URI parameters](uri-parameters.md)
 - [Server-side integration](server-side-integration.md)
 - [Public API](generated/modules.md)
 
