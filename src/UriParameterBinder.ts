@@ -33,7 +33,7 @@ export default class UriParameterBinder
         const parameters = UriParameterCollection.fromUriString(uri.toString())
 
         // Return base uri if there's nothing to bind.
-        if(parameters.length === 0 && configuration.bindGetParameters === false) {
+        if(parameters.size === 0 && configuration.bindGetParameters === false) {
             return uri
         }
 
@@ -76,8 +76,11 @@ export default class UriParameterBinder
      */
     private bindArray(uri: string, array: Array<any>, parameters: UriParameterCollection, config: Configuration) : string
     {
+        let n = 0
+
         for(const [index, parameter] of parameters.entries()) {
-            uri = this.bindParameter(uri, parameter, array[index], config)
+            uri = this.bindParameter(uri, parameter, array[n], config)
+            n++
         }
 
         return uri
@@ -89,14 +92,20 @@ export default class UriParameterBinder
      */
     private bindValue(uri: string, value: any, parameters: UriParameterCollection, config: Configuration) : string
     {
-        const required = parameters.getRequired()
+        const required = Array.from(parameters.getRequired().keys())
 
         if(required.length > 1) {
             const msg = `Cannot bind a given ${typeof value} as uri parameters: this type is handled as a plain value and can only be bound to one parameter but there are ${required.length} required parameters.`
             throw new UriParameterBindingError(msg)
         }
 
-        return this.bindParameter(uri, parameters[0], value, config)
+        const parameter = parameters.first()
+
+        if(parameter === null) {
+            return uri
+        }
+
+        return this.bindParameter(uri, parameter, value, config)
     }
 
     /**
@@ -124,7 +133,7 @@ export default class UriParameterBinder
     {
         if(value === undefined) {
             if(parameter.required) {
-                const msg = `Cannot bind missing value for required parameter '${parameter.name}'.`
+                const msg = `Cannot bind undefined value for required parameter '${parameter.name}'.`
                 throw new UriParameterBindingError(msg)
             }
             value = ''

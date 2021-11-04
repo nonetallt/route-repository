@@ -6,6 +6,19 @@ describe('UriParameterBinder', () => {
 
     describe('bind', () => {
 
+        it('returns given uri string when there are no parameters to bind', () => {
+            const binder = new UriParameterBinder()
+            expect(binder.bind('foo', 'foo')).toEqual('foo')
+        })
+
+        it('throws error when binding undefined value for a required parameter', () => {
+            const binder = new UriParameterBinder()
+
+            expect(() => {
+                binder.bind('/foo/{bar}', undefined)
+            }).toThrow(UriParameterBindingError)
+        })
+
         it('throws error when first required parameter is missing', () => {
 
             const binder = new UriParameterBinder()

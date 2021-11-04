@@ -56,7 +56,7 @@ export default abstract class RouteRegistrar
     {
         if(typeof routes === 'string') {
             try {
-                routes = Object.assign(new Array<RouteInterface>(), JSON.parse(routes))
+                routes = JSON.parse(routes)
             }
             catch(error) {
                 if(error instanceof SyntaxError) {

@@ -1,6 +1,7 @@
 import Uri from '../src/Uri'
 import UriComponent from '../src/UriComponent'
 import UriSyntaxError from '../src/error/UriSyntaxError'
+import UriParameterCollection from '../src/UriParameterCollection'
 
 describe('Uri', () => {
 
@@ -285,6 +286,38 @@ describe('Uri', () => {
             uri.withComponent(UriComponent.Scheme, 'https')
 
             expect(uri.toString()).toEqual('foo')
+        })
+    })
+
+    describe('components', () => {
+
+        it('returns the uri components', () => {
+            const uri = new Uri('http://example.com/foo')
+
+            expect(uri.components.get('scheme')).toEqual('http')
+            expect(uri.components.get('host')).toEqual('example.com')
+            expect(uri.components.get('path')).toEqual('foo')
+        })
+    })
+
+    describe('uriParameters', () => {
+
+        it('returns uri parameters', () => {
+            const uri = new Uri('http://example.com/foo?foo=1&bar=2&baz=3')
+            expect(uri.uriParameters).toBeInstanceOf(UriParameterCollection)
+        })
+    })
+
+    describe('bindParameters', () => {
+
+        it('bindsParameters', () => {
+            const uri = new Uri('http://example.com/{foo}')
+            expect(uri.bindParameters({foo: 'foo'})).toEqual('http://example.com/foo')
+        })
+
+        it('overrides configuration if new configuration is provided', () => {
+            const uri = new Uri('/{foo}')
+            expect(uri.bindParameters({foo: 'foo', bar: 'bar'}, {bindGetParameters: true})).toEqual('/foo?bar=bar')
         })
     })
 })

@@ -1,8 +1,5 @@
 ## Refactor and cleanup:
 
-- remove d.ts files from dist
-- versioning
-- resolve circular dependencies?
 - CI? (travis?)
 - more tests:
     - Configurations specs?
