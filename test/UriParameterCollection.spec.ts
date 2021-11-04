@@ -7,7 +7,7 @@ describe('UriParameterCollection', () => {
 
         it('finds all parameters', () => {
             const params = UriParameterCollection.fromUriString('/foo/{bar}/{baz?}')
-            expect(params.length).toEqual(2)
+            expect(params.size).toEqual(2)
         })
 
         it('throws error when optional parameters are before required ones', () => {

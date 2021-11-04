@@ -66,7 +66,7 @@ export default abstract class RouteRegistrar
             }
 
             if(! Array.isArray(routes)) {
-                const msg = 'Could not load given json: array data.'
+                const msg = `Could not load given json: expected array data, got ${typeof routes}.`
                 throw new RegistrationError(msg)
             }
         }

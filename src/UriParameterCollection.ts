@@ -3,13 +3,8 @@ import UriParameterSyntaxError from './error/UriParameterSyntaxError'
 
 const parseRegex = new RegExp(/\{.*?\}/)
 
-export default class UriParameterCollection extends Array<UriParameter>
+export default class UriParameterCollection extends Map<string, UriParameter>
 {
-    constructor(...items : Array<UriParameter>)
-    {
-        super(...items)
-    }
-
     /**
      * Create a new uri parameter collection from parameter placeholders in a given uri string
      *
@@ -18,7 +13,7 @@ export default class UriParameterCollection extends Array<UriParameter>
      */
     static fromUriString(uri: string) : UriParameterCollection
     {
-        const parameters = []
+        const parameters = new UriParameterCollection
 
         // Parse the uri parameter placeholders with surrounding {curiy braces}.
         let match = uri.match(parseRegex)
@@ -36,12 +31,12 @@ export default class UriParameterCollection extends Array<UriParameter>
 
             lastParameterOptional = ! parameter.required
 
-            parameters.push(parameter)
+            parameters.set(parameter.name, parameter)
             uri = uri.replace(placeholder, '');
             match = uri.match(parseRegex);
         }
 
-        return new UriParameterCollection(...parameters)
+        return parameters
     }
 
     /**
@@ -68,9 +63,14 @@ export default class UriParameterCollection extends Array<UriParameter>
      */
     getRequired() : UriParameterCollection
     {
-        return new UriParameterCollection(...this.filter(parameter => {
-            return parameter.required
-        }))
+        return new UriParameterCollection(Array.from(this.values())
+            .filter(parameter => {
+                return parameter.required
+            })
+            .map(parameter => {
+                return [parameter.name, parameter]
+            })
+         )
     }
 
     /**
@@ -79,7 +79,7 @@ export default class UriParameterCollection extends Array<UriParameter>
      */
     getNames() : Array<string>
     {
-        return this.map(parameter => parameter.name)
+        return Array.from(this.values()).map(parameter => parameter.name)
     }
 
     /**
@@ -88,12 +88,21 @@ export default class UriParameterCollection extends Array<UriParameter>
      */
     getParameter(name: string) : UriParameter | null
     {
-        const parameter = this.find(param => param.name === name)
+        const parameter = Array.from(this.values()).find(param => param.name === name)
 
         if(parameter === undefined) {
             return null
         }
 
         return parameter
+    }
+
+    /**
+     * Return the 'first' parameter as indicated by iterator keys
+     *
+     */
+    first() : UriParameter | null
+    {
+        return this.get(Array.from(this.keys())[0]) ?? null
     }
 }
