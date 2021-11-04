@@ -48,7 +48,7 @@
 
 #### Defined in
 
-[src/RequestMethodType.ts:3](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/RequestMethodType.ts#L3)
+[src/RequestMethodType.ts:3](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/RequestMethodType.ts#L3)
 
 ___
 
@@ -58,4 +58,4 @@ ___
 
 #### Defined in
 
-[src/UriComponentType.ts:3](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/UriComponentType.ts#L3)
+[src/UriComponentType.ts:3](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriComponentType.ts#L3)

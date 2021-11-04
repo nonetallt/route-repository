@@ -23,7 +23,7 @@
 
 #### Defined in
 
-[src/contract/UriParameterBinderConfigurationInterface.ts:4](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/contract/UriParameterBinderConfigurationInterface.ts#L4)
+[src/contract/UriParameterBinderConfigurationInterface.ts:4](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/contract/UriParameterBinderConfigurationInterface.ts#L4)
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 #### Defined in
 
-[src/contract/UriParameterBinderConfigurationInterface.ts:6](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/contract/UriParameterBinderConfigurationInterface.ts#L6)
+[src/contract/UriParameterBinderConfigurationInterface.ts:6](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/contract/UriParameterBinderConfigurationInterface.ts#L6)
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 #### Defined in
 
-[src/contract/UriParameterBinderConfigurationInterface.ts:5](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/contract/UriParameterBinderConfigurationInterface.ts#L5)
+[src/contract/UriParameterBinderConfigurationInterface.ts:5](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/contract/UriParameterBinderConfigurationInterface.ts#L5)
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 #### Defined in
 
-[src/contract/UriParameterBinderConfigurationInterface.ts:3](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/contract/UriParameterBinderConfigurationInterface.ts#L3)
+[src/contract/UriParameterBinderConfigurationInterface.ts:3](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/contract/UriParameterBinderConfigurationInterface.ts#L3)
 
 ## Methods
 
@@ -73,4 +73,4 @@ ___
 
 #### Defined in
 
-[src/contract/UriParameterBinderConfigurationInterface.ts:7](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/contract/UriParameterBinderConfigurationInterface.ts#L7)
+[src/contract/UriParameterBinderConfigurationInterface.ts:7](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/contract/UriParameterBinderConfigurationInterface.ts#L7)

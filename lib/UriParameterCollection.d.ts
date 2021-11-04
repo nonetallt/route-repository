@@ -1,6 +1,5 @@
 import UriParameter from './UriParameter';
-export default class UriParameterCollection extends Array<UriParameter> {
-    constructor(...items: Array<UriParameter>);
+export default class UriParameterCollection extends Map<string, UriParameter> {
     /**
      * Create a new uri parameter collection from parameter placeholders in a given uri string
      *
@@ -28,4 +27,9 @@ export default class UriParameterCollection extends Array<UriParameter> {
      *
      */
     getParameter(name: string): UriParameter | null;
+    /**
+     * Return the 'first' parameter as indicated by iterator keys
+     *
+     */
+    first(): UriParameter | null;
 }

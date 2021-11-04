@@ -24,7 +24,7 @@
 
 #### Defined in
 
-[src/UriComponent.ts:11](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/UriComponent.ts#L11)
+[src/UriComponent.ts:11](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriComponent.ts#L11)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[src/UriComponent.ts:7](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/UriComponent.ts#L7)
+[src/UriComponent.ts:7](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriComponent.ts#L7)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[src/UriComponent.ts:6](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/UriComponent.ts#L6)
+[src/UriComponent.ts:6](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriComponent.ts#L6)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[src/UriComponent.ts:9](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/UriComponent.ts#L9)
+[src/UriComponent.ts:9](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriComponent.ts#L9)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[src/UriComponent.ts:8](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/UriComponent.ts#L8)
+[src/UriComponent.ts:8](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriComponent.ts#L8)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-[src/UriComponent.ts:10](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/UriComponent.ts#L10)
+[src/UriComponent.ts:10](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriComponent.ts#L10)
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 #### Defined in
 
-[src/UriComponent.ts:3](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/UriComponent.ts#L3)
+[src/UriComponent.ts:3](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriComponent.ts#L3)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 #### Defined in
 
-[src/UriComponent.ts:4](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/UriComponent.ts#L4)
+[src/UriComponent.ts:4](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriComponent.ts#L4)
 
 ___
 
@@ -104,4 +104,4 @@ ___
 
 #### Defined in
 
-[src/UriComponent.ts:5](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/UriComponent.ts#L5)
+[src/UriComponent.ts:5](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriComponent.ts#L5)

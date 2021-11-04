@@ -4,8 +4,8 @@ route-repository / [Exports](modules.md)
 
 - [Configuration](configuration.md)
 - [Registering routes](registration.md)
-- [Binding URI parameters]('uri_parameters.md')
-- [Server-side integration](server_side_integration.md)
+- [Binding URI parameters](uri-parameters.md)
+- [Server-side integration](server-side-integration.md)
 - [Public API](generated/modules.md)
 
 ## Versioning

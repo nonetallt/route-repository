@@ -48,7 +48,7 @@ Error.constructor
 
 #### Defined in
 
-[src/error/TypeConversionError.ts:9](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/error/TypeConversionError.ts#L9)
+[src/error/TypeConversionError.ts:9](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/error/TypeConversionError.ts#L9)
 
 ## Properties
 
@@ -86,7 +86,7 @@ ___
 
 #### Defined in
 
-[src/error/TypeConversionError.ts:7](https://github.com/nonetallt/front-to-back-router/blob/ae9086a/src/error/TypeConversionError.ts#L7)
+[src/error/TypeConversionError.ts:7](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/error/TypeConversionError.ts#L7)
 
 ___
 
