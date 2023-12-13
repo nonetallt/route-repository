@@ -4,7 +4,7 @@
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [Fragment](UriComponent.md#fragment)
 - [Host](UriComponent.md#host)
@@ -16,92 +16,92 @@
 - [Userinfo](UriComponent.md#userinfo)
 - [Username](UriComponent.md#username)
 
-## Enumeration members
+## Enumeration Members
 
 ### Fragment
 
-• **Fragment** = `"fragment"`
+• **Fragment** = ``"fragment"``
 
 #### Defined in
 
-[src/UriComponent.ts:11](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriComponent.ts#L11)
+[src/UriComponent.ts:11](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriComponent.ts#L11)
 
 ___
 
 ### Host
 
-• **Host** = `"host"`
+• **Host** = ``"host"``
 
 #### Defined in
 
-[src/UriComponent.ts:7](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriComponent.ts#L7)
+[src/UriComponent.ts:7](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriComponent.ts#L7)
 
 ___
 
 ### Password
 
-• **Password** = `"password"`
+• **Password** = ``"password"``
 
 #### Defined in
 
-[src/UriComponent.ts:6](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriComponent.ts#L6)
+[src/UriComponent.ts:6](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriComponent.ts#L6)
 
 ___
 
 ### Path
 
-• **Path** = `"path"`
+• **Path** = ``"path"``
 
 #### Defined in
 
-[src/UriComponent.ts:9](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriComponent.ts#L9)
+[src/UriComponent.ts:9](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriComponent.ts#L9)
 
 ___
 
 ### Port
 
-• **Port** = `"port"`
+• **Port** = ``"port"``
 
 #### Defined in
 
-[src/UriComponent.ts:8](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriComponent.ts#L8)
+[src/UriComponent.ts:8](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriComponent.ts#L8)
 
 ___
 
 ### Query
 
-• **Query** = `"query"`
+• **Query** = ``"query"``
 
 #### Defined in
 
-[src/UriComponent.ts:10](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriComponent.ts#L10)
+[src/UriComponent.ts:10](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriComponent.ts#L10)
 
 ___
 
 ### Scheme
 
-• **Scheme** = `"scheme"`
+• **Scheme** = ``"scheme"``
 
 #### Defined in
 
-[src/UriComponent.ts:3](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriComponent.ts#L3)
+[src/UriComponent.ts:3](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriComponent.ts#L3)
 
 ___
 
 ### Userinfo
 
-• **Userinfo** = `"userinfo"`
+• **Userinfo** = ``"userinfo"``
 
 #### Defined in
 
-[src/UriComponent.ts:4](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriComponent.ts#L4)
+[src/UriComponent.ts:4](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriComponent.ts#L4)
 
 ___
 
 ### Username
 
-• **Username** = `"username"`
+• **Username** = ``"username"``
 
 #### Defined in
 
-[src/UriComponent.ts:5](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriComponent.ts#L5)
+[src/UriComponent.ts:5](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriComponent.ts#L5)

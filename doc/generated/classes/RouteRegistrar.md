@@ -40,7 +40,7 @@ Describes a class that can register routes
 
 #### Defined in
 
-[src/RouteRegistrar.ts:21](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/RouteRegistrar.ts#L21)
+[src/RouteRegistrar.ts:21](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/RouteRegistrar.ts#L21)
 
 ## Methods
 
@@ -50,8 +50,6 @@ Describes a class that can register routes
 
 Register a new delete route
 
-**`throws`** RegistrationError
-
 #### Parameters
 
 | Name | Type |
@@ -64,9 +62,13 @@ Register a new delete route
 
 `void`
 
+**`Throws`**
+
+RegistrationError
+
 #### Defined in
 
-[src/RouteRegistrar.ts:145](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/RouteRegistrar.ts#L145)
+[src/RouteRegistrar.ts:145](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/RouteRegistrar.ts#L145)
 
 ___
 
@@ -76,8 +78,6 @@ ___
 
 Register a new get route
 
-**`throws`** RegistrationError
-
 #### Parameters
 
 | Name | Type |
@@ -90,9 +90,13 @@ Register a new get route
 
 `void`
 
+**`Throws`**
+
+RegistrationError
+
 #### Defined in
 
-[src/RouteRegistrar.ts:101](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/RouteRegistrar.ts#L101)
+[src/RouteRegistrar.ts:101](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/RouteRegistrar.ts#L101)
 
 ___
 
@@ -102,8 +106,6 @@ ___
 
 Register a new patch route
 
-**`throws`** RegistrationError
-
 #### Parameters
 
 | Name | Type |
@@ -116,9 +118,13 @@ Register a new patch route
 
 `void`
 
+**`Throws`**
+
+RegistrationError
+
 #### Defined in
 
-[src/RouteRegistrar.ts:134](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/RouteRegistrar.ts#L134)
+[src/RouteRegistrar.ts:134](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/RouteRegistrar.ts#L134)
 
 ___
 
@@ -128,8 +134,6 @@ ___
 
 Register a new post route
 
-**`throws`** RegistrationError
-
 #### Parameters
 
 | Name | Type |
@@ -142,9 +146,13 @@ Register a new post route
 
 `void`
 
+**`Throws`**
+
+RegistrationError
+
 #### Defined in
 
-[src/RouteRegistrar.ts:112](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/RouteRegistrar.ts#L112)
+[src/RouteRegistrar.ts:112](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/RouteRegistrar.ts#L112)
 
 ___
 
@@ -154,8 +162,6 @@ ___
 
 Register a new put route
 
-**`throws`** RegistrationError
-
 #### Parameters
 
 | Name | Type |
@@ -168,9 +174,13 @@ Register a new put route
 
 `void`
 
+**`Throws`**
+
+RegistrationError
+
 #### Defined in
 
-[src/RouteRegistrar.ts:123](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/RouteRegistrar.ts#L123)
+[src/RouteRegistrar.ts:123](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/RouteRegistrar.ts#L123)
 
 ___
 
@@ -180,24 +190,26 @@ ___
 
 Create and register a new route from parameters
 
-**`throws`** RegistrationError
-
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `name` | `string` |
 | `method` | ``"GET"`` \| ``"POST"`` \| ``"PUT"`` \| ``"PATCH"`` \| ``"DELETE"`` \| ``"HEAD"`` \| ``"CONNECT"`` \| ``"OPTIONS"`` \| ``"TRACE"`` |
-| `uri` | `string` \| `Map`<``"scheme"`` \| ``"userinfo"`` \| ``"username"`` \| ``"password"`` \| ``"host"`` \| ``"port"`` \| ``"path"`` \| ``"query"`` \| ``"fragment"``, `string`\> |
+| `uri` | `string` \| `Map`\<``"scheme"`` \| ``"userinfo"`` \| ``"username"`` \| ``"password"`` \| ``"host"`` \| ``"port"`` \| ``"path"`` \| ``"query"`` \| ``"fragment"``, `string`\> |
 | `extra` | `object` |
 
 #### Returns
 
 `void`
 
+**`Throws`**
+
+RegistrationError
+
 #### Defined in
 
-[src/RouteRegistrar.ts:41](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/RouteRegistrar.ts#L41)
+[src/RouteRegistrar.ts:41](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/RouteRegistrar.ts#L41)
 
 ___
 
@@ -206,8 +218,6 @@ ___
 ▸ **registerAll**(`routes`): `void`
 
 Register all routes from a given schema
-
-**`throws`** RegistrationError
 
 #### Parameters
 
@@ -219,6 +229,10 @@ Register all routes from a given schema
 
 `void`
 
+**`Throws`**
+
+RegistrationError
+
 #### Defined in
 
-[src/RouteRegistrar.ts:55](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/RouteRegistrar.ts#L55)
+[src/RouteRegistrar.ts:55](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/RouteRegistrar.ts#L55)

@@ -7,6 +7,8 @@
 
 ## Features
 
+Config option to force unique urls in repo
+
 RouteRepo
 - removeRoute / unregister
 - disableRoute

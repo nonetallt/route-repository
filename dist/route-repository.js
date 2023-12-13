@@ -512,7 +512,12 @@ var route_repository = (function (exports) {
             if (!this.has(component) || this.get(component) === null) {
                 return '';
             }
-            return prepend + this.get(component) + append;
+            const componentValue = this.get(component);
+            // If path is a single slash, do not prepend a slash
+            if (prepend === '/' && componentValue === '/') {
+                return componentValue;
+            }
+            return prepend + componentValue + append;
         }
     }
 

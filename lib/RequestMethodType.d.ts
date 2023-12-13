@@ -1,3 +1,3 @@
 import RequestMethod from './RequestMethod';
-declare type RequestMethodType = `${RequestMethod}`;
+type RequestMethodType = `${RequestMethod}`;
 export default RequestMethodType;

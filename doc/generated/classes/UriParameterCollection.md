@@ -4,7 +4,7 @@
 
 ## Hierarchy
 
-- `Map`<`string`, [`UriParameter`](UriParameter.md)\>
+- `Map`\<`string`, [`UriParameter`](UriParameter.md)\>
 
   ↳ **`UriParameterCollection`**
 
@@ -53,27 +53,27 @@
 
 #### Inherited from
 
-Map<string, UriParameter\>.constructor
+Map\<string, UriParameter\>.constructor
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es2015.collection.d.ts:33
+node_modules/typescript/lib/lib.es2015.collection.d.ts:53
 
-• **new UriParameterCollection**(`iterable`)
+• **new UriParameterCollection**(`iterable?`)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `iterable` | `Iterable`<readonly [`string`, [`UriParameter`](UriParameter.md)]\> |
+| `iterable?` | ``null`` \| `Iterable`\<readonly [`string`, [`UriParameter`](UriParameter.md)]\> |
 
 #### Inherited from
 
-Map<string, UriParameter\>.constructor
+Map\<string, UriParameter\>.constructor
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es2015.iterable.d.ts:160
+node_modules/typescript/lib/lib.es2015.iterable.d.ts:161
 
 ## Properties
 
@@ -83,7 +83,7 @@ node_modules/typescript/lib/lib.es2015.iterable.d.ts:160
 
 #### Inherited from
 
-Map.\_\_@toStringTag@23
+Map.[toStringTag]
 
 #### Defined in
 
@@ -101,7 +101,7 @@ Map.size
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es2015.collection.d.ts:28
+node_modules/typescript/lib/lib.es2015.collection.d.ts:48
 
 ___
 
@@ -111,7 +111,7 @@ ___
 
 #### Inherited from
 
-Map.\_\_@species@13
+Map.[species]
 
 #### Defined in
 
@@ -121,17 +121,17 @@ node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts:317
 
 ### [iterator]
 
-▸ **[iterator]**(): `IterableIterator`<[`string`, [`UriParameter`](UriParameter.md)]\>
+▸ **[iterator]**(): `IterableIterator`\<[`string`, [`UriParameter`](UriParameter.md)]\>
 
 Returns an iterable of entries in the map.
 
 #### Returns
 
-`IterableIterator`<[`string`, [`UriParameter`](UriParameter.md)]\>
+`IterableIterator`\<[`string`, [`UriParameter`](UriParameter.md)]\>
 
 #### Inherited from
 
-Map.\_\_@iterator@21
+Map.[iterator]
 
 #### Defined in
 
@@ -151,7 +151,7 @@ Check if any uri parameters are required
 
 #### Defined in
 
-[src/UriParameterCollection.ts:46](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriParameterCollection.ts#L46)
+[src/UriParameterCollection.ts:46](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriParameterCollection.ts#L46)
 
 ___
 
@@ -169,7 +169,7 @@ Map.clear
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es2015.collection.d.ts:22
+node_modules/typescript/lib/lib.es2015.collection.d.ts:23
 
 ___
 
@@ -187,25 +187,27 @@ ___
 
 `boolean`
 
+true if an element in the Map existed and has been removed, or false if the element does not exist.
+
 #### Inherited from
 
 Map.delete
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es2015.collection.d.ts:23
+node_modules/typescript/lib/lib.es2015.collection.d.ts:27
 
 ___
 
 ### entries
 
-▸ **entries**(): `IterableIterator`<[`string`, [`UriParameter`](UriParameter.md)]\>
+▸ **entries**(): `IterableIterator`\<[`string`, [`UriParameter`](UriParameter.md)]\>
 
 Returns an iterable of key, value pairs for every entry in the map.
 
 #### Returns
 
-`IterableIterator`<[`string`, [`UriParameter`](UriParameter.md)]\>
+`IterableIterator`\<[`string`, [`UriParameter`](UriParameter.md)]\>
 
 #### Inherited from
 
@@ -229,7 +231,7 @@ Return the 'first' parameter as indicated by iterator keys
 
 #### Defined in
 
-[src/UriParameterCollection.ts:104](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriParameterCollection.ts#L104)
+[src/UriParameterCollection.ts:104](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriParameterCollection.ts#L104)
 
 ___
 
@@ -237,11 +239,13 @@ ___
 
 ▸ **forEach**(`callbackfn`, `thisArg?`): `void`
 
+Executes a provided function once per each key/value pair in the Map, in insertion order.
+
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `callbackfn` | (`value`: [`UriParameter`](UriParameter.md), `key`: `string`, `map`: `Map`<`string`, [`UriParameter`](UriParameter.md)\>) => `void` |
+| `callbackfn` | (`value`: [`UriParameter`](UriParameter.md), `key`: `string`, `map`: `Map`\<`string`, [`UriParameter`](UriParameter.md)\>) => `void` |
 | `thisArg?` | `any` |
 
 #### Returns
@@ -254,13 +258,15 @@ Map.forEach
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es2015.collection.d.ts:24
+node_modules/typescript/lib/lib.es2015.collection.d.ts:31
 
 ___
 
 ### get
 
 ▸ **get**(`key`): `undefined` \| [`UriParameter`](UriParameter.md)
+
+Returns a specified element from the Map object. If the value that is associated to the provided key is an object, then you will get a reference to that object and any change made to that object will effectively modify it inside the Map.
 
 #### Parameters
 
@@ -272,13 +278,15 @@ ___
 
 `undefined` \| [`UriParameter`](UriParameter.md)
 
+Returns the element associated with the specified key. If no element is associated with the specified key, undefined is returned.
+
 #### Inherited from
 
 Map.get
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es2015.collection.d.ts:25
+node_modules/typescript/lib/lib.es2015.collection.d.ts:36
 
 ___
 
@@ -294,7 +302,7 @@ Get names of all parameters
 
 #### Defined in
 
-[src/UriParameterCollection.ts:80](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriParameterCollection.ts#L80)
+[src/UriParameterCollection.ts:80](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriParameterCollection.ts#L80)
 
 ___
 
@@ -316,7 +324,7 @@ Get the parameter with the given name
 
 #### Defined in
 
-[src/UriParameterCollection.ts:89](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriParameterCollection.ts#L89)
+[src/UriParameterCollection.ts:89](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriParameterCollection.ts#L89)
 
 ___
 
@@ -332,7 +340,7 @@ Get a list of the required uri parameters
 
 #### Defined in
 
-[src/UriParameterCollection.ts:64](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriParameterCollection.ts#L64)
+[src/UriParameterCollection.ts:64](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriParameterCollection.ts#L64)
 
 ___
 
@@ -350,25 +358,27 @@ ___
 
 `boolean`
 
+boolean indicating whether an element with the specified key exists or not.
+
 #### Inherited from
 
 Map.has
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es2015.collection.d.ts:26
+node_modules/typescript/lib/lib.es2015.collection.d.ts:40
 
 ___
 
 ### keys
 
-▸ **keys**(): `IterableIterator`<`string`\>
+▸ **keys**(): `IterableIterator`\<`string`\>
 
 Returns an iterable of keys in the map
 
 #### Returns
 
-`IterableIterator`<`string`\>
+`IterableIterator`\<`string`\>
 
 #### Inherited from
 
@@ -383,6 +393,8 @@ ___
 ### set
 
 ▸ **set**(`key`, `value`): [`UriParameterCollection`](UriParameterCollection.md)
+
+Adds a new element with a specified key and value to the Map. If an element with the same key already exists, the element will be updated.
 
 #### Parameters
 
@@ -401,19 +413,19 @@ Map.set
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es2015.collection.d.ts:27
+node_modules/typescript/lib/lib.es2015.collection.d.ts:44
 
 ___
 
 ### values
 
-▸ **values**(): `IterableIterator`<[`UriParameter`](UriParameter.md)\>
+▸ **values**(): `IterableIterator`\<[`UriParameter`](UriParameter.md)\>
 
 Returns an iterable of values in the map
 
 #### Returns
 
-`IterableIterator`<[`UriParameter`](UriParameter.md)\>
+`IterableIterator`\<[`UriParameter`](UriParameter.md)\>
 
 #### Inherited from
 
@@ -431,8 +443,6 @@ ___
 
 Create a new uri parameter collection from parameter placeholders in a given uri string
 
-**`throws`** UriParameterSyntaxError
-
 #### Parameters
 
 | Name | Type |
@@ -443,6 +453,10 @@ Create a new uri parameter collection from parameter placeholders in a given uri
 
 [`UriParameterCollection`](UriParameterCollection.md)
 
+**`Throws`**
+
+UriParameterSyntaxError
+
 #### Defined in
 
-[src/UriParameterCollection.ts:14](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriParameterCollection.ts#L14)
+[src/UriParameterCollection.ts:14](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriParameterCollection.ts#L14)

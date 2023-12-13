@@ -4,30 +4,36 @@
 
 ## Table of contents
 
-### Methods
+### Properties
 
 - [applyMiddleware](RouteMiddlewareInterface.md#applymiddleware)
 
-## Methods
+## Properties
 
 ### applyMiddleware
 
-▸ **applyMiddleware**(`route`): [`Route`](../classes/Route.md)
+• **applyMiddleware**: (`route`: [`Route`](../classes/Route.md)) => [`Route`](../classes/Route.md)
 
-**`throws`** RegistrationError
+#### Type declaration
 
-Apply the middleware to a given route.
+▸ (`route`): [`Route`](../classes/Route.md)
 
-#### Parameters
+##### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `route` | [`Route`](../classes/Route.md) |
 
-#### Returns
+##### Returns
 
 [`Route`](../classes/Route.md)
 
+**`Throws`**
+
+RegistrationError
+
+Apply the middleware to a given route.
+
 #### Defined in
 
-[src/contract/RouteMiddlewareInterface.ts:11](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/contract/RouteMiddlewareInterface.ts#L11)
+[src/contract/RouteMiddlewareInterface.ts:11](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/contract/RouteMiddlewareInterface.ts#L11)

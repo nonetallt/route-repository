@@ -48,7 +48,7 @@ Error.constructor
 
 #### Defined in
 
-[src/error/UriSyntaxError.ts:9](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/error/UriSyntaxError.ts#L9)
+[src/error/UriSyntaxError.ts:9](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/error/UriSyntaxError.ts#L9)
 
 ## Properties
 
@@ -62,7 +62,7 @@ Error.message
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:974
+node_modules/typescript/lib/lib.es5.d.ts:1054
 
 ___
 
@@ -76,7 +76,7 @@ Error.name
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:973
+node_modules/typescript/lib/lib.es5.d.ts:1053
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 #### Defined in
 
-[src/error/UriSyntaxError.ts:7](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/error/UriSyntaxError.ts#L7)
+[src/error/UriSyntaxError.ts:7](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/error/UriSyntaxError.ts#L7)
 
 ___
 
@@ -100,7 +100,7 @@ Error.stack
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:975
+node_modules/typescript/lib/lib.es5.d.ts:1055
 
 ___
 
@@ -114,8 +114,6 @@ ___
 
 Optional override for formatting stack traces
 
-**`see`** https://v8.dev/docs/stack-trace-api#customizing-stack-traces
-
 ##### Parameters
 
 | Name | Type |
@@ -127,13 +125,17 @@ Optional override for formatting stack traces
 
 `any`
 
+**`See`**
+
+https://v8.dev/docs/stack-trace-api#customizing-stack-traces
+
 #### Inherited from
 
 Error.prepareStackTrace
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:11
+node_modules/@types/node/globals.d.ts:28
 
 ___
 
@@ -147,7 +149,7 @@ Error.stackTraceLimit
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:13
+node_modules/@types/node/globals.d.ts:30
 
 ## Methods
 
@@ -174,4 +176,4 @@ Error.captureStackTrace
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:4
+node_modules/@types/node/globals.d.ts:21

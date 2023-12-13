@@ -35,27 +35,27 @@
 - [UriInterface](interfaces/UriInterface.md)
 - [UriParameterBinderConfigurationInterface](interfaces/UriParameterBinderConfigurationInterface.md)
 
-### Type aliases
+### Type Aliases
 
 - [RequestMethodType](modules.md#requestmethodtype)
 - [UriComponentType](modules.md#uricomponenttype)
 
-## Type aliases
+## Type Aliases
 
 ### RequestMethodType
 
-Ƭ **RequestMethodType**: \`${RequestMethod}\`
+Ƭ **RequestMethodType**: \`$\{RequestMethod}\`
 
 #### Defined in
 
-[src/RequestMethodType.ts:3](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/RequestMethodType.ts#L3)
+[src/RequestMethodType.ts:3](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/RequestMethodType.ts#L3)
 
 ___
 
 ### UriComponentType
 
-Ƭ **UriComponentType**: \`${UriComponent}\`
+Ƭ **UriComponentType**: \`$\{UriComponent}\`
 
 #### Defined in
 
-[src/UriComponentType.ts:3](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/UriComponentType.ts#L3)
+[src/UriComponentType.ts:3](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriComponentType.ts#L3)

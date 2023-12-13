@@ -1,5 +1,8 @@
 {
     "entryPoints": ["src/index.ts"],
     "out": "doc/generated",
-    "readme": "doc/README.md"
+    "readme": "doc/README.md",
+    "plugin": [
+        "typedoc-plugin-markdown"
+    ]
 }

@@ -1,3 +1,3 @@
 import UriComponent from './UriComponent';
-declare type UriComponentType = `${UriComponent}`;
+type UriComponentType = `${UriComponent}`;
 export default UriComponentType;

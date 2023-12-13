@@ -7,7 +7,7 @@ because having a data object for a value with only 2 string keys would be redund
 
 ## Hierarchy
 
-- `Map`<`string`, `string`\>
+- `Map`\<`string`, `string`\>
 
   ↳ **`QueryParameterCollection`**
 
@@ -54,27 +54,27 @@ because having a data object for a value with only 2 string keys would be redund
 
 #### Inherited from
 
-Map<string, string\>.constructor
+Map\<string, string\>.constructor
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es2015.collection.d.ts:33
+node_modules/typescript/lib/lib.es2015.collection.d.ts:53
 
-• **new QueryParameterCollection**(`iterable`)
+• **new QueryParameterCollection**(`iterable?`)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `iterable` | `Iterable`<readonly [`string`, `string`]\> |
+| `iterable?` | ``null`` \| `Iterable`\<readonly [`string`, `string`]\> |
 
 #### Inherited from
 
-Map<string, string\>.constructor
+Map\<string, string\>.constructor
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es2015.iterable.d.ts:160
+node_modules/typescript/lib/lib.es2015.iterable.d.ts:161
 
 ## Properties
 
@@ -84,7 +84,7 @@ node_modules/typescript/lib/lib.es2015.iterable.d.ts:160
 
 #### Inherited from
 
-Map.\_\_@toStringTag@23
+Map.[toStringTag]
 
 #### Defined in
 
@@ -102,7 +102,7 @@ Map.size
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es2015.collection.d.ts:28
+node_modules/typescript/lib/lib.es2015.collection.d.ts:48
 
 ___
 
@@ -112,7 +112,7 @@ ___
 
 #### Inherited from
 
-Map.\_\_@species@13
+Map.[species]
 
 #### Defined in
 
@@ -122,17 +122,17 @@ node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts:317
 
 ### [iterator]
 
-▸ **[iterator]**(): `IterableIterator`<[`string`, `string`]\>
+▸ **[iterator]**(): `IterableIterator`\<[`string`, `string`]\>
 
 Returns an iterable of entries in the map.
 
 #### Returns
 
-`IterableIterator`<[`string`, `string`]\>
+`IterableIterator`\<[`string`, `string`]\>
 
 #### Inherited from
 
-Map.\_\_@iterator@21
+Map.[iterator]
 
 #### Defined in
 
@@ -154,7 +154,7 @@ Map.clear
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es2015.collection.d.ts:22
+node_modules/typescript/lib/lib.es2015.collection.d.ts:23
 
 ___
 
@@ -172,25 +172,27 @@ ___
 
 `boolean`
 
+true if an element in the Map existed and has been removed, or false if the element does not exist.
+
 #### Inherited from
 
 Map.delete
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es2015.collection.d.ts:23
+node_modules/typescript/lib/lib.es2015.collection.d.ts:27
 
 ___
 
 ### entries
 
-▸ **entries**(): `IterableIterator`<[`string`, `string`]\>
+▸ **entries**(): `IterableIterator`\<[`string`, `string`]\>
 
 Returns an iterable of key, value pairs for every entry in the map.
 
 #### Returns
 
-`IterableIterator`<[`string`, `string`]\>
+`IterableIterator`\<[`string`, `string`]\>
 
 #### Inherited from
 
@@ -206,11 +208,13 @@ ___
 
 ▸ **forEach**(`callbackfn`, `thisArg?`): `void`
 
+Executes a provided function once per each key/value pair in the Map, in insertion order.
+
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `callbackfn` | (`value`: `string`, `key`: `string`, `map`: `Map`<`string`, `string`\>) => `void` |
+| `callbackfn` | (`value`: `string`, `key`: `string`, `map`: `Map`\<`string`, `string`\>) => `void` |
 | `thisArg?` | `any` |
 
 #### Returns
@@ -223,13 +227,15 @@ Map.forEach
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es2015.collection.d.ts:24
+node_modules/typescript/lib/lib.es2015.collection.d.ts:31
 
 ___
 
 ### get
 
 ▸ **get**(`key`): `undefined` \| `string`
+
+Returns a specified element from the Map object. If the value that is associated to the provided key is an object, then you will get a reference to that object and any change made to that object will effectively modify it inside the Map.
 
 #### Parameters
 
@@ -241,13 +247,15 @@ ___
 
 `undefined` \| `string`
 
+Returns the element associated with the specified key. If no element is associated with the specified key, undefined is returned.
+
 #### Inherited from
 
 Map.get
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es2015.collection.d.ts:25
+node_modules/typescript/lib/lib.es2015.collection.d.ts:36
 
 ___
 
@@ -265,25 +273,27 @@ ___
 
 `boolean`
 
+boolean indicating whether an element with the specified key exists or not.
+
 #### Inherited from
 
 Map.has
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es2015.collection.d.ts:26
+node_modules/typescript/lib/lib.es2015.collection.d.ts:40
 
 ___
 
 ### keys
 
-▸ **keys**(): `IterableIterator`<`string`\>
+▸ **keys**(): `IterableIterator`\<`string`\>
 
 Returns an iterable of keys in the map
 
 #### Returns
 
-`IterableIterator`<`string`\>
+`IterableIterator`\<`string`\>
 
 #### Inherited from
 
@@ -297,7 +307,7 @@ ___
 
 ### merge
 
-▸ **merge**(...`collections`): [`QueryParameterCollection`](QueryParameterCollection.md)
+▸ **merge**(`...collections`): [`QueryParameterCollection`](QueryParameterCollection.md)
 
 Merge this collection with multiple other collections or maps
 
@@ -305,7 +315,7 @@ Merge this collection with multiple other collections or maps
 
 | Name | Type |
 | :------ | :------ |
-| `...collections` | `Map`<`string`, `string`\>[] |
+| `...collections` | `Map`\<`string`, `string`\>[] |
 
 #### Returns
 
@@ -313,13 +323,15 @@ Merge this collection with multiple other collections or maps
 
 #### Defined in
 
-[src/QueryParameterCollection.ts:60](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/QueryParameterCollection.ts#L60)
+[src/QueryParameterCollection.ts:60](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/QueryParameterCollection.ts#L60)
 
 ___
 
 ### set
 
 ▸ **set**(`key`, `value`): [`QueryParameterCollection`](QueryParameterCollection.md)
+
+Adds a new element with a specified key and value to the Map. If an element with the same key already exists, the element will be updated.
 
 #### Parameters
 
@@ -338,7 +350,7 @@ Map.set
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es2015.collection.d.ts:27
+node_modules/typescript/lib/lib.es2015.collection.d.ts:44
 
 ___
 
@@ -360,7 +372,7 @@ Get the string representation of this object
 
 #### Defined in
 
-[src/QueryParameterCollection.ts:37](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/QueryParameterCollection.ts#L37)
+[src/QueryParameterCollection.ts:37](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/QueryParameterCollection.ts#L37)
 
 ___
 
@@ -376,19 +388,19 @@ Get the string representation of this object
 
 #### Defined in
 
-[src/QueryParameterCollection.ts:28](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/QueryParameterCollection.ts#L28)
+[src/QueryParameterCollection.ts:28](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/QueryParameterCollection.ts#L28)
 
 ___
 
 ### values
 
-▸ **values**(): `IterableIterator`<`string`\>
+▸ **values**(): `IterableIterator`\<`string`\>
 
 Returns an iterable of values in the map
 
 #### Returns
 
-`IterableIterator`<`string`\>
+`IterableIterator`\<`string`\>
 
 #### Inherited from
 
@@ -418,4 +430,4 @@ Create a new query parameter collection from a query string
 
 #### Defined in
 
-[src/QueryParameterCollection.ts:12](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/QueryParameterCollection.ts#L12)
+[src/QueryParameterCollection.ts:12](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/QueryParameterCollection.ts#L12)

@@ -1,8 +1,17 @@
 import UriBuilder from '../src/UriBuilder'
+import UriComponent from '../src/UriComponent'
 
 describe('UriBuilder', () => {
 
     describe('configuration', () => {
+
+        describe('build', () => {
+
+          it('builds uri consisting of slash correctly', () => {
+            const builder = new UriBuilder(new Map([[UriComponent.Path, '/']]))
+            expect(builder.build()).toEqual('/')
+          })
+        })
 
         describe('baseUri', () => {
 

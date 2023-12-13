@@ -6,7 +6,7 @@ A simple enum that contains valid HTTP methods
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [CONNECT](RequestMethod.md#connect)
 - [DELETE](RequestMethod.md#delete)
@@ -18,92 +18,92 @@ A simple enum that contains valid HTTP methods
 - [PUT](RequestMethod.md#put)
 - [TRACE](RequestMethod.md#trace)
 
-## Enumeration members
+## Enumeration Members
 
 ### CONNECT
 
-• **CONNECT** = `"CONNECT"`
+• **CONNECT** = ``"CONNECT"``
 
 #### Defined in
 
-[src/RequestMethod.ts:13](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/RequestMethod.ts#L13)
+[src/RequestMethod.ts:13](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/RequestMethod.ts#L13)
 
 ___
 
 ### DELETE
 
-• **DELETE** = `"DELETE"`
+• **DELETE** = ``"DELETE"``
 
 #### Defined in
 
-[src/RequestMethod.ts:11](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/RequestMethod.ts#L11)
+[src/RequestMethod.ts:11](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/RequestMethod.ts#L11)
 
 ___
 
 ### GET
 
-• **GET** = `"GET"`
+• **GET** = ``"GET"``
 
 #### Defined in
 
-[src/RequestMethod.ts:7](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/RequestMethod.ts#L7)
+[src/RequestMethod.ts:7](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/RequestMethod.ts#L7)
 
 ___
 
 ### HEAD
 
-• **HEAD** = `"HEAD"`
+• **HEAD** = ``"HEAD"``
 
 #### Defined in
 
-[src/RequestMethod.ts:12](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/RequestMethod.ts#L12)
+[src/RequestMethod.ts:12](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/RequestMethod.ts#L12)
 
 ___
 
 ### OPTIONS
 
-• **OPTIONS** = `"OPTIONS"`
+• **OPTIONS** = ``"OPTIONS"``
 
 #### Defined in
 
-[src/RequestMethod.ts:14](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/RequestMethod.ts#L14)
+[src/RequestMethod.ts:14](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/RequestMethod.ts#L14)
 
 ___
 
 ### PATCH
 
-• **PATCH** = `"PATCH"`
+• **PATCH** = ``"PATCH"``
 
 #### Defined in
 
-[src/RequestMethod.ts:10](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/RequestMethod.ts#L10)
+[src/RequestMethod.ts:10](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/RequestMethod.ts#L10)
 
 ___
 
 ### POST
 
-• **POST** = `"POST"`
+• **POST** = ``"POST"``
 
 #### Defined in
 
-[src/RequestMethod.ts:8](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/RequestMethod.ts#L8)
+[src/RequestMethod.ts:8](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/RequestMethod.ts#L8)
 
 ___
 
 ### PUT
 
-• **PUT** = `"PUT"`
+• **PUT** = ``"PUT"``
 
 #### Defined in
 
-[src/RequestMethod.ts:9](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/RequestMethod.ts#L9)
+[src/RequestMethod.ts:9](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/RequestMethod.ts#L9)
 
 ___
 
 ### TRACE
 
-• **TRACE** = `"TRACE"`
+• **TRACE** = ``"TRACE"``
 
 #### Defined in
 
-[src/RequestMethod.ts:15](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/RequestMethod.ts#L15)
+[src/RequestMethod.ts:15](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/RequestMethod.ts#L15)

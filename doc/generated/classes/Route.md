@@ -43,7 +43,7 @@
 
 #### Defined in
 
-[src/Route.ts:13](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/Route.ts#L13)
+[src/Route.ts:13](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/Route.ts#L13)
 
 ## Properties
 
@@ -53,7 +53,7 @@
 
 #### Defined in
 
-[src/Route.ts:11](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/Route.ts#L11)
+[src/Route.ts:11](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/Route.ts#L11)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 #### Defined in
 
-[src/Route.ts:9](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/Route.ts#L9)
+[src/Route.ts:9](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/Route.ts#L9)
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 #### Defined in
 
-[src/Route.ts:8](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/Route.ts#L8)
+[src/Route.ts:8](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/Route.ts#L8)
 
 ## Accessors
 
@@ -87,7 +87,7 @@ ___
 
 #### Defined in
 
-[src/Route.ts:74](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/Route.ts#L74)
+[src/Route.ts:74](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/Route.ts#L74)
 
 • `set` **uri**(`uri`): `void`
 
@@ -103,7 +103,7 @@ ___
 
 #### Defined in
 
-[src/Route.ts:79](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/Route.ts#L79)
+[src/Route.ts:79](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/Route.ts#L79)
 
 ## Methods
 
@@ -125,7 +125,7 @@ Create a new instnace of this route with the given extra
 
 #### Defined in
 
-[src/Route.ts:64](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/Route.ts#L64)
+[src/Route.ts:64](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/Route.ts#L64)
 
 ___
 
@@ -147,7 +147,7 @@ Create a new instance of this route with the given request method
 
 #### Defined in
 
-[src/Route.ts:34](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/Route.ts#L34)
+[src/Route.ts:34](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/Route.ts#L34)
 
 ___
 
@@ -169,7 +169,7 @@ Create a new instance of this route with the given name
 
 #### Defined in
 
-[src/Route.ts:25](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/Route.ts#L25)
+[src/Route.ts:25](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/Route.ts#L25)
 
 ___
 
@@ -191,7 +191,7 @@ Create a new instance of this route with the given uri
 
 #### Defined in
 
-[src/Route.ts:43](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/Route.ts#L43)
+[src/Route.ts:43](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/Route.ts#L43)
 
 ___
 
@@ -214,4 +214,4 @@ Create a new instance of this route with the given uri component
 
 #### Defined in
 
-[src/Route.ts:52](https://github.com/nonetallt/front-to-back-router/blob/f030813/src/Route.ts#L52)
+[src/Route.ts:52](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/Route.ts#L52)
