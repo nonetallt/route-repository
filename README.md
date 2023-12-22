@@ -41,7 +41,7 @@ var repository = new RouteRepository();
 
 #### Browser
 
-Include directly from one the public CDN providers:
+Include directly from one of the public CDN providers:
 
 ```html
 <script src="https://jsdelivr.com/route-repository/dist/route-repository.min.js"></script>
