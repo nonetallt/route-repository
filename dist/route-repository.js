@@ -150,12 +150,25 @@ var route_repository = (function (exports) {
         }
     }
 
+    class QueryParameter {
+        constructor(key, value, arrayAccessor) {
+            this.key = key;
+            this.value = value;
+            this.arrayAccessor = arrayAccessor;
+        }
+    }
+
     /**
      * A collection of query parameters. Note that QueryParameter singular class does not exist
      * because having a data object for a value with only 2 string keys would be redundant.
      *
      */
     class QueryParameterCollection extends Map {
+        static fromObject(parameters) {
+            return new QueryParameterCollection(Array.from(Object.entries(parameters).map(([key, value]) => {
+                return [key, value instanceof QueryParameter ? value : new QueryParameter(key, value)];
+            })));
+        }
         /**
          * Create a new query parameter collection from a query string
          *
@@ -164,7 +177,7 @@ var route_repository = (function (exports) {
             const params = new QueryParameterCollection();
             for (const keyValuePair of query.split('&')) {
                 const [key, value] = keyValuePair.split('=');
-                params.set(key, value);
+                params.set(key, new QueryParameter(key, value));
             }
             return params;
         }
@@ -180,15 +193,16 @@ var route_repository = (function (exports) {
          *
          */
         stringify(urlEncode) {
+            var _a;
             const parts = new Array();
-            for (const [name, value] of this) {
-                let paramName = name;
-                let paramValue = value;
+            for (const [path, parameter] of this) {
+                let paramName = parameter.key;
+                let paramValue = parameter.value;
                 if (urlEncode) {
-                    paramName = encodeURIComponent(name);
-                    paramValue = encodeURIComponent(value);
+                    paramName = encodeURIComponent(paramName);
+                    paramValue = encodeURIComponent(paramValue);
                 }
-                parts.push(`${paramName}=${paramValue}`);
+                parts.push(`${paramName}${(_a = parameter.arrayAccessor) !== null && _a !== void 0 ? _a : ''}=${paramValue}`);
             }
             return parts.join('&');
         }
@@ -199,8 +213,8 @@ var route_repository = (function (exports) {
         merge(...collections) {
             const newCollection = new QueryParameterCollection(this);
             for (const collection of collections) {
-                for (const [name, value] of collection) {
-                    newCollection.set(name, value);
+                for (const [name, parameter] of collection) {
+                    newCollection.set(name, parameter);
                 }
             }
             return newCollection;
@@ -301,9 +315,13 @@ var route_repository = (function (exports) {
         bindGetParameters(uri, values, config) {
             const uriObj = new Uri(uri);
             const oldQuery = uriObj.queryParameters ? uriObj.queryParameters : new QueryParameterCollection;
-            const newQuery = new QueryParameterCollection();
+            let newQuery = new QueryParameterCollection();
             for (const [key, value] of Object.entries(values)) {
-                newQuery.set(key, this.stringValue(key, value));
+                if (Array.isArray(value)) {
+                    newQuery = newQuery.merge(this.collectArrayGetParameters(key, value));
+                    continue;
+                }
+                newQuery.set(key, new QueryParameter(key, value));
             }
             return uriObj.withComponent(UriComponent$1.Query, oldQuery.merge(newQuery).stringify(config.encodeGetParameters)).toString();
         }
@@ -363,6 +381,19 @@ var route_repository = (function (exports) {
                 throw error;
             }
             return value;
+        }
+        collectArrayGetParameters(key, value, accessor) {
+            let query = new QueryParameterCollection();
+            value.forEach((value, index) => {
+                if (Array.isArray(value)) {
+                    query = query.merge(this.collectArrayGetParameters(key, value, `[${index.toString()}]`));
+                    return;
+                }
+                const localAccessor = `${accessor !== null && accessor !== void 0 ? accessor : ''}[${index}]`;
+                const parameter = new QueryParameter(key, this.stringValue(key, value), localAccessor);
+                query.set(`${key}${localAccessor}`, parameter);
+            });
+            return query;
         }
     }
 

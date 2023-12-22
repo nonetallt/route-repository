@@ -48,4 +48,5 @@ export default class UriParameterBinder {
      *
      */
     private stringValue;
+    private collectArrayGetParameters;
 }

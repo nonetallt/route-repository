@@ -50,7 +50,7 @@ Describes a class that can register routes
 
 #### Defined in
 
-[src/RouteRepository.ts:17](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/RouteRepository.ts#L17)
+[src/RouteRepository.ts:17](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/RouteRepository.ts#L17)
 
 ## Methods
 
@@ -66,7 +66,7 @@ Count the number of routes
 
 #### Defined in
 
-[src/RouteRepository.ts:68](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/RouteRepository.ts#L68)
+[src/RouteRepository.ts:68](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/RouteRepository.ts#L68)
 
 ___
 
@@ -98,7 +98,7 @@ RegistrationError
 
 #### Defined in
 
-[src/RouteRegistrar.ts:145](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/RouteRegistrar.ts#L145)
+[src/RouteRegistrar.ts:145](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/RouteRegistrar.ts#L145)
 
 ___
 
@@ -130,7 +130,7 @@ RegistrationError
 
 #### Defined in
 
-[src/RouteRegistrar.ts:101](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/RouteRegistrar.ts#L101)
+[src/RouteRegistrar.ts:101](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/RouteRegistrar.ts#L101)
 
 ___
 
@@ -152,7 +152,7 @@ Get a route with the given name
 
 #### Defined in
 
-[src/RouteRepository.ts:77](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/RouteRepository.ts#L77)
+[src/RouteRepository.ts:77](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/RouteRepository.ts#L77)
 
 ___
 
@@ -175,7 +175,7 @@ Register routes using same registrar settings for the whole group
 
 #### Defined in
 
-[src/RouteRepository.ts:124](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/RouteRepository.ts#L124)
+[src/RouteRepository.ts:124](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/RouteRepository.ts#L124)
 
 ___
 
@@ -197,7 +197,7 @@ Check if a route with a given name exists
 
 #### Defined in
 
-[src/RouteRepository.ts:87](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/RouteRepository.ts#L87)
+[src/RouteRepository.ts:87](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/RouteRepository.ts#L87)
 
 ___
 
@@ -220,7 +220,7 @@ Check if a route with a given uri and optionally method, exists
 
 #### Defined in
 
-[src/RouteRepository.ts:96](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/RouteRepository.ts#L96)
+[src/RouteRepository.ts:96](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/RouteRepository.ts#L96)
 
 ___
 
@@ -236,7 +236,7 @@ Get a formatted list of all registered routes.
 
 #### Defined in
 
-[src/RouteRepository.ts:134](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/RouteRepository.ts#L134)
+[src/RouteRepository.ts:134](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/RouteRepository.ts#L134)
 
 ___
 
@@ -268,7 +268,7 @@ RegistrationError
 
 #### Defined in
 
-[src/RouteRegistrar.ts:134](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/RouteRegistrar.ts#L134)
+[src/RouteRegistrar.ts:134](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/RouteRegistrar.ts#L134)
 
 ___
 
@@ -300,7 +300,7 @@ RegistrationError
 
 #### Defined in
 
-[src/RouteRegistrar.ts:112](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/RouteRegistrar.ts#L112)
+[src/RouteRegistrar.ts:112](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/RouteRegistrar.ts#L112)
 
 ___
 
@@ -332,7 +332,7 @@ RegistrationError
 
 #### Defined in
 
-[src/RouteRegistrar.ts:123](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/RouteRegistrar.ts#L123)
+[src/RouteRegistrar.ts:123](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/RouteRegistrar.ts#L123)
 
 ___
 
@@ -348,7 +348,7 @@ Create and register a new route from parameters
 | :------ | :------ |
 | `name` | `string` |
 | `method` | ``"GET"`` \| ``"POST"`` \| ``"PUT"`` \| ``"PATCH"`` \| ``"DELETE"`` \| ``"HEAD"`` \| ``"CONNECT"`` \| ``"OPTIONS"`` \| ``"TRACE"`` |
-| `uri` | `string` \| `Map`\<``"scheme"`` \| ``"userinfo"`` \| ``"username"`` \| ``"password"`` \| ``"host"`` \| ``"port"`` \| ``"path"`` \| ``"query"`` \| ``"fragment"``, `string`\> |
+| `uri` | `string` \| `Map`\<``"path"`` \| ``"scheme"`` \| ``"userinfo"`` \| ``"username"`` \| ``"password"`` \| ``"host"`` \| ``"port"`` \| ``"query"`` \| ``"fragment"``, `string`\> |
 | `extra` | `object` |
 
 #### Returns
@@ -365,7 +365,7 @@ RegistrationError
 
 #### Defined in
 
-[src/RouteRegistrar.ts:41](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/RouteRegistrar.ts#L41)
+[src/RouteRegistrar.ts:41](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/RouteRegistrar.ts#L41)
 
 ___
 
@@ -395,4 +395,4 @@ RegistrationError
 
 #### Defined in
 
-[src/RouteRegistrar.ts:55](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/RouteRegistrar.ts#L55)
+[src/RouteRegistrar.ts:55](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/RouteRegistrar.ts#L55)

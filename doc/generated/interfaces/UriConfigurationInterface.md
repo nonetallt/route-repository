@@ -31,7 +31,7 @@ UriBuilderConfigurationInterface.baseUri
 
 #### Defined in
 
-[src/contract/UriBuilderConfigurationInterface.ts:5](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/contract/UriBuilderConfigurationInterface.ts#L5)
+[src/contract/UriBuilderConfigurationInterface.ts:5](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/contract/UriBuilderConfigurationInterface.ts#L5)
 
 ___
 
@@ -45,7 +45,7 @@ UriBuilderConfigurationInterface.defaultScheme
 
 #### Defined in
 
-[src/contract/UriBuilderConfigurationInterface.ts:7](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/contract/UriBuilderConfigurationInterface.ts#L7)
+[src/contract/UriBuilderConfigurationInterface.ts:7](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/contract/UriBuilderConfigurationInterface.ts#L7)
 
 ___
 
@@ -59,7 +59,7 @@ UriBuilderConfigurationInterface.mergeQuery
 
 #### Defined in
 
-[src/contract/UriBuilderConfigurationInterface.ts:6](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/contract/UriBuilderConfigurationInterface.ts#L6)
+[src/contract/UriBuilderConfigurationInterface.ts:6](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/contract/UriBuilderConfigurationInterface.ts#L6)
 
 ___
 
@@ -73,7 +73,7 @@ UriBuilderConfigurationInterface.overrideScheme
 
 #### Defined in
 
-[src/contract/UriBuilderConfigurationInterface.ts:8](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/contract/UriBuilderConfigurationInterface.ts#L8)
+[src/contract/UriBuilderConfigurationInterface.ts:8](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/contract/UriBuilderConfigurationInterface.ts#L8)
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 #### Defined in
 
-[src/contract/UriConfigurationInterface.ts:7](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/contract/UriConfigurationInterface.ts#L7)
+[src/contract/UriConfigurationInterface.ts:7](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/contract/UriConfigurationInterface.ts#L7)
 
 ___
 
@@ -93,4 +93,4 @@ ___
 
 #### Defined in
 
-[src/contract/UriConfigurationInterface.ts:6](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/contract/UriConfigurationInterface.ts#L6)
+[src/contract/UriConfigurationInterface.ts:6](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/contract/UriConfigurationInterface.ts#L6)

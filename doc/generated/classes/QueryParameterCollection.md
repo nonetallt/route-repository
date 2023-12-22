@@ -7,7 +7,7 @@ because having a data object for a value with only 2 string keys would be redund
 
 ## Hierarchy
 
-- `Map`\<`string`, `string`\>
+- `Map`\<`string`, `QueryParameter`\>
 
   ↳ **`QueryParameterCollection`**
 
@@ -38,6 +38,7 @@ because having a data object for a value with only 2 string keys would be redund
 - [stringify](QueryParameterCollection.md#stringify)
 - [toString](QueryParameterCollection.md#tostring)
 - [values](QueryParameterCollection.md#values)
+- [fromObject](QueryParameterCollection.md#fromobject)
 - [fromQueryString](QueryParameterCollection.md#fromquerystring)
 
 ## Constructors
@@ -50,11 +51,11 @@ because having a data object for a value with only 2 string keys would be redund
 
 | Name | Type |
 | :------ | :------ |
-| `entries?` | ``null`` \| readonly readonly [`string`, `string`][] |
+| `entries?` | ``null`` \| readonly readonly [`string`, `default`][] |
 
 #### Inherited from
 
-Map\<string, string\>.constructor
+Map\<string, QueryParameter\>.constructor
 
 #### Defined in
 
@@ -66,11 +67,11 @@ node_modules/typescript/lib/lib.es2015.collection.d.ts:53
 
 | Name | Type |
 | :------ | :------ |
-| `iterable?` | ``null`` \| `Iterable`\<readonly [`string`, `string`]\> |
+| `iterable?` | ``null`` \| `Iterable`\<readonly [`string`, `default`]\> |
 
 #### Inherited from
 
-Map\<string, string\>.constructor
+Map\<string, QueryParameter\>.constructor
 
 #### Defined in
 
@@ -122,13 +123,13 @@ node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts:317
 
 ### [iterator]
 
-▸ **[iterator]**(): `IterableIterator`\<[`string`, `string`]\>
+▸ **[iterator]**(): `IterableIterator`\<[`string`, `default`]\>
 
 Returns an iterable of entries in the map.
 
 #### Returns
 
-`IterableIterator`\<[`string`, `string`]\>
+`IterableIterator`\<[`string`, `default`]\>
 
 #### Inherited from
 
@@ -186,13 +187,13 @@ ___
 
 ### entries
 
-▸ **entries**(): `IterableIterator`\<[`string`, `string`]\>
+▸ **entries**(): `IterableIterator`\<[`string`, `default`]\>
 
 Returns an iterable of key, value pairs for every entry in the map.
 
 #### Returns
 
-`IterableIterator`\<[`string`, `string`]\>
+`IterableIterator`\<[`string`, `default`]\>
 
 #### Inherited from
 
@@ -214,7 +215,7 @@ Executes a provided function once per each key/value pair in the Map, in inserti
 
 | Name | Type |
 | :------ | :------ |
-| `callbackfn` | (`value`: `string`, `key`: `string`, `map`: `Map`\<`string`, `string`\>) => `void` |
+| `callbackfn` | (`value`: `default`, `key`: `string`, `map`: `Map`\<`string`, `default`\>) => `void` |
 | `thisArg?` | `any` |
 
 #### Returns
@@ -233,7 +234,7 @@ ___
 
 ### get
 
-▸ **get**(`key`): `undefined` \| `string`
+▸ **get**(`key`): `undefined` \| `default`
 
 Returns a specified element from the Map object. If the value that is associated to the provided key is an object, then you will get a reference to that object and any change made to that object will effectively modify it inside the Map.
 
@@ -245,7 +246,7 @@ Returns a specified element from the Map object. If the value that is associated
 
 #### Returns
 
-`undefined` \| `string`
+`undefined` \| `default`
 
 Returns the element associated with the specified key. If no element is associated with the specified key, undefined is returned.
 
@@ -315,7 +316,7 @@ Merge this collection with multiple other collections or maps
 
 | Name | Type |
 | :------ | :------ |
-| `...collections` | `Map`\<`string`, `string`\>[] |
+| `...collections` | `Map`\<`string`, `default`\>[] |
 
 #### Returns
 
@@ -323,7 +324,7 @@ Merge this collection with multiple other collections or maps
 
 #### Defined in
 
-[src/QueryParameterCollection.ts:60](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/QueryParameterCollection.ts#L60)
+[src/QueryParameterCollection.ts:69](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/QueryParameterCollection.ts#L69)
 
 ___
 
@@ -338,7 +339,7 @@ Adds a new element with a specified key and value to the Map. If an element with
 | Name | Type |
 | :------ | :------ |
 | `key` | `string` |
-| `value` | `string` |
+| `value` | `default` |
 
 #### Returns
 
@@ -372,7 +373,7 @@ Get the string representation of this object
 
 #### Defined in
 
-[src/QueryParameterCollection.ts:37](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/QueryParameterCollection.ts#L37)
+[src/QueryParameterCollection.ts:46](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/QueryParameterCollection.ts#L46)
 
 ___
 
@@ -388,19 +389,19 @@ Get the string representation of this object
 
 #### Defined in
 
-[src/QueryParameterCollection.ts:28](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/QueryParameterCollection.ts#L28)
+[src/QueryParameterCollection.ts:37](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/QueryParameterCollection.ts#L37)
 
 ___
 
 ### values
 
-▸ **values**(): `IterableIterator`\<`string`\>
+▸ **values**(): `IterableIterator`\<`default`\>
 
 Returns an iterable of values in the map
 
 #### Returns
 
-`IterableIterator`\<`string`\>
+`IterableIterator`\<`default`\>
 
 #### Inherited from
 
@@ -409,6 +410,26 @@ Map.values
 #### Defined in
 
 node_modules/typescript/lib/lib.es2015.iterable.d.ts:136
+
+___
+
+### fromObject
+
+▸ `Static` **fromObject**(`parameters`): [`QueryParameterCollection`](QueryParameterCollection.md)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `parameters` | `object` |
+
+#### Returns
+
+[`QueryParameterCollection`](QueryParameterCollection.md)
+
+#### Defined in
+
+[src/QueryParameterCollection.ts:10](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/QueryParameterCollection.ts#L10)
 
 ___
 
@@ -430,4 +451,4 @@ Create a new query parameter collection from a query string
 
 #### Defined in
 
-[src/QueryParameterCollection.ts:12](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/QueryParameterCollection.ts#L12)
+[src/QueryParameterCollection.ts:21](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/QueryParameterCollection.ts#L21)

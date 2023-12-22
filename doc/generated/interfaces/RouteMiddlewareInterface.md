@@ -36,4 +36,4 @@ Apply the middleware to a given route.
 
 #### Defined in
 
-[src/contract/RouteMiddlewareInterface.ts:11](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/contract/RouteMiddlewareInterface.ts#L11)
+[src/contract/RouteMiddlewareInterface.ts:11](https://github.com/nonetallt/front-to-back-router/blob/c711a78/src/contract/RouteMiddlewareInterface.ts#L11)
