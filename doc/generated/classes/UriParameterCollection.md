@@ -151,7 +151,7 @@ Check if any uri parameters are required
 
 #### Defined in
 
-[src/UriParameterCollection.ts:46](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriParameterCollection.ts#L46)
+[src/UriParameterCollection.ts:46](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/UriParameterCollection.ts#L46)
 
 ___
 
@@ -231,7 +231,7 @@ Return the 'first' parameter as indicated by iterator keys
 
 #### Defined in
 
-[src/UriParameterCollection.ts:104](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriParameterCollection.ts#L104)
+[src/UriParameterCollection.ts:104](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/UriParameterCollection.ts#L104)
 
 ___
 
@@ -302,7 +302,7 @@ Get names of all parameters
 
 #### Defined in
 
-[src/UriParameterCollection.ts:80](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriParameterCollection.ts#L80)
+[src/UriParameterCollection.ts:80](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/UriParameterCollection.ts#L80)
 
 ___
 
@@ -324,7 +324,7 @@ Get the parameter with the given name
 
 #### Defined in
 
-[src/UriParameterCollection.ts:89](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriParameterCollection.ts#L89)
+[src/UriParameterCollection.ts:89](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/UriParameterCollection.ts#L89)
 
 ___
 
@@ -340,7 +340,7 @@ Get a list of the required uri parameters
 
 #### Defined in
 
-[src/UriParameterCollection.ts:64](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriParameterCollection.ts#L64)
+[src/UriParameterCollection.ts:64](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/UriParameterCollection.ts#L64)
 
 ___
 
@@ -459,4 +459,4 @@ UriParameterSyntaxError
 
 #### Defined in
 
-[src/UriParameterCollection.ts:14](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriParameterCollection.ts#L14)
+[src/UriParameterCollection.ts:14](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/UriParameterCollection.ts#L14)

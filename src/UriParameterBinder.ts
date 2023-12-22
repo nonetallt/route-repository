@@ -7,6 +7,7 @@ import Configuration from './config/UriParameterBinderConfiguration'
 import ConfigurationInterface from './contract/UriParameterBinderConfigurationInterface'
 import QueryParameterCollection from './QueryParameterCollection'
 import UriComponent from './UriComponent'
+import QueryParameter from './QueryParameter'
 
 /**
  * Not part of the external API, use Uri as a wrapper
@@ -116,10 +117,16 @@ export default class UriParameterBinder
     {
         const uriObj = new Uri(uri)
         const oldQuery = uriObj.queryParameters ? uriObj.queryParameters : new QueryParameterCollection
-        const newQuery = new QueryParameterCollection()
+        let newQuery = new QueryParameterCollection()
 
         for(const [key, value] of Object.entries(values)) {
-            newQuery.set(key, this.stringValue(key, value))
+
+            if(Array.isArray(value)) {
+                newQuery = newQuery.merge(this.collectArrayGetParameters(key, value))
+                continue
+            }
+
+            newQuery.set(key, new QueryParameter(key, value))
         }
 
         return uriObj.withComponent(UriComponent.Query, oldQuery.merge(newQuery).stringify(config.encodeGetParameters)).toString()
@@ -195,5 +202,23 @@ export default class UriParameterBinder
         }
 
         return value
+    }
+
+    private collectArrayGetParameters(key: string, value: Array<string>, accessor?: string) : QueryParameterCollection
+    {
+        let query = new QueryParameterCollection()
+
+        value.forEach((value, index) => {
+            if(Array.isArray(value)) {
+                query = query.merge(this.collectArrayGetParameters(key, value, `[${index.toString()}]`))
+                return
+            }
+
+            const localAccessor = `${accessor ?? ''}[${index}]`
+            const parameter = new QueryParameter(key, this.stringValue(key, value), localAccessor)
+            query.set(`${key}${localAccessor}`, parameter)
+        })
+
+        return query
     }
 }

@@ -28,7 +28,7 @@
 
 #### Defined in
 
-[src/UriParameter.ts:7](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriParameter.ts#L7)
+[src/UriParameter.ts:7](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/UriParameter.ts#L7)
 
 ## Properties
 
@@ -38,7 +38,7 @@
 
 #### Defined in
 
-[src/UriParameter.ts:3](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriParameter.ts#L3)
+[src/UriParameter.ts:3](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/UriParameter.ts#L3)
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 #### Defined in
 
-[src/UriParameter.ts:5](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriParameter.ts#L5)
+[src/UriParameter.ts:5](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/UriParameter.ts#L5)
 
 ___
 
@@ -58,4 +58,4 @@ ___
 
 #### Defined in
 
-[src/UriParameter.ts:4](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/UriParameter.ts#L4)
+[src/UriParameter.ts:4](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/UriParameter.ts#L4)

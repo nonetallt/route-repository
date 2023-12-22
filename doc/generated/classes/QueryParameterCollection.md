@@ -323,7 +323,7 @@ Merge this collection with multiple other collections or maps
 
 #### Defined in
 
-[src/QueryParameterCollection.ts:60](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/QueryParameterCollection.ts#L60)
+[src/QueryParameterCollection.ts:60](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/QueryParameterCollection.ts#L60)
 
 ___
 
@@ -372,7 +372,7 @@ Get the string representation of this object
 
 #### Defined in
 
-[src/QueryParameterCollection.ts:37](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/QueryParameterCollection.ts#L37)
+[src/QueryParameterCollection.ts:37](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/QueryParameterCollection.ts#L37)
 
 ___
 
@@ -388,7 +388,7 @@ Get the string representation of this object
 
 #### Defined in
 
-[src/QueryParameterCollection.ts:28](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/QueryParameterCollection.ts#L28)
+[src/QueryParameterCollection.ts:28](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/QueryParameterCollection.ts#L28)
 
 ___
 
@@ -430,4 +430,4 @@ Create a new query parameter collection from a query string
 
 #### Defined in
 
-[src/QueryParameterCollection.ts:12](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/QueryParameterCollection.ts#L12)
+[src/QueryParameterCollection.ts:12](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/QueryParameterCollection.ts#L12)

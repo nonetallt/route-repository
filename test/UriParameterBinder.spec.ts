@@ -166,6 +166,18 @@ describe('UriParameterBinder', () => {
                 const binder = new UriParameterBinder({bindGetParameters: true})
                 expect(binder.bind('/products/{category}?search=example', {category: 'foo', page: 1, preview: false})).toEqual('/products/foo?search=example&page=1&preview=false')
             })
+
+            it('binds arrays correctly', () => {
+                const binder = new UriParameterBinder({bindGetParameters: true})
+                const filters = ['foo', 'bar'];
+                expect(binder.bind('/products', {filters: filters})).toEqual('/products?filters[0]=foo&filters[1]=bar')
+            })
+
+            it('binds multi-dimensional arrays correctly', () => {
+                const binder = new UriParameterBinder({bindGetParameters: true})
+                const filters = ['foo', ['foo', 'bar']];
+                expect(binder.bind('/products', {filters: filters})).toEqual('/products?filters[0]=foo&filters[1][0]=foo&filters[1][1]=bar')
+            })
         })
 
         describe('typeConversionFunction', () => {

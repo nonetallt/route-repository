@@ -1,10 +1,19 @@
+import QueryParameter from "./QueryParameter"
+
 /**
  * A collection of query parameters. Note that QueryParameter singular class does not exist
  * because having a data object for a value with only 2 string keys would be redundant.
  *
  */
-export default class QueryParameterCollection extends Map<string, string>
+export default class QueryParameterCollection extends Map<string, QueryParameter>
 {
+    static fromObject(parameters: object) : QueryParameterCollection
+    {
+        return new QueryParameterCollection(Array.from(Object.entries(parameters).map(([key, value]) => {
+            return [key, value instanceof QueryParameter ? value : new QueryParameter(key, value)]
+        })))
+    }
+
     /**
      * Create a new query parameter collection from a query string
      *
@@ -15,7 +24,7 @@ export default class QueryParameterCollection extends Map<string, string>
 
         for(const keyValuePair of query.split('&')) {
             const [key, value] = keyValuePair.split('=')
-            params.set(key, value)
+            params.set(key, new QueryParameter(key, value))
         }
 
         return params
@@ -38,16 +47,16 @@ export default class QueryParameterCollection extends Map<string, string>
     {
         const parts = new Array<string>()
 
-        for(const [name, value] of this) {
+        for(const [path, parameter] of this) {
 
-            let paramName = name
-            let paramValue = value
+            let paramName = parameter.key
+            let paramValue = parameter.value
 
             if(urlEncode) {
-                paramName = encodeURIComponent(name)
-                paramValue = encodeURIComponent(value)
+                paramName = encodeURIComponent(paramName)
+                paramValue = encodeURIComponent(paramValue)
             }
-            parts.push(`${paramName}=${paramValue}`)
+            parts.push(`${paramName}${parameter.arrayAccessor ?? ''}=${paramValue}`)
         }
 
         return parts.join('&')
@@ -57,13 +66,13 @@ export default class QueryParameterCollection extends Map<string, string>
      * Merge this collection with multiple other collections or maps
      *
      */
-    merge(...collections: Array<Map<string, string>>) : QueryParameterCollection
+    merge(...collections: Array<Map<string, QueryParameter>>) : QueryParameterCollection
     {
         const newCollection = new QueryParameterCollection(this)
 
         for(const collection of collections) {
-            for(const [name, value] of collection) {
-                newCollection.set(name, value)
+            for(const [name, parameter] of collection) {
+                newCollection.set(name, parameter)
             }
         }
 

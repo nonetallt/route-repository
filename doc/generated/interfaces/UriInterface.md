@@ -22,7 +22,7 @@
 
 #### Defined in
 
-[src/contract/UriInterface.ts:9](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/contract/UriInterface.ts#L9)
+[src/contract/UriInterface.ts:9](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/contract/UriInterface.ts#L9)
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 #### Defined in
 
-[src/contract/UriInterface.ts:5](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/contract/UriInterface.ts#L5)
+[src/contract/UriInterface.ts:5](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/contract/UriInterface.ts#L5)
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 #### Defined in
 
-[src/contract/UriInterface.ts:7](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/contract/UriInterface.ts#L7)
+[src/contract/UriInterface.ts:7](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/contract/UriInterface.ts#L7)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 #### Defined in
 
-[src/contract/UriInterface.ts:6](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/contract/UriInterface.ts#L6)
+[src/contract/UriInterface.ts:6](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/contract/UriInterface.ts#L6)
 
 ___
 
@@ -62,7 +62,7 @@ ___
 
 #### Defined in
 
-[src/contract/UriInterface.ts:8](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/contract/UriInterface.ts#L8)
+[src/contract/UriInterface.ts:8](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/contract/UriInterface.ts#L8)
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 #### Defined in
 
-[src/contract/UriInterface.ts:3](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/contract/UriInterface.ts#L3)
+[src/contract/UriInterface.ts:3](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/contract/UriInterface.ts#L3)
 
 ___
 
@@ -82,4 +82,4 @@ ___
 
 #### Defined in
 
-[src/contract/UriInterface.ts:4](https://github.com/nonetallt/front-to-back-router/blob/4aaeda5/src/contract/UriInterface.ts#L4)
+[src/contract/UriInterface.ts:4](https://github.com/nonetallt/front-to-back-router/blob/efe5427/src/contract/UriInterface.ts#L4)

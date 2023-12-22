@@ -97,3 +97,7 @@ axios({
 Check out the [documentation](/doc/README.md) for all methods and public API provided by this package.
 
 It is also highly recommended to take a look at the [server side integration](/doc/server-side-integration.md) to understand the optimal workflow and how to get the most out of using this package.
+
+## Changes
+
+See the [changelog](./changelog.md) for notes on changes introduced in different package versions (since 2.0.0)
